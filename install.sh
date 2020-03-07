@@ -11,11 +11,13 @@ THEME=$ENV/$SRC/themes
 DOTFILE=$ENV/$SRC/dotfiles
 
 JUSTENV=~/.justenv/
-mkdir $JUSTENV
-pull_configs
+mkdir -p $JUSTENV
 
 . $UTILS/env_utils.sh
 . $SETUP/setup.sh
+
+pull_configs
+
 . $MODULE/modules.sh
 
 if [[ $zsh == "y" ]]; then
