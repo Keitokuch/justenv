@@ -31,20 +31,20 @@ get_vimplug() {
 
 deploy_zsh() {
     MSG+=(">>> deploying zsh configs")
-    ln -s $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
+    ln -sf $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
     [[ -f ~/.zshrc ]] && cp ~/.zshrc $JUSTENV/zshrc.old
-    ln -s $CONFIG/zshrc ~/.zshrc
+    ln -sf $CONFIG/zshrc ~/.zshrc
     if [[ -f $CONFIG/zshrc.$OS ]]; then
-        ln -s $CONFIG/zshrc.$OS ~/.zshrc.native
+        ln -sf $CONFIG/zshrc.$OS ~/.zshrc.native
     fi
 }
 
 deploy_tmux() {
     MSG+=(">>> deploying tmux configs")
     [[ -f ~/.tmux.conf ]] && cp ~/.tmux.conf $JUSTENV/tmux.conf.old
-    ln -s $CONFIG/tmux.conf ~/.tmux.conf
+    ln -sf $CONFIG/tmux.conf ~/.tmux.conf
     mkdir -p ~/.tmux
-    ln -s $CONFIG/tmux.remote.conf ~/.tmux/.tmux.remote.conf
+    ln -sf $CONFIG/tmux.remote.conf ~/.tmux/.tmux.remote.conf
 }
 
 deploy_vim() {
