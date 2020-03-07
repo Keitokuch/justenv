@@ -68,8 +68,10 @@ deploy_configs() {
 
 
 get_invalid() {
-    echo "$1: setup for $OS not implemented."
+    MSG+=("$1: setup for $OS not implemented.")
 }
+get_build()     { get_invalid ${FUNCNAME[0]} }
+get_update()    { get_invalid ${FUNCNAME[0]} }
 get_curl() {
     get_invalid ${FUNCNAME[0]}
 }

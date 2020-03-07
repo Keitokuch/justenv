@@ -3,6 +3,14 @@
 OS=ubuntu
 
 
+get_build() {
+    sudo apt install -y build-essential
+}
+
+get_update() {
+    sudo apt update
+}
+
 get_ag() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v ag) ]]; then
