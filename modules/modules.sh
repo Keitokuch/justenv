@@ -1,11 +1,11 @@
 if [[ $zsh == "y" ]]; then
-    . ./zsh.sh
+    . $MODULE/zsh.sh
 fi
 
 if [[ $tmux == "y" ]]; then
-    . ./tmux.sh
+    . $MODULE/tmux.sh
 fi
 
 if [[ $nvim == "y" ]]; then
-    . ./nvim.sh
+    . $MODULE/nvim.sh
 fi
