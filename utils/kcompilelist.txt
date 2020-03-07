@@ -1,8 +1,0 @@
-build-essential
-kernel-package
-libncurses5-dev
-flex
-bison
-openssl
-libssl-dev
-libelf-dev

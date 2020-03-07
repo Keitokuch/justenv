@@ -31,8 +31,11 @@ get_vimplug() {
 
 deploy_zsh() {
     MSG+=(">>> deploying zsh configs")
-    cp $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
-    cp $DOTFILE/zshrc ~/.zshrc
+    ln -s $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
+    if [[ -f ~/.zshrc ]]; then
+        cp ~/.zshrc $JUSTENV/zshrc.old
+    fi
+    ln -s $CONFIG/zshrc ~/.zshrc
 }
 
 deploy_tmux() {

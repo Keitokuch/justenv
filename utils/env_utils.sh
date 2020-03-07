@@ -32,3 +32,10 @@ put_msg() {
         echo $msg
     done
 }
+
+pull_configs() {
+    cp $DOTFILE/init.vim $CONFIG/init.vim
+    cp $DOTFILE/tmux.conf $CONFIG/tmux.conf
+    cp $DOTFILE/tmux.remote.conf $CONFIG/tmux.remote.conf
+    cp $DOTFILE/zshrc $CONFIG/zshrc
+}
