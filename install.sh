@@ -18,6 +18,10 @@ pull_configs
 . $SETUP/setup.sh
 . $MODULE/modules.sh
 
+if [[ $zsh == "y" ]]; then
+    zsh
+fi
+
 
 # PY_VERSION=3.6.8
 # TMUX_VERSION=3.0a

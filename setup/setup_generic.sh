@@ -36,6 +36,9 @@ deploy_zsh() {
         cp ~/.zshrc $JUSTENV/zshrc.old
     fi
     ln -s $CONFIG/zshrc ~/.zshrc
+    if [[ -f $CONFIG/zshrc.$OS ]]; then
+        ln -s $CONFIG/zshrc.$OS ~/.zshrc.native
+    fi
 }
 
 deploy_tmux() {

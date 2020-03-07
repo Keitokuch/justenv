@@ -27,13 +27,14 @@ get_tmux() {
     parse_options $@
     if [[ $forced ]] || [[ ! -x $(command -v tmux) ]] ; then
         sudo apt install -y libevent-dev libncurses-dev
+        cd $BUILD
         wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
         tar -xvf tmux-${TMUX_VERSION}.tar.gz
         cd tmux-${TMUX_VERSION}
         ./configure && make
         sudo make install
-        cd $ENV && rm -rf tmux-${TMUX_VERSION}
-        rm tmux-${TMUX_VERSION}.tar.gz
+        cd $BUILD && rm tmux-${TMUX_VERSION}.tar.gz
+        cd $ENV 
         [[ $silent ]] || MSG+=(">>> installed tmux <<<")
     else
         [[ $silent ]] || MSG+=("=== tmux already installed ===")
@@ -93,12 +94,12 @@ get_python3() {
     fi
 }
 
-deploy_zsh() {
-    MSG+=(">>> deploying zsh configs")
-    cp $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
-    cp $DOTFILE/zshrc ~/.zshrc
-    cp $DOTFILE/zshrc.ubuntu ~/.zshrc.native
-}
+# deploy_zsh() {
+    # MSG+=(">>> deploying zsh configs")
+    # cp $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
+    # cp $DOTFILE/zshrc ~/.zshrc
+    # cp $DOTFILE/zshrc.ubuntu ~/.zshrc.native
+# }
 
 get_kbuild() {
     sudo apt install build-essential kernel-package libncurses5-dev
