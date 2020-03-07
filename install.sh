@@ -3,15 +3,16 @@
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SETUP=$ENV/setup
 MODULE=$ENV/modules
-CONFIG=$ENV/configs
 UTILS=$ENV/utils
 
 . justenv.config
 THEME=$ENV/$SRC/themes
 DOTFILE=$ENV/$SRC/dotfiles
 
-JUSTENV=~/.justenv/
+JUSTENV=~/.justenv
+CONFIG=$ENV/configs
 mkdir -p $JUSTENV
+mkdir -p $CONFIG
 
 . $UTILS/env_utils.sh
 . $SETUP/setup.sh
