@@ -1,11 +1,5 @@
-if [[ $zsh == "y" ]]; then
-    . $MODULE/zsh.sh
-fi
+[[ $zsh == "y" ]] && . $MODULE/zsh.sh
 
-if [[ $tmux == "y" ]]; then
-    . $MODULE/tmux.sh
-fi
+[[ $tmux == "y" ]] && . $MODULE/tmux.sh
 
-if [[ $nvim == "y" ]]; then
-    . $MODULE/nvim.sh
-fi
+[[ $nvim == "y" ]] && . $MODULE/nvim.sh

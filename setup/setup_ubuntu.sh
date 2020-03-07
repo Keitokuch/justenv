@@ -94,13 +94,6 @@ get_python3() {
     fi
 }
 
-# deploy_zsh() {
-    # MSG+=(">>> deploying zsh configs")
-    # cp $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
-    # cp $DOTFILE/zshrc ~/.zshrc
-    # cp $DOTFILE/zshrc.ubuntu ~/.zshrc.native
-# }
-
 get_kbuild() {
     sudo apt install build-essential kernel-package libncurses5-dev
     apt install -y flex bison

@@ -32,9 +32,7 @@ get_vimplug() {
 deploy_zsh() {
     MSG+=(">>> deploying zsh configs")
     ln -s $THEME/keitoku.zsh-theme $OMZ/themes/keitoku.zsh-theme
-    if [[ -f ~/.zshrc ]]; then
-        cp ~/.zshrc $JUSTENV/zshrc.old
-    fi
+    [[ -f ~/.zshrc ]] && cp ~/.zshrc $JUSTENV/zshrc.old
     ln -s $CONFIG/zshrc ~/.zshrc
     if [[ -f $CONFIG/zshrc.$OS ]]; then
         ln -s $CONFIG/zshrc.$OS ~/.zshrc.native
@@ -43,10 +41,10 @@ deploy_zsh() {
 
 deploy_tmux() {
     MSG+=(">>> deploying tmux configs")
-    tic $ENV/utils/xterm-256color-italic.terminfo 
-    cp $DOTFILE/tmux.conf ~/.tmux.conf 
+    [[ -f ~/.tmux.conf ]] && cp ~/.tmux.conf $JUSTENV/tmux.conf.old
+    ln -s $CONFIG/tmux.conf ~/.tmux.conf
     mkdir -p ~/.tmux
-    cp $DOTFILE/tmux.remote.conf ~/.tmux/tmux.remote.conf
+    ln -s $CONFIG/tmux.remote.conf ~/.tmux/.tmux.remote.conf
 }
 
 deploy_vim() {
@@ -67,7 +65,6 @@ deploy_configs() {
     deploy_tmux
     deploy_vim
 }
-
 
 
 get_invalid() {
