@@ -4,6 +4,7 @@ ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SETUP=$ENV/setup
 MODULE=$ENV/modules
 UTILS=$ENV/utils
+SCRIPT=$ENV/scripts
 
 . justenv.config
 THEME=$ENV/$SRC/themes
@@ -21,9 +22,8 @@ pull_configs
 
 . $MODULE/modules.sh
 
-if [[ $zsh == "y" ]]; then
-    zsh
-fi
-
 put_msg
+
+[[ $zsh == "y" ]] && zsh
+
 

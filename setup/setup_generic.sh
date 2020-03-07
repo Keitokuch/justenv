@@ -45,6 +45,8 @@ deploy_tmux() {
     ln -sf $CONFIG/tmux.conf ~/.tmux.conf
     mkdir -p ~/.tmux
     ln -sf $CONFIG/tmux.remote.conf ~/.tmux/.tmux.remote.conf
+    cp -f $SCRIPT/cpu_usage.sh ~/.tmux/cpu_usage.sh
+    cp -f $SCRIPT/mem_usage.sh ~/.tmux/mem_usage.sh
 }
 
 deploy_vim() {
@@ -70,8 +72,12 @@ deploy_configs() {
 get_invalid() {
     MSG+=("$1: setup for $OS not implemented.")
 }
-get_build()     { get_invalid ${FUNCNAME[0]} }
-get_update()    { get_invalid ${FUNCNAME[0]} }
+get_build() { 
+    get_invalid ${FUNCNAME[0]} 
+}
+get_update()  {
+    get_invalid ${FUNCNAME[0]} 
+}
 get_curl() {
     get_invalid ${FUNCNAME[0]}
 }
