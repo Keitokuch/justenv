@@ -25,20 +25,5 @@ if [[ $zsh == "y" ]]; then
     zsh
 fi
 
+put_msg
 
-# PY_VERSION=3.6.8
-# TMUX_VERSION=3.0a
-
-# get_zsh
-# get_tmux   -f
-# get_nvim
-# get_vimplug
-# get_nodejs
-# get_OMZ
-# get_ctags
-# get_ag
-
-# deploy_configs
-
-# put_msg
-# zsh
