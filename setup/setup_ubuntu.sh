@@ -47,7 +47,7 @@ get_tmux() {
 get_zsh() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v zsh) ]]; then
-        sudo apt install zsh
+        sudo apt install -y zsh
         if [[ -x "/bin/zsh" ]]; then
             chsh -s "/bin/zsh"
         else 
