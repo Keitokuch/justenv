@@ -1,6 +1,6 @@
 #! /usr/bin/env bash 
 
-OS=Ubuntu
+OS=ubuntu
 
 
 get_ag() {
