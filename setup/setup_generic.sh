@@ -44,7 +44,7 @@ deploy_tmux() {
     [[ -f ~/.tmux.conf ]] && cp ~/.tmux.conf $JUSTENV/tmux.conf.old
     ln -sf $CONFIG/tmux.conf ~/.tmux.conf
     mkdir -p ~/.tmux
-    ln -sf $CONFIG/tmux.remote.conf ~/.tmux/.tmux.remote.conf
+    ln -sf $CONFIG/tmux.remote.conf ~/.tmux/tmux.remote.conf
     cp -f $SCRIPT/cpu_usage.sh ~/.tmux/cpu_usage.sh
     cp -f $SCRIPT/mem_usage.sh ~/.tmux/mem_usage.sh
 }

@@ -1,2 +1,2 @@
-get_tmux -f
+get_tmux 
 deploy_tmux
