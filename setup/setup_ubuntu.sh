@@ -32,16 +32,17 @@ get_curl() {
 }
 
 get_tmux() {
+    VERSION=$TMUX_VERSION
     parse_options $@
     if [[ $forced ]] || [[ ! -x $(command -v tmux) ]] ; then
         sudo apt install -y libevent-dev libncurses-dev
         cd $BUILD
-        wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz
-        tar -xvf tmux-${TMUX_VERSION}.tar.gz
-        cd tmux-${TMUX_VERSION}
+        wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz
+        tar -xvf tmux-${VERSION}.tar.gz
+        cd tmux-${VERSION}
         ./configure && make
         sudo make install
-        cd $BUILD && rm tmux-${TMUX_VERSION}.tar.gz
+        cd $BUILD && rm tmux-${VERSION}.tar.gz
         cd $ENV 
         [[ $silent ]] || MSG+=(">>> installed tmux <<<")
     else
@@ -122,13 +123,13 @@ get_ranger() {
 get_ctags() {
     parse_options $@
     if [[ $forced ]] || [[ ! -x $(command -v ctags) ]]; then
-        src=$SRC/ctags
+        build = $BUILD/ctags
         sudo apt install -y \
             gcc make pkg-config autoconf automake \
             python3-docutils libseccomp-dev libjansson-dev \
             libyaml-dev libxml2-dev
-        git clone https://github.com/universal-ctags/ctags.git $src
-        cd $src
+        git clone https://github.com/universal-ctags/ctags.git $build
+        cd $build
         ./autogen.sh
         ./configure && make
         sudo make install

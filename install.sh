@@ -10,9 +10,12 @@ SCRIPT=$ENV/scripts
 THEME=$ENV/$SRC/themes
 DOTFILE=$ENV/$SRC/dotfiles
 
+
 JUSTENV=~/.justenv
+BUILD=$ENV/build
 CONFIG=$ENV/configs
 mkdir -p $JUSTENV
+mkdir -p $BUILD
 mkdir -p $CONFIG
 
 . $UTILS/env_utils.sh
@@ -25,5 +28,3 @@ pull_configs
 put_msg
 
 [[ $zsh == "y" ]] && zsh
-
-

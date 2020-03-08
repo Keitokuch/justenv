@@ -38,7 +38,6 @@ get_python3() {
 get_tmux() {
     VERSION=$TMUX_VERSION
     parse_options $@
-
     if [[ $forced ]] || [[ ! -x $(command -v tmux) ]] ; then
         sudo yum install libevent-devel
         sudo yum install ncurses-devel
