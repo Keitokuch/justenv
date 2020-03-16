@@ -68,11 +68,11 @@ get_zsh() {
 get_nvim() {
     VERSION=$NVIM_VERSION
     parse_options $@
-    if [[ $forced ]] || ! [[ -x $(command -v nvim) ]]; then
+    if [[ $forced ]] || [[ ! -x $(command -v nvim) ]]; then
         cd $BIN
         wget https://github.com/neovim/neovim/releases/download/${VERSION}/nvim.appimage
         chmod +x nvim.appimage
-        ln -sf nvim.appimage /usr/local/bin/nvim
+        sudo ln -f nvim.appimage /usr/local/bin/nvim
         cd $ENV
         sudo apt install -y python-neovim
         sudo apt install -y python3-neovim
