@@ -16,16 +16,6 @@ get_prereq() {
     sudo apt install -y wget
 }
 
-get_ag() {
-    parse_options $@
-    if [[ $forced ]] || ! [[ -x $(command -v ag) ]]; then
-        sudo apt-get install -y silversearcher-ag
-        [[ $silent ]] || MSG+=(">>> installed ag <<<")
-    else
-        [[ $silent ]] || MSG+=("=== ag already installed ===")
-    fi 
-}
-
 get_curl() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v curl) ]]; then
@@ -105,8 +95,8 @@ get_nodejs() {
 get_python3() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v python3) ]]; then
-        sudo apt install python3
-        sudo apt install python3-pip
+        sudo apt install -y python3
+        sudo apt install -y python3-pip
         [[ $silent ]] || MSG+=(">>> installed python3 <<<")
     else
         [[ $silent ]] || MSG+=('=== python3 already installed ===')
@@ -116,7 +106,7 @@ get_python3() {
 get_kbuild() {
     sudo apt install build-essential kernel-package libncurses5-dev
     apt install -y flex bison
-    apt install openssl libssl-dev libelf-dev
+    apt install -y openssl libssl-dev libelf-dev
     MSG+=(">>> installed kernel build dependencies.")
 }
 
@@ -148,4 +138,14 @@ get_ctags() {
     else
         [[ $silent ]] || MSG+=('=== ctags already installed ===')
     fi
+}
+
+get_ag() {
+    parse_options $@
+    if [[ $forced ]] || ! [[ -x $(command -v ag) ]]; then
+        sudo apt-get install -y silversearcher-ag
+        [[ $silent ]] || MSG+=(">>> installed ag <<<")
+    else
+        [[ $silent ]] || MSG+=("=== ag already installed ===")
+    fi 
 }

@@ -7,7 +7,7 @@ TMP=~/.tmux/plugins
 # get oh-my-zsh
 get_OMZ() {
     parse_options $@
-    if [[ ! -d $OMZ ]]; then
+    if [[ $forced ]] || [[ ! -d $OMZ ]]; then
         sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --unattended" 
        [[ $silent ]] ||  MSG+=(">>> installed oh-my-zsh <<<")
     else
@@ -17,10 +17,8 @@ get_OMZ() {
 
 get_vimplug() {
     parse_options $@
-    if [[ ! -f  ~/.local/share/nvim/site/autoload/plug.vim ]]; then 
+    if [[ $forced ]] || [[ ! -f  ~/.local/share/nvim/site/autoload/plug.vim ]]; then 
         [[ $silent ]] || MSG+=(">>> installing vim-plug <<<")
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     else
