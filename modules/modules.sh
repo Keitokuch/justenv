@@ -1,5 +1,6 @@
-get_build
 get_update
+get_prereq
+get_build
 
 [[ $zsh == "y" ]] && . $MODULE/zsh.sh
 

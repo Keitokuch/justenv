@@ -14,9 +14,11 @@ DOTFILE=$ENV/$SRC/dotfiles
 JUSTENV=~/.justenv
 BUILD=$ENV/build
 CONFIG=$ENV/configs
+BIN=$ENV/bin
 mkdir -p $JUSTENV
 mkdir -p $BUILD
 mkdir -p $CONFIG
+mkdir -p $BIN
 
 . $UTILS/env_utils.sh
 . $SETUP/setup.sh

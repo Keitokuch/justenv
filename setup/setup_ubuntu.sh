@@ -11,6 +11,11 @@ get_update() {
     sudo apt update
 }
 
+get_prereq() {
+    sudo apt install -y curl
+    sudo apt install -y wget
+}
+
 get_ag() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v ag) ]]; then
@@ -71,11 +76,16 @@ get_zsh() {
 
 
 get_nvim() {
+    VERSION=$NVIM_VERSION
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v nvim) ]]; then
-        sudo apt install neovim
-        sudo apt install python-neovim
-        sudo apt install python3-neovim
+        cd $BIN
+        wget https://github.com/neovim/neovim/releases/download/${VERSION}/nvim.appimage
+        chmod +x nvim.appimage
+        ln -sf nvim.appimage /usr/local/bin/nvim
+        cd $ENV
+        sudo apt install -y python-neovim
+        sudo apt install -y python3-neovim
         [[ $silent ]] || MSG+=(">>> installed neovim <<<")
     else 
         [[ $silent ]] || MSG+=("=== neovim already installed ===")

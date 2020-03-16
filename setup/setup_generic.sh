@@ -49,6 +49,17 @@ deploy_tmux() {
     cp -f $SCRIPT/mem_usage.sh ~/.tmux/mem_usage.sh
 }
 
+deploy_nvim() {
+    MSG+=(">>> deploying nvim configs")
+    mkdir -p ~/.config/nvim/
+    [[ -f ~/.config/nvim/init.vim ]] && cp ~/.config/nvim/init.vim $JUSTENV/init.vim.old
+    ln -sf $CONFIG/init.vim ~/.config/nvim/init.vim
+
+    # vim colorscheme
+    mkdir -p ~/.config/nvim/colors/
+    cp $THEME/*.vim ~/.config/nvim/colors/
+}
+
 deploy_vim() {
     MSG+=(">>> deploying vim configs")
     mkdir -p ~/.config/nvim/
@@ -77,6 +88,9 @@ get_build() {
 }
 get_update()  {
     get_invalid ${FUNCNAME[0]} 
+}
+get_prereq() {
+    get_invalid ${FUNCNAME[0]}
 }
 get_curl() {
     get_invalid ${FUNCNAME[0]}

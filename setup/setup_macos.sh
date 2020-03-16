@@ -1,7 +1,18 @@
 #! /usr/bin/env bash 
 
-OS="macOS"
+OS="macos"
 
+
+get_update() {
+    brew update
+}
+
+get_prereq() {
+}
+
+get_build() {
+
+}
 
 get_ag() {
     parse_options $@
