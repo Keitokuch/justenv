@@ -1,4 +1,4 @@
-get_nvim -f
+get_nvim    -f
 get_vimplug -f
 get_nodejs
 get_ctags

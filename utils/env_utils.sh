@@ -10,8 +10,9 @@ parse_options() {
     #    [[ $var == v ]] && ver=1
     #    [[ $ver ]] && VERSION=$var
     #done
-    unset silent forced
-    while getopts ":fsv:" opt; do
+    unset forced silent
+    local OPTIND
+    while getopts ":fsv:" opt ; do
         case $opt in
             f)
                 forced=1
