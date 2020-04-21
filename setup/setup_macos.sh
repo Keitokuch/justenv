@@ -7,12 +7,6 @@ get_update() {
     brew update
 }
 
-get_prereq() {
-}
-
-get_build() {
-
-}
 
 get_ag() {
     parse_options $@
