@@ -64,7 +64,7 @@ map <C-i> 10k
 map <C-d> 10j
 nnoremap Y :%y<CR>
 nnoremap <leader>= gg=G<C-o>
-command sudow w !sudo dd of=%
+command Sudow w !sudo dd of=%
 
 "" Split
 map s <nop>
