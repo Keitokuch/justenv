@@ -47,7 +47,7 @@ set splitright
 set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
-cmap w!! w !sudo tee%
+cmap w!! w !sudo -S tee%
 
 " -------------------- Color Scheme -------------------
 let g:airline_theme='onehalfdark'
@@ -64,7 +64,7 @@ map <C-i> 10k
 map <C-d> 10j
 nnoremap Y :%y<CR>
 nnoremap <leader>= gg=G<C-o>
-command Sudow w !sudo dd of=%
+command sudow w !sudo dd of=%
 
 "" Split
 map s <nop>
