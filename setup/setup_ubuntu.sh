@@ -123,7 +123,8 @@ get_ranger() {
 get_ctags() {
     parse_options $@
     if [[ $forced ]] || [[ ! -x $(command -v ctags) ]]; then
-        build = $BUILD/ctags
+        build=$BUILD/ctags
+        mkdir -p $build
         sudo apt install -y \
             gcc make pkg-config autoconf automake \
             python3-docutils libseccomp-dev libjansson-dev \
