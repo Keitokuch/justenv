@@ -5,6 +5,10 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+if [[ -f ~/.bashrc ]]; then
+    . ~/.bashrc
+fi
+
 if [[ -f ~/.zshrc.local ]]; then
     . ~/.zshrc.local
 fi
