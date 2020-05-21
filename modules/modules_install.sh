@@ -29,6 +29,11 @@ elif [[ $nvim == "r" ]]; then
 fi
 
 if [[ $tmux == "y" ]]; then
-    get_tmux -f
+    jenv_get tmux -f
+    get_tpm
+    deploy_tmux
+elif [[ $tmux == "r" ]]; then
+    jenv_get tmux -f 
+    get_tpm -f
     deploy_tmux
 fi

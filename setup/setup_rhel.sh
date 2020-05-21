@@ -9,8 +9,8 @@ _get_zsh() {
     rm zsh.tar.gz
     cd zsh
     ./configure --prefix=$JENV
-    make || return 1
-    make install || return 1
+    make -j nr_worker   || return 1
+    make install        || return 1
     cd $ENV
 }
 
@@ -34,29 +34,29 @@ _get_ag() {
     rm $ag.tar.gz
     cd $ag
     ./configure --prefix=$JENV  || return 1
-    make                || return 1
+    make -j nr_worker           || return 1
     make install        || return 1
     cd $ENV
 }
 
 _get_tmux() {
     version=${VERSION:-$TMUX_VERSION}
-    jenv_get libevent -f
+    _get_libevent && _get_ncurses || return 1
     cd $BUILD
     wget https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz || return 1
     tar -xzf tmux-$version.tar.gz
     cd tmux-$version
-    .
+    CFLAGS="-I$JENV/include" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV
+    make -j $nr_worker
+    make install
+    cd $ENV
 }
 
 _get_libevent() {
     LIBEVENT_VERSION=2.0.22-stable
-    if has_lib libncurses ; then
-        echo haslibbbbb
+    if has_lib libevent ; then
         return 0
     fi
-    echo nononono
-    return 1
     cd $BUILD
     wget https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz
     tar -xzf libevent-$LIBEVENT_VERSION.tar.gz
@@ -69,6 +69,9 @@ _get_libevent() {
 
 _get_ncurses() {
     NCURSES_VERSION=6.0
+    if has_lib libncurses ; then
+        return 0
+    fi
     cd $BUILD
     wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$NCURSES_VERSION.tar.gz
     tar -xzf ncurses-$NCURSES_VERSION.tar.gz

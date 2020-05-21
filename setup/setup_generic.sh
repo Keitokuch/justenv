@@ -1,7 +1,7 @@
 #! /usr/bin/env bash 
 
-OMZ=~/.oh-my-zsh
-TMP=~/.tmux/plugins
+OMZ=$HOME/.oh-my-zsh
+TMP=$HOME/.tmux/plugins
 
 jenv_get() {
     app=$1
@@ -67,6 +67,11 @@ get_vimplug() {
     fi 
 }
 
+get_tpm() {
+    if [[ ! -d "$TMP/tpm" ]]; then
+        git clone https://github.com/tmux-plugins/tpm.git $TMP/tpm
+    fi
+}
 
 deploy_zsh() {
     MSG+=(">>> deploying zsh configs")
