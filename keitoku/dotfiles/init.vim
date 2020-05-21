@@ -150,7 +150,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'lfv89/vim-interestingwords'
 Plug 'connorholyday/vim-snazzy'
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp':'vim/'}
@@ -261,9 +262,35 @@ omap / <Plug>(easymotion-tn)
 "" ------------------------------------ coc.nvim -------------------------------------------
 " coc-python, coc-json, coc-pairs, coc-vimtex, coc-html,
 " coc-neosnippet, coc-java, coc-snippets
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
 function! s:check_back_space() abort
     let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 function! s:show_documentation()
@@ -275,7 +302,8 @@ function! s:show_documentation()
 endfunction
 
 " use <tab> and <s-tab> for trigger completion and navigate to complete items
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" :
+inoremap <silent><expr> <Tab> 
+            \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<Tab>" :
             \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"

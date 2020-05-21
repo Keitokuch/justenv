@@ -13,11 +13,11 @@ elif [[ $zsh == "r" ]]; then
 fi
 
 if [[ $nvim == "y" ]]; then
-    jenv_get nvim
-    get_vimplug
     jenv_get node
     jenv_get ctags
     jenv_get ag
+    jenv_get nvim
+    get_vimplug
     deploy_nvim
 elif [[ $nvim == "r" ]]; then
     jenv_get nvim   -f

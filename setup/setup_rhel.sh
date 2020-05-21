@@ -21,6 +21,8 @@ _get_nvim() {
     chmod +x nvim.appimage
     ln -f nvim.appimage $BIN/nvim
     cd $ENV
+    pip install neovim --user
+    pip3 install neovim --user
 }
 
 _get_ag() {

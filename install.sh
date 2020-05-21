@@ -38,4 +38,4 @@ jenv_setup
 put_msg
 rm -rf $BUILD
 
-[[ "$zsh" =~  ^(y|r)$ ]] && zsh
+[[ "$zsh" =~  ^(y|r)$ ]] && chsh -s $(which zsh) $USER && zsh
