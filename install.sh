@@ -37,4 +37,4 @@ jenv_setup
 
 put_msg
 
-[[ $zsh == "y" ]] && zsh
+[[ "$zsh" =~  ^(y|r)$ ]] && zsh
