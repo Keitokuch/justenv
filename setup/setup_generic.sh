@@ -123,6 +123,13 @@ deploy_configs() {
     deploy_vim
 }
 
+deploy_terminfo() {
+    cd $SCRIPT/terminfo
+    tic -o $HOME/.terminfo tmux.terminfo
+    tic -o $HOME/.terminfo tmux-256color.terminfo
+    tic -o $HOME/.terminfo xterm-256color.terminfo
+}
+
 
 get_invalid() {
     MSG+=("$1: setup for $OS not implemented.")

@@ -26,6 +26,7 @@ elif [[ $nvim == "r" ]]; then
     jenv_get ctags  -f
     jenv_get ag     -f
     deploy_nvim
+    deploy_terminfo
 fi
 
 if [[ $tmux == "y" ]]; then
