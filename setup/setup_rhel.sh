@@ -12,6 +12,7 @@ _get_zsh() {
     make -j $nr_worker   || return 1
     make install        || return 1
     cd $ENV
+    chsh -s $BIN/zsh $USER 
 }
 
 _get_nvim() {
