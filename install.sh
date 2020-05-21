@@ -33,8 +33,9 @@ check_append "source $JENV_RC" $SYS_RC
 pull_configs
 
 . $MODULE/modules_install.sh
-jenv_setup
 
+jenv_setup
 put_msg
+rm -rf $BUILD
 
 [[ "$zsh" =~  ^(y|r)$ ]] && zsh
