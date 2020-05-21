@@ -17,7 +17,7 @@ _get_zsh() {
 _get_nvim() {
     version=${VERSION:-$NVIM_VERSION}
     cd $BIN
-    wget https://github.com/neovim/neovim/releases/download/${VERSION}/nvim.appimage || return 1
+    wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
     chmod +x nvim.appimage
     ln -f nvim.appimage $BIN/nvim
     cd $ENV
