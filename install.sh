@@ -32,7 +32,7 @@ check_append "source $JENV_RC" $SYS_RC
 
 pull_configs
 
-. $MODULE/modules.sh
+. $MODULE/modules_install.sh
 jenv_setup
 
 put_msg
