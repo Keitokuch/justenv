@@ -45,3 +45,12 @@ pull_configs() {
 check_append() {
     grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
 }
+
+has_lib() {
+    haslib=$(whereis "$1" | wc -w)
+    if [[ $haslib -gt 1 ]]; then 
+        return 0
+    else
+        return 1
+    fi
+}

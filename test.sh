@@ -32,6 +32,6 @@ touch $JENV_RC
 check_append "source $JENV_RC" $SYS_RC
 # grep -qsF "$source_jenv" $SYS_RC || echo "$source_jenv" >> $SYS_RC
 
-jenv_get ctags -f 
-jenv_setup
+. $SETUP/setup_rhel.sh
+jenv_get libevent -f 
 put_msg

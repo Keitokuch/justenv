@@ -38,3 +38,43 @@ _get_ag() {
     make install        || return 1
     cd $ENV
 }
+
+_get_tmux() {
+    version=${VERSION:-$TMUX_VERSION}
+    jenv_get libevent -f
+    cd $BUILD
+    wget https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz || return 1
+    tar -xzf tmux-$version.tar.gz
+    cd tmux-$version
+    .
+}
+
+_get_libevent() {
+    LIBEVENT_VERSION=2.0.22-stable
+    if has_lib libncurses ; then
+        echo haslibbbbb
+        return 0
+    fi
+    echo nononono
+    return 1
+    cd $BUILD
+    wget https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz
+    tar -xzf libevent-$LIBEVENT_VERSION.tar.gz
+    cd libevent-$LIBEVENT_VERSION
+    ./configure --prefix=$JENV
+    make -j$nr_worker
+    make install
+    cd $ENV
+}
+
+_get_ncurses() {
+    NCURSES_VERSION=6.0
+    cd $BUILD
+    wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$NCURSES_VERSION.tar.gz
+    tar -xzf ncurses-$NCURSES_VERSION.tar.gz
+    cd ncurses-$NCURSES_VERSION
+    ./configure CPPFLAGS="-P" --prefix=$JENV
+    make -j $nr_worker
+    make install
+    cd $ENV
+}

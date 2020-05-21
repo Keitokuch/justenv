@@ -32,6 +32,7 @@ check_append "source $JENV_RC" $SYS_RC
 
 pull_configs
 
+nr_worker=$(nproc)
 . $MODULE/modules_install.sh
 
 jenv_setup
