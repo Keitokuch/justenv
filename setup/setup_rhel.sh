@@ -9,7 +9,7 @@ _get_zsh() {
     rm zsh.tar.gz
     cd zsh
     ./configure --prefix=$JENV
-    make -j nr_worker   || return 1
+    make -j $nr_worker   || return 1
     make install        || return 1
     cd $ENV
 }
@@ -34,7 +34,7 @@ _get_ag() {
     rm $ag.tar.gz
     cd $ag
     ./configure --prefix=$JENV  || return 1
-    make -j nr_worker           || return 1
+    make -j $nr_worker           || return 1
     make install        || return 1
     cd $ENV
 }
