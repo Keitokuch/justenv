@@ -10,16 +10,15 @@ SCRIPT=$ENV/scripts
 THEME=$ENV/$SRC/themes
 DOTFILE=$ENV/$SRC/dotfiles
 
-
 JUSTENV=$HOME/.justenv
 BUILD=$ENV/build
 CONFIG=$ENV/configs
 JENV=$HOME/jenv
 BIN=$JENV/bin
-
 mkdir -p $JUSTENV
 mkdir -p $BUILD
 mkdir -p $CONFIG
+mkdir -p $JENV
 mkdir -p $BIN
 
 . $UTILS/env_utils.sh
@@ -34,8 +33,8 @@ check_append "source $JENV_RC" $SYS_RC
 pull_configs
 
 . $MODULE/modules.sh
-
 jenv_setup
+
 put_msg
 
 [[ $zsh == "y" ]] && zsh

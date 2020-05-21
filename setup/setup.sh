@@ -15,6 +15,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
             . $SETUP/setup_centos.sh
         elif [[ $OS == "ubuntu" ]]; then
             . $SETUP/setup_ubuntu.sh
+        elif [[ $OS == "rhel" ]]; then
+            . $SETUP/setup_rhel.sh
         else
             echo "Failed: linux distro $OS not supported."
             exit 1
