@@ -1,6 +1,6 @@
 #! /usr/bin/env bash 
 
-OS=ubuntu
+# ubuntu
 
 
 get_build() {

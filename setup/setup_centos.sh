@@ -1,6 +1,6 @@
 #! /usr/bin/env bash 
 
-OS=CentOS
+# CentOS
 
 get_ag() {
     parse_options $@

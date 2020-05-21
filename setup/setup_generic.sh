@@ -3,6 +3,25 @@
 OMZ=~/.oh-my-zsh
 TMP=~/.tmux/plugins
 
+jenv_get() {
+    app=$1
+    parse_options $@
+    if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
+        if get_$app ; then
+            [[ $silent ]] || MSG+=(">>> installed $app <<<")
+        else
+            MSG+=("[ ERROR ] Failed to install $app")
+        fi
+    else
+       [[ $silent ]] || MSG+=("=== $app already installed ===")
+    fi
+}
+
+get_test(){
+    echo "in get test"
+    return 1
+}
+
 
 # get oh-my-zsh
 get_OMZ() {
