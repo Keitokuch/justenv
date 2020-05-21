@@ -1,7 +1,7 @@
-get_nvim    -f
+jenv_get nvim -f
 get_vimplug -f
-get_nodejs
-get_ctags
-get_ag
+jenv_get node
+jenv_get ctags
+jenv_get ag -v 2.2.0
 
 deploy_nvim

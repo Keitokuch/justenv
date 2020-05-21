@@ -5,9 +5,10 @@ TMP=~/.tmux/plugins
 
 jenv_get() {
     app=$1
+    shift 1
     parse_options $@
     if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
-        if get_$app ; then
+        if _get_$app ; then
             [[ $silent ]] || MSG+=(">>> installed $app <<<")
         else
             MSG+=("[ ERROR ] Failed to install $app")
@@ -17,9 +18,30 @@ jenv_get() {
     fi
 }
 
-get_test(){
-    echo "in get test"
-    return 1
+_get_node() {
+    version=${VERSION:-$NODEJS_VERSION}
+    distro=$OSTYPE-x64
+    lib_nodejs=$JENV/lib/nodejs
+    nodejs=node-$version-$distro
+    mkdir -p $lib_nodejs
+    cd $BUILD
+    wget https://nodejs.org/dist/$version/$nodejs.tar.xz    || return 1
+    tar -xJvf $nodejs.tar.xz -C $lib_nodejs                 || return 1 
+    rm $nodejs.tar.xz
+    JENV_PATH+=("$lib_nodejs/$nodejs/bin")
+    cd $ENV
+}
+
+_get_ctags() {
+    build=$BUILD/ctags
+    mkdir -p $build 
+    git clone https://github.com/universal-ctags/ctags.git $build   || return 1
+    cd $build
+    ./autogen.sh                        || return 1
+    ./configure --prefix=$JENV          || return 1
+    make                                || return 1
+    make install                        || return 1
+    cd $ENV
 }
 
 

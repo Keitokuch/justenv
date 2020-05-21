@@ -17,13 +17,7 @@ get_prereq() {
 }
 
 get_curl() {
-    parse_options $@
-    if [[ $forced ]] || ! [[ -x $(command -v curl) ]]; then
-        sudo apt-get install -y curl
-        [[ $silent ]] || MSG+=(">>> installed curl <<<")
-    else
-        [[ $silent ]] || MSG+=("=== curl already installed ===")
-    fi 
+    sudo apt-get install -y curl
 }
 
 get_tmux() {
@@ -49,21 +43,25 @@ get_tmux() {
     fi
 }
 
-get_zsh() {
-    parse_options $@
-    if [[ $forced ]] || ! [[ -x $(command -v zsh) ]]; then
-        sudo apt install -y zsh
-        if [[ -x "/bin/zsh" ]]; then
-            chsh -s "/bin/zsh"
-        else 
-            chsh -s $(which zsh) 
-        fi
-        [[ $silent ]] || MSG+=(">>> installed zsh <<<")
-    else
-        [[ $silent ]] || MSG+=("=== zsh already installed ===")
-    fi 
+_get_zsh() {
+    sudo apt install -y zsh
+    if [[ -x "/bin/zsh" ]]; then
+        chsh -s "/bin/zsh"
+    else 
+        chsh -s $(which zsh) 
+    fi
 }
 
+_get_nvim() {
+    version=${VERSION:-$NVIM_VERSION}
+    cd $BIN
+    wget https://github.com/neovim/neovim/releases/download/${VERSION}/nvim.appimage || return 1
+    chmod +x nvim.appimage
+    sudo ln -f nvim.appimage /usr/local/bin/nvim
+    cd $ENV
+    sudo apt install -y python-neovim || return 1
+    sudo apt install -y python3-neovim || return 1
+}
 
 get_nvim() {
     VERSION=$NVIM_VERSION
@@ -80,6 +78,10 @@ get_nvim() {
     else 
         [[ $silent ]] || MSG+=("=== neovim already installed ===")
     fi
+}
+
+_get_node() {
+    curl -sL install-node.now.sh/lts | sudo bash
 }
 
 get_nodejs() {
@@ -141,12 +143,6 @@ get_ctags() {
     fi
 }
 
-get_ag() {
-    parse_options $@
-    if [[ $forced ]] || ! [[ -x $(command -v ag) ]]; then
-        sudo apt-get install -y silversearcher-ag
-        [[ $silent ]] || MSG+=(">>> installed ag <<<")
-    else
-        [[ $silent ]] || MSG+=("=== ag already installed ===")
-    fi 
+_get_ag() {
+    sudo apt-get install -y silversearcher-ag
 }

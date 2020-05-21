@@ -10,7 +10,7 @@ parse_options() {
     #    [[ $var == v ]] && ver=1
     #    [[ $ver ]] && VERSION=$var
     #done
-    unset forced silent
+    unset forced silent VERSION
     local OPTIND
     while getopts ":fsv:" opt ; do
         case $opt in
@@ -40,4 +40,8 @@ pull_configs() {
     cp -f $DOTFILE/tmux.remote.conf $CONFIG/tmux.remote.conf
     cp -f $DOTFILE/zshrc $CONFIG/zshrc
     cp -f $DOTFILE/zshrc.ubuntu $CONFIG/zshrc.ubuntu
+}
+
+check_append() {
+    grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
 }
