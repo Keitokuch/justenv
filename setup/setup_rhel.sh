@@ -3,14 +3,18 @@
 # rhel
 
 _get_zsh() {
+    _get_ncurses
     cd $BUILD
-    wget -O zsh.tar.gz https://sourceforge.net/projects/zsh/files/latest/download || return 1
-    mkdir zsh && tar -xvf zsh.tar.gz -C zsh --strip-components 1
-    rm zsh.tar.gz
+    # wget -O zsh.tar.gz https://sourceforge.net/projects/zsh/files/latest/download || return 1
+    # mkdir zsh && tar -xvf zsh.tar.gz -C zsh --strip-components 1
+    # rm zsh.tar.gz
+    git clone git://github.com/zsh-users/zsh.git
     cd zsh
-    ./configure --prefix=$JENV
+    autoheader
+    autoconf
+    CFLAGS="-I$JENV/include" CPPFLAGS="-I$JENV/include" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV
     make -j $nr_worker   || return 1
-    make install        || return 1
+    make install
     cd $ENV
     chsh -s $BIN/zsh $USER 
 }
@@ -77,7 +81,7 @@ _get_ncurses() {
     wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$NCURSES_VERSION.tar.gz
     tar -xzf ncurses-$NCURSES_VERSION.tar.gz
     cd ncurses-$NCURSES_VERSION
-    ./configure CPPFLAGS="-P" --prefix=$JENV
+    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-P" ./configure  --prefix=$JENV
     make -j $nr_worker
     make install
     cd $ENV
