@@ -13,6 +13,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         VER=$VERSION_ID
         if [[ $OS == "centos" ]]; then
             . $SETUP/setup_centos.sh
+            . $SETUP/setup_rhel.sh
         elif [[ $OS == "ubuntu" ]]; then
             . $SETUP/setup_ubuntu.sh
         elif [[ $OS == "rhel" ]]; then
