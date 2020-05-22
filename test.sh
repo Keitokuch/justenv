@@ -15,11 +15,13 @@ BUILD=$ENV/build
 CONFIG=$ENV/configs
 JENV=$HOME/jenv
 BIN=$JENV/bin
+LIB=$JENV/lib
 
 mkdir -p $JUSTENV
 mkdir -p $BUILD
 mkdir -p $CONFIG
 mkdir -p $BIN
+mkdir -p $LIB
 
 . $UTILS/env_utils.sh
 . $SETUP/setup.sh
@@ -29,9 +31,11 @@ JENV_RC=$HOME/.jenv_profile
 
 touch $JENV_RC
 
-check_append "source $JENV_RC" $SYS_RC
+# check_append "source $JENV_RC" $SYS_RC
 # grep -qsF "$source_jenv" $SYS_RC || echo "$source_jenv" >> $SYS_RC
 
 . $SETUP/setup_rhel.sh
-jenv_get libevent -f 
+# jenv_get libevent -f 
+[[ ! $(has_lib libncurses) ]] && echo "YESLIB" || echo "NOLIB"
+jenv_setup
 put_msg

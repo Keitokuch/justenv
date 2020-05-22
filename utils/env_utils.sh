@@ -51,6 +51,10 @@ has_lib() {
     if [[ $haslib -gt 1 ]]; then 
         return 0
     else
-        return 1
+        if [[ $(whereis -B "$LIB" -f "$1" | wc -w) -gt 1 ]]; then
+            return 0
+        else
+            return 1
+        fi
     fi
 }

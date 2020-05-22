@@ -15,11 +15,13 @@ BUILD=$ENV/build
 CONFIG=$ENV/configs
 JENV=$HOME/jenv
 BIN=$JENV/bin
+LIB=$JENV/lib
 mkdir -p $JUSTENV
 mkdir -p $BUILD
 mkdir -p $CONFIG
 mkdir -p $JENV
 mkdir -p $BIN
+mkdir -p $LIB
 
 . $UTILS/env_utils.sh
 . $SETUP/setup.sh
@@ -37,6 +39,6 @@ nr_worker=$(nproc)
 
 jenv_setup
 put_msg
-rm -rf $BUILD
+# rm -rf $BUILD
 
 [[ "$zsh" =~  ^(y|r)$ ]] && zsh

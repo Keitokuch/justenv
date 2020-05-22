@@ -36,7 +36,6 @@ fi
 
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 
-        echo $path
         check_append "export PATH=$path:\$PATH" $JENV_RC
     done
 }

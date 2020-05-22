@@ -12,11 +12,11 @@ _get_zsh() {
     cd zsh
     autoheader
     autoconf
-    CFLAGS="-I$JENV/include" CPPFLAGS="-I$JENV/include" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV
-    make -j $nr_worker   || return 1
+    CPPFLAGS="-I$JENV/include -I$JENV/include/ncurses" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV --with-tcsetpgrp --without-shared
+    make -j $nr_worker
     make install
     cd $ENV
-    chsh -s $BIN/zsh $USER 
+    chsh -s $(chsh -l | grep zsh) $USER 
 }
 
 _get_nvim() {
@@ -46,12 +46,13 @@ _get_ag() {
 
 _get_tmux() {
     version=${VERSION:-$TMUX_VERSION}
-    _get_libevent && _get_ncurses || return 1
+    _get_libevent
+    _get_ncurses
     cd $BUILD
     wget https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz || return 1
     tar -xzf tmux-$version.tar.gz
     cd tmux-$version
-    CFLAGS="-I$JENV/include" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV
+    CPPFLAGS="-I$JENV/include -I$JENV/include/ncurses" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV
     make -j $nr_worker
     make install
     cd $ENV
@@ -66,7 +67,7 @@ _get_libevent() {
     wget https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz
     tar -xzf libevent-$LIBEVENT_VERSION.tar.gz
     cd libevent-$LIBEVENT_VERSION
-    ./configure --prefix=$JENV
+    CPPFLAGS="-fPIC" ./configure --prefix=$JENV
     make -j$nr_worker
     make install
     cd $ENV
@@ -81,7 +82,7 @@ _get_ncurses() {
     wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$NCURSES_VERSION.tar.gz
     tar -xzf ncurses-$NCURSES_VERSION.tar.gz
     cd ncurses-$NCURSES_VERSION
-    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-P" ./configure  --prefix=$JENV
+    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-fPIC" ./configure  --prefix=$JENV --with-shared
     make -j $nr_worker
     make install
     cd $ENV
