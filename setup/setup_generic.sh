@@ -104,23 +104,22 @@ deploy_nvim() {
     cp $THEME/*.vim ~/.config/nvim/colors/
 }
 
+# Not used
 deploy_vim() {
     MSG+=(">>> deploying vim configs")
     mkdir -p ~/.config/nvim/
     cp $DOTFILE/vimrc ~/.vimrc
-    cp $DOTFILE/init.vim ~/.config/nvim/init.vim 
 
     # vim colorscheme
     mkdir -p ~/.vim/colors/ 
     mkdir -p ~/.config/nvim/colors/
     cp $THEME/vim-keitoku.vim ~/.vim/colors/ 
-    cp $THEME/vim-keitoku.vim ~/.config/nvim/colors/
 }
 
 deploy_configs() {
     deploy_zsh
     deploy_tmux
-    deploy_vim
+    deploy_nvim
 }
 
 deploy_terminfo() {

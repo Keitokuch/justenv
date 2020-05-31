@@ -175,5 +175,4 @@ call s:hi("Underlined", s:fg, {}, "")
 call s:hi("Ignore", s:fg, {}, "")
 call s:hi("Error", s:red, s:gutter_bg, "")
 call s:hi("Todo", s:purple, {}, "")
-" }
 
