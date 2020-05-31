@@ -8,7 +8,9 @@ jenv_get() {
     shift 1
     parse_options $@
     if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
-        if _get_$app ; then
+        _func=_get_$app
+        has_func $_func || { MSG+=("[ ERROR ] $_func not implemented") ; return 1 ;}
+        if $_func ; then
             [[ $silent ]] || MSG+=(">>> installed $app <<<")
         else
             MSG+=("[ ERROR ] Failed to install $app")

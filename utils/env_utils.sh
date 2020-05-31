@@ -58,3 +58,8 @@ has_lib() {
         fi
     fi
 }
+
+has_func() {
+    declare -f $_func > /dev/null
+    return $?
+}
