@@ -3,9 +3,6 @@
 
 declare -a MSG=()
 
-. $JGET/jenv_utils.sh
-. $SETUP/setup.sh
-
 JENV=$HOME/jenv
 BIN=$JENV/bin
 LIB=$JENV/lib
@@ -18,6 +15,9 @@ mkdir -p $BUILD
 
 JENV_RC=$HOME/.jenv_profile
 SYS_RC=$HOME/.bashrc
+
+. $JGET/jenv_utils.sh
+. $SETUP/setup.sh
 
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 
