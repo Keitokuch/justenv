@@ -5,6 +5,7 @@ SETUP=$ENV/setup
 MODULE=$ENV/modules
 UTILS=$ENV/utils
 SCRIPT=$ENV/scripts
+JGET=$ENV/jenv-get
 
 . $ENV/justenv.config
 THEME=$ENV/$SRC/themes

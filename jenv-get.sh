@@ -30,6 +30,10 @@ else
     nr_worker=$(sysctl -n hw.ncpu)
 fi
 
+usage() {
+    echo "Usage: $0 install PACKAGE"
+}
+
 check_jenv() {
     [[ -f $JENV_RC ]] && return 0
     return 1
@@ -55,6 +59,7 @@ main() {
             do_install $@
             ;;
         *)
+            usage
             exit 0
             ;;
     esac

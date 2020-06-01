@@ -1,3 +1,10 @@
+# jenv-get Core
+# To be sourced from context where JGET is set
+
+declare -a MSG=()
+
+. $JGET/jenv_utils.sh
+
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 
         check_append "export PATH=$path:\$PATH" $JENV_RC
