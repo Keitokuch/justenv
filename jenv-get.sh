@@ -6,7 +6,6 @@ UTILS=$ENV/utils
 JGET=$ENV/jenv-get
 
 . $UTILS/env_utils.sh
-. $SETUP/setup.sh
 . $JGET/jenv_core.sh
 
 if [[ $OSTYPE == "linux" ]]; then 

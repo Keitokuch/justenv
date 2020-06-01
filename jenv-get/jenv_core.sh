@@ -4,6 +4,7 @@
 declare -a MSG=()
 
 . $JGET/jenv_utils.sh
+. $SETUP/setup.sh
 
 JENV=$HOME/jenv
 BIN=$JENV/bin
