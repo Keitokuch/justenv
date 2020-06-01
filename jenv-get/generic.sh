@@ -3,26 +3,9 @@
 OMZ=$HOME/.oh-my-zsh
 TMP=$HOME/.tmux/plugins
 
-jenv_get() {
-    app=$1
-    shift 1
-    parse_options $@
-    if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
-        _func=_get_$app
-        has_func $_func || { MSG+=("[ ERROR ] $_func not implemented") ; return 1 ;}
-        if $_func ; then
-            [[ $silent ]] || MSG+=(">>> installed $app <<<")
-        else
-            MSG+=("[ ERROR ] Failed to install $app")
-        fi
-    else
-       [[ $silent ]] || MSG+=("=== $app already installed ===")
-    fi
-}
-
 _get_node() {
     version=${VERSION:-$NODEJS_VERSION}
-    distro=$OSTYPE-x64
+    distro=$ostype-x64
     lib_nodejs=$JENV/lib/nodejs
     nodejs=node-$version-$distro
     mkdir -p $lib_nodejs

@@ -23,6 +23,25 @@ parse_options() {
     done
 }
 
+parse_ostype() {
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        ostype=linux
+        if [ -f /etc/os-release ]; then
+            . /etc/os-release
+            OS=$ID
+            OSVER=$VERSION_ID
+        else
+            MSG+=("Failed: linux distro not recognized.")
+            return 1
+        fi
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        ostype=darwin
+    else
+        MSG+=("Failed: OS type $OSTYPE not supported.")
+        return 1
+    fi
+}
+
 # display messages
 put_msg() {
     for msg in "${MSG[@]}"; do
@@ -47,3 +66,7 @@ has_lib() {
     fi
 }
 
+has_func() {
+    declare -f $_func > /dev/null
+    return $?
+}

@@ -16,3 +16,7 @@ has_func() {
 put_file() {
     mkdir -p $(dirname "$2") && cp "$1" "$2"
 }
+
+check_append() {
+    grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
+}

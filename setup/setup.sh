@@ -1,9 +1,5 @@
 #! /usr/bin/env bash 
 
-declare -a JENV_PATH=()
-
-JENV_PATH+=("$BIN")
-
 . $SETUP/setup_generic.sh
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     OSTYPE=linux
