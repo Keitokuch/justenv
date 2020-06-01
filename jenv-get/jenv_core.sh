@@ -5,6 +5,19 @@ declare -a MSG=()
 
 . $JGET/jenv_utils.sh
 
+JENV=$HOME/jenv
+BIN=$JENV/bin
+LIB=$JENV/lib
+mkdir -p $JENV
+mkdir -p $BIN
+mkdir -p $LIB
+
+BUILD=$JGET/build
+mkdir -p $BUILD
+
+JENV_RC=$HOME/.jenv_profile
+SYS_RC=$HOME/.bashrc
+
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 
         check_append "export PATH=$path:\$PATH" $JENV_RC

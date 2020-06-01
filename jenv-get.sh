@@ -5,24 +5,9 @@ SETUP=$ENV/setup
 UTILS=$ENV/utils
 JGET=$ENV/jenv-get
 
-BUILD=$ENV/build
-JENV=$HOME/jenv
-BIN=$JENV/bin
-LIB=$JENV/lib
-mkdir -p $BUILD
-mkdir -p $JENV
-mkdir -p $BIN
-mkdir -p $LIB
-
 . $UTILS/env_utils.sh
 . $SETUP/setup.sh
 . $JGET/jenv_core.sh
-
-SYS_RC=$HOME/.bashrc
-JENV_RC=$HOME/.jenv_profile
-
-# touch $JENV_RC
-# check_append "source $JENV_RC" $SYS_RC
 
 if [[ $OSTYPE == "linux" ]]; then 
     nr_worker=$(nproc)
