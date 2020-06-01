@@ -3,7 +3,7 @@
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SETUP=$ENV/setup
 UTILS=$ENV/utils
-JGET=$ENV/jenv_get
+JGET=$ENV/jenv-get
 
 BUILD=$ENV/build
 JENV=$HOME/jenv
