@@ -5,9 +5,6 @@
 _get_zsh() {
     _get_ncurses
     cd $BUILD
-    # wget -O zsh.tar.gz https://sourceforge.net/projects/zsh/files/latest/download || return 1
-    # mkdir zsh && tar -xvf zsh.tar.gz -C zsh --strip-components 1
-    # rm zsh.tar.gz
     git clone git://github.com/zsh-users/zsh.git
     cd zsh
     autoheader
