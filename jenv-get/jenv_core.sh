@@ -18,6 +18,7 @@ JENV_RC=$HOME/.jenv_profile
 SYS_RC=$HOME/.bashrc
 
 . $JGET/utils.sh
+. $JGET/config
 
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 

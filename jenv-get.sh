@@ -22,6 +22,10 @@ do_install() {
     done
 }
 
+do_test() {
+    has_lib $1 && echo yes || echo no
+}
+
 main() {
     check_jenv || jenv_init
 
@@ -31,6 +35,9 @@ main() {
     case $opt in
         install)
             do_install $@
+            ;;
+        test)
+            do_test $@
             ;;
         *)
             usage

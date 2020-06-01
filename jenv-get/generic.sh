@@ -30,7 +30,7 @@ _get_ctags() {
 }
 
 _get_zsh() {
-    _get_ncurses
+    get_ncurses
     cd $BUILD
     git clone git://github.com/zsh-users/zsh.git
     cd zsh
@@ -44,6 +44,7 @@ _get_zsh() {
 }
 
 _get_nvim() {
+    echo $NVIM_VERSION
     version=${VERSION:-$NVIM_VERSION}
     cd $BIN
     wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
@@ -70,8 +71,8 @@ _get_ag() {
 
 _get_tmux() {
     version=${VERSION:-$TMUX_VERSION}
-    _get_libevent
-    _get_ncurses
+    get_libevent
+    get_ncurses
     cd $BUILD
     wget https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz || return 1
     tar -xzf tmux-$version.tar.gz
@@ -82,7 +83,7 @@ _get_tmux() {
     cd $ENV
 }
 
-_get_libevent() {
+get_libevent() {
     LIBEVENT_VERSION=2.0.22-stable
     if has_lib libevent ; then
         return 0

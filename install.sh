@@ -19,7 +19,7 @@ SYS_RC=$HOME/.bashrc
 
 
 JGET=$ENV/jenv-get
-. $JGET/core.sh
+. $JGET/jenv_core.sh
 
 jenv_init
 
