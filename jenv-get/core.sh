@@ -50,6 +50,7 @@ jenv_get() {
 }
 
 load_source() {
+    . $JGET/generic.sh
     if [[ $ostype == "linux" ]]; then 
         nr_worker=$(nproc)
         case $OS in
@@ -80,3 +81,5 @@ main() {
     parse_ostype || { jenv_after; exit 1; }
     load_source  || { jenv_after; exit 1; }
 }
+
+main
