@@ -52,3 +52,6 @@ get_nodejs() {
     fi 
 }
 
+_get_ctags() {
+    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+}
