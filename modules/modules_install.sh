@@ -1,5 +1,5 @@
-get_update
 get_prereq
+get_update
 get_build
 
 if [[ $zsh == "y" ]]; then

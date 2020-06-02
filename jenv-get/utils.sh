@@ -35,6 +35,7 @@ parse_ostype() {
             return 1
         fi
     elif [[ "$OSTYPE" == "darwin"* ]]; then
+        OS=macos
         ostype=darwin
     else
         MSG+=("Failed: OS type $OSTYPE not supported.")

@@ -1,7 +1,4 @@
-#! /usr/bin/env bash 
-
-OS="macos"
-
+# macos
 
 get_update() {
     brew update
@@ -11,6 +8,10 @@ get_prereq() {
     jenv_get brew -s
     jenv_get curl -s
     jenv_get wget -s
+}
+
+get_build() {
+    xcode-select --install
 }
 
 _get_brew() {

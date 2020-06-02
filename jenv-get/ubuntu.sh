@@ -1,11 +1,4 @@
-#! /usr/bin/env bash 
-
 # ubuntu
-
-
-get_build() {
-    sudo apt install -y build-essential
-}
 
 get_update() {
     sudo apt update
@@ -18,6 +11,10 @@ get_prereq() {
 
 get_curl() {
     sudo apt-get install -y curl
+}
+
+get_build() {
+    sudo apt install -y build-essential
 }
 
 get_tmux() {
