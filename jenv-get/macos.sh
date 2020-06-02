@@ -7,6 +7,58 @@ get_update() {
     brew update
 }
 
+get_prereq() {
+    jenv_get brew -s
+    jenv_get curl -s
+    jenv_get wget -s
+}
+
+_get_brew() {
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+}
+
+_get_ctags() {
+    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+}
+
+_get_nvim() {
+    version=${VERSION:-$NVIM_VERSION}
+    cd $BIN
+    wget https://github.com/neovim/neovim/releases/download/v0.4.3/nvim-macos.tar.gz || return 1
+    tar xzvf nvim-macos.tar.gz
+    JENV_PATH+=("$BIN/nvim-osx64/bin")
+    rm nvim-macos.tar.gz
+    cd $ENV
+}
+
+_get_zsh() {
+    brew install zsh zsh-completions
+}
+
+_get_curl() {
+    brew install curl
+}
+
+_get_wget() {
+    brew install wget
+}
+
+get_libevent() {
+    brew list libevent > /dev/null || brew install libevent
+}
+
+get_ncurses() {
+    brew list ncurses > /dev/null || brew install ncurses
+}
+
+get_nodejs() {
+    if ! [[ -x $(command -v node) ]]; then
+        brew install node
+        MSG+=(">>> installed nodejs <<<")
+    else 
+        MSG+=("=== nodejs already installed ===")
+    fi 
+}
 
 get_ag() {
     parse_options $@
@@ -18,40 +70,3 @@ get_ag() {
     fi 
 }
 
-get_zsh() {
-    if ! [[ -x $(command -v zsh) ]]; then
-        brew install zsh zsh-completions
-        if [[ -x "/bin/zsh" ]]; then
-            chsh -s "/bin/zsh"
-        else 
-            chsh -s $(which zsh) 
-        fi
-        MSG+=(">>> installed zsh <<<")
-    else
-        MSG+=("=== zsh already installed ===")
-    fi 
-}
-
-
-get_curl() {
-    if ! [[ -x $(command -v curl) ]]; then
-        brew install curl
-        MSG+=(">>> installed curl <<<")
-    else
-        MSG+=("=== curl already installed ===")
-    fi 
-}
-
-
-get_nodejs() {
-    if ! [[ -x $(command -v node) ]]; then
-        brew install node
-        MSG+=(">>> installed nodejs <<<")
-    else 
-        MSG+=("=== nodejs already installed ===")
-    fi 
-}
-
-_get_ctags() {
-    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-}

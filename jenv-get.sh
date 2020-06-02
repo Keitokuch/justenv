@@ -6,7 +6,7 @@ JGET=$ENV/jenv-get
 . $JGET/jenv_core.sh
 
 usage() {
-    echo "Usage: $0 install PACKAGE"
+    echo "Usage: $0 install [-f] PACKAGE"
 }
 
 check_jenv() {
@@ -17,13 +17,13 @@ check_jenv() {
 do_install() {
     while (( $# > 0 )) 
     do
-        jenv_get $1 -f
+        jenv_get $1
         shift
     done
 }
 
 do_test() {
-    has_lib $1 && echo yes || echo no
+    jenv_get tmux -f
 }
 
 main() {
@@ -34,6 +34,7 @@ main() {
 
     case $opt in
         install)
+            parse_options $@
             do_install $@
             ;;
         test)

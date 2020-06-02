@@ -44,7 +44,6 @@ _get_zsh() {
 }
 
 _get_nvim() {
-    echo $NVIM_VERSION
     version=${VERSION:-$NVIM_VERSION}
     cd $BIN
     wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
