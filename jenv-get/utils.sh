@@ -7,7 +7,7 @@ parse_options() {
     #    [[ $ver ]] && VERSION=$var
     #done
     unset forced silent VERSION
-    local OPTIND
+    OPTIND=1
     while getopts ":fsv:" opt ; do
         case $opt in
             f)
@@ -20,6 +20,22 @@ parse_options() {
                 VERSION=$OPTARG
                 ;; 
         esac 
+    done
+    forced=${forced:-$FORCED}
+    silent=${silent:-$SILENT}
+}
+
+global_options() {
+    unset FORCED SILENT
+    while getopts ":fs" opt ; do
+        case $opt in 
+            f)
+                FORCED=1
+                ;;
+            s)
+                SILENT=1
+                ;;
+        esac
     done
 }
 

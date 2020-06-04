@@ -82,6 +82,24 @@ _get_tmux() {
     cd $ENV
 }
 
+_get_gdb() {
+    version=${VERSION:-$GDB_VERSION}
+    cd $BUILD
+    wget http://ftp.gnu.org/gnu/gdb/gdb-$version.tar.xz || return 1
+    tar xvf gdb-$version.tar.xz
+    cd gdb-$version
+    mkdir build && cd build
+    ../configure --prefix=$JENV  || return 1
+    make -j $nr_worker          || return 1
+    make install                || return 1
+}
+
+get_gef() {
+    cd
+    wget -q -O "$HOME/.gef.py" https://github.com/hugsy/gef-legacy/raw/master/gef.py
+    echo "source $HOME/.gef.py" > "$HOME/.gdbinit"
+}
+
 get_libevent() {
     LIBEVENT_VERSION=2.0.22-stable
     if has_lib libevent ; then
@@ -97,7 +115,7 @@ get_libevent() {
     cd $ENV
 }
 
-_get_ncurses() {
+get_ncurses() {
     NCURSES_VERSION=6.0
     if has_lib libncurses ; then
         return 0

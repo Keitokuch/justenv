@@ -17,8 +17,8 @@ check_jenv() {
 do_install() {
     while (( $# > 0 )) 
     do
-        jenv_get $1
-        shift
+        jenv_get $@
+        shift $(( OPTIND ))
     done
 }
 
@@ -34,7 +34,8 @@ main() {
 
     case $opt in
         install)
-            parse_options $@
+            global_options $@
+            shift $(( OPTIND - 1 ))
             do_install $@
             ;;
         test)
