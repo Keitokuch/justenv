@@ -1,41 +1,27 @@
 #! /usr/bin/env bash 
 
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-SETUP=$ENV/setup
 MODULE=$ENV/modules
 UTILS=$ENV/utils
 SCRIPT=$ENV/scripts
 
 . $ENV/justenv.config
+. $UTILS/env_utils.sh
+
 THEME=$ENV/$SRC/themes
 DOTFILE=$ENV/$SRC/dotfiles
 
 JUSTENV=$HOME/.justenv
-BUILD=$ENV/build
-CONFIG=$ENV/configs
-JENV=$HOME/jenv
-BIN=$JENV/bin
-LIB=$JENV/lib
-
+CONFIG=${CONFIG_PATH:-"$ENV/configs"}
 mkdir -p $JUSTENV
-mkdir -p $BUILD
 mkdir -p $CONFIG
-mkdir -p $BIN
-mkdir -p $LIB
-
-. $UTILS/env_utils.sh
-. $SETUP/setup.sh
-
 SYS_RC=$HOME/.bashrc
-JENV_RC=$HOME/.jenv_profile
 
-touch $JENV_RC
 
-# check_append "source $JENV_RC" $SYS_RC
-# grep -qsF "$source_jenv" $SYS_RC || echo "$source_jenv" >> $SYS_RC
+JGET=$ENV/jenv-get
+. $JGET/jenv_core.sh
 
-. $SETUP/setup_rhel.sh
-# jenv_get libevent -f 
-[[ ! $(has_lib libncurses) ]] && echo "YESLIB" || echo "NOLIB"
-jenv_setup
+pull_configs
+deploy_configs
+
 put_msg

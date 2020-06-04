@@ -8,11 +8,8 @@ SCRIPT=$ENV/scripts
 . $ENV/justenv.config
 . $UTILS/env_utils.sh
 
-THEME=$ENV/$SRC/themes
-DOTFILE=$ENV/$SRC/dotfiles
-
 JUSTENV=$HOME/.justenv
-CONFIG=$ENV/configs
+CONFIG=${CONFIG_PATH:-"$ENV/configs"}
 mkdir -p $JUSTENV
 mkdir -p $CONFIG
 SYS_RC=$HOME/.bashrc
@@ -24,8 +21,11 @@ JGET=$ENV/jenv-get
 jenv_init
 
 pull_configs
+THEME=$CONFIG/themes
+DOTFILE=$CONFIG/dotfiles
 
 . $MODULE/modules_install.sh
+deploy_terminfo
 
 jenv_after
 

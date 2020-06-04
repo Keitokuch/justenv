@@ -3,6 +3,7 @@
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 JGET=$ENV/jenv-get
 
+. $ENV/justenv.config
 . $JGET/jenv_core.sh
 
 usage() {
@@ -22,8 +23,10 @@ do_install() {
     done
 }
 
+. $ENV/utils/env_utils.sh
+CONFIG=$ENV/test
 do_test() {
-    jenv_get tmux -f
+    deploy_other
 }
 
 main() {
@@ -40,6 +43,9 @@ main() {
             ;;
         test)
             do_test $@
+            ;;
+        func)
+            $@
             ;;
         *)
             usage

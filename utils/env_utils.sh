@@ -1,11 +1,7 @@
 #! /usr/bin/env bash 
 
 pull_configs() {
-    cp -f $DOTFILE/init.vim $CONFIG/init.vim
-    cp -f $DOTFILE/tmux.conf $CONFIG/tmux.conf
-    cp -f $DOTFILE/tmux.remote.conf $CONFIG/tmux.remote.conf
-    cp -f $DOTFILE/zshrc $CONFIG/zshrc
-    cp -f $DOTFILE/zshrc.ubuntu $CONFIG/zshrc.ubuntu
+    cp -rf $SRC/* $CONFIG
 }
 
 has_func() {
