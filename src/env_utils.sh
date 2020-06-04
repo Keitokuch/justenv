@@ -1,5 +1,7 @@
 #! /usr/bin/env bash 
 
+OMZ=$HOME/.oh-my-zsh
+TMP=$HOME/.tmux/plugins
 pull_configs() {
     cp -rf $SRC/* $CONFIG
 }
@@ -15,4 +17,11 @@ put_file() {
 
 check_append() {
     grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
+}
+
+# display messages
+put_msg() {
+    for msg in "${MSG[@]}"; do
+        echo $msg
+    done
 }
