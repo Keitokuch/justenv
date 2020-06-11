@@ -1,23 +1,24 @@
-" neovim specific 
-let g:python2_host_prog = system('which python')[:-2]
+" neovim Python env
+" let g:python2_host_prog = system('which python')[:-2]
+let g:loaded_python_provider = 0
 let g:python3_host_prog = system('which python3')[:-2]
 
 " ----------------- Options ----------------
-syntax on 
+syntax on
 set nocompatible
 set number
 set relativenumber
 set wrap
 set showcmd
 set wildmenu
-filetype plugin indent on 
+filetype plugin indent on
 set encoding=utf-8
 let &t_ut=''
-set expandtab 
+set expandtab
 set backspace=indent,eol,start
 set foldmethod=indent
 set foldlevel=99
-set hlsearch 
+set hlsearch
 set incsearch
 set ignorecase
 set smartcase
@@ -31,23 +32,22 @@ set vb t_vb=
 set ruler
 set nohls
 "set runtimepath+=~/.vim
-set history=1000 
+set history=1000
 set laststatus=2    "always show status
-set clipboard=unnamed 
+set clipboard=unnamed
 set mouse=a
-set termguicolors 
+set termguicolors
 set scrolloff=13
 set showtabline=2
-autocmd FileType help wincmd L | vert resize 80
 set noswapfile
-
 set noshowmode
-set splitbelow 
+set splitbelow
 set splitright
 set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
-cmap w!! w !sudo -S tee%
+autocmd FileType help wincmd L | vert resize 80
+
 
 " -------------------- Color Scheme -------------------
 let g:airline_theme='onehalfdark'
@@ -55,16 +55,24 @@ colorscheme vim-keitoku
 
 " ============================ Key Mappings =============================
 let mapleader=" "
+"" jj to exit insert mode
 inoremap jj <ESC>
+"" Use q for escape
 map q <ESC>
 nnoremap Q q
-cnoremap qq <C-c>
-cnoremap jj <C-c>
+"" Up down scrolling
 map <C-i> 10k
 map <C-d> 10j
+"" Copy All
 nnoremap Y :%y<CR>
+"" Indent All
 nnoremap <leader>= gg=G<C-o>
+"" Sudo Write
 command Sudow w !sudo dd of=%
+cmap w!! w !sudo -S tee%
+"" In command panel
+cnoremap qq <C-c>
+cnoremap jj <C-c>
 
 "" Split
 map s <nop>
@@ -78,12 +86,6 @@ map <leader>h <C-w>h
 map <leader>k <C-w>k
 map <leader>j <C-w>j
 map <leader>p <C-w>p
-map <S-C-up> :resize +5<CR>
-map <S-C-down> :resize -5<CR>
-map <S-C-left> :vertical resize-5<CR>
-map <S-C-right> :vertical resize+5<CR>
-map <leader><C-w> :q<CR>
-map <leader>W :q<CR>
 
 map <M-up> :resize +5<CR>
 map <M-down> :resize -5<CR>
@@ -91,34 +93,44 @@ map <M-left> :vertical resize-5<CR>
 map <M-right> :vertical resize+5<CR>
 
 "" Tab
-map <leader>t :tabe<CR>
-map <leader>] :+tabnext<CR>
-map <leader>[ :-tabnext<CR>
+" map <leader>t :tabe<CR>
+" map <leader>] :+tabnext<CR>
+" map <leader>[ :-tabnext<CR>
 
-"" Buffer 
+"" <Space s> to save
 map <leader>s :w<CR>
+"" <Space q> to quit
 map <leader>q :qall<CR>
-map <leader>w :q<CR>
+"" <Space Q> to force quit
+map <leader>Q :qall!<CR>
+"" <Space w> to close buffer
 map <silent><expr> <leader>w buflisted(bufnr("%"))? ":bp<cr>:bd #<cr>" : ":q\<CR>"
+"" <Space W> to force close buffer
+map <silent><expr> <leader>W buflisted(bufnr("%"))? ":bp<cr>:bd! #<cr>" : ":q!\<CR>"
+"" <Space Ctrl-W> to close window
+map <leader><C-w> :q<CR>
 
 "" Jumping
-" tag jump
+" <Ctrl-P> jump to tag
 nnoremap <C-p> <C-]>
-" next position
-nnoremap <C-u> <C-i> 
-" jump last tag 
+" Redo jump
+nnoremap <C-u> <C-i>
+" jump last tag
 nnoremap <C-y> <C-t>
 
-"" Insert mode
+"" Insert mode emacs bindings
 inoremap <silent><expr> <C-e> pumvisible()? "\<C-e>" : "\<ESC>A"
 inoremap <C-a> <ESC>I
 inoremap <C-f> <right>
 inoremap <C-b> <left>
+inoremap <C-M-b> <ESC>bi
+inoremap <C-M-f> <right><ESC>wi
+inoremap <C-M-d> <right><ESC>wcw
 inoremap <silent><expr> <C-p> pumvisible()? "\<C-p>" : "\<up>"
 inoremap <silent><expr> <C-n> pumvisible()? "\<C-n>" : "\<down>"
 
-
-"" Terminal mode 
+"" Terminal mode
+" qq to escape in terminal
 tnoremap qq <C-\><C-n>
 
 " Minimal auto closing
@@ -144,7 +156,7 @@ call plug#begin()
 
 Plug 'scrooloose/nerdtree'
 ""
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' 
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 ""
 Plug 'airblade/vim-gitgutter'
@@ -184,7 +196,7 @@ autocmd VimEnter *
             \|   PlugInstall --sync | q
             \| endif
 
-" Restore Session 
+" Restore Session
 autocmd VimEnter * nested call StartSetup()
 autocmd VimLeave * call LeaveSetup()
 
@@ -195,12 +207,12 @@ map <leader>d :NERDTreeToggle<CR>
 map <silent><expr> sf exists("b:NERDTree") ? "\<C-w>p" : ":NERDTreeFocus<CR>"
 map <silent><expr> sF exists("b:NERDTree") ? "\<C-w>p" : ":NERDTreeFind<CR>"
 let g:NERDTreeWinSize=24
-let g:NERDTreeMinimalUI=1 
+let g:NERDTreeMinimalUI=1
 let NERDTreeMapOpenVSplit='so'
 let NERDTreeMapToggleZoom='a'
 autocmd StdinReadPre * let s:std_in=1
 
-" When NERDTree is the only window left 
+" When NERDTree is the only window left
 " open empty buffer if started by opening a directory
 " quit otherwise
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() && g:DIR_START == 0) | q | endif
@@ -232,8 +244,8 @@ let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtr
 
 
 "" ------------------ vim-gitgutter -------------------
-" unmap conflict leader combo 
-let g:gitgutter_map_keys = 0 
+" unmap conflict leader combo
+let g:gitgutter_map_keys = 0
 
 "" -------------------- nerdcommenter ----------------
 let g:NERDSpaceDelims = 1
@@ -256,8 +268,8 @@ map F <Plug>(easymotion-Fl)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 1
 nmap  / <Plug>(easymotion-sn)
-"d,y,c operators 
-omap / <Plug>(easymotion-tn)  
+"d,y,c operators
+omap / <Plug>(easymotion-tn)
 
 "" ------------------------------------ coc.nvim -------------------------------------------
 " coc-python, coc-json, coc-pairs, coc-vimtex, coc-html,
@@ -302,7 +314,7 @@ function! s:show_documentation()
 endfunction
 
 " use <tab> and <s-tab> for trigger completion and navigate to complete items
-inoremap <silent><expr> <Tab> 
+inoremap <silent><expr> <Tab>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<Tab>" :
             \ coc#refresh()
@@ -334,9 +346,6 @@ nmap <silent> gr <Plug>(coc-references)
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 
-" --------------------- neosnippet ------------------------
-"
-
 " ------------------------- Tagbar ----------------------------
 map tt :TagbarToggle<CR>
 map <silent><expr> st b:current_syntax == "tagbar" ? "\<C-w>p" : ":TagbarOpen fj<CR>"
@@ -351,6 +360,7 @@ let g:tagbar_map_zoomwin = "a"
 let g:tagbar_map_togglesort = "so"
 
 " ------------------------------------ vim-gutentags ----------------------------------
+set statusline+=%{gutentags#statusline()}
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
 
@@ -378,32 +388,33 @@ let g:Lf_NormalMap = {
             \            ["<C-C>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
             \ }
 let g:Lf_CommandMap =  {
-            \           '<ESC>': ['<C-T>', '<ESC>', '<C-Q>'], 
-            \           '<Home>': ['<C-A>'], 
-            \           '<End>': ['<C-E>'], 
-            \           '<Left>': ['<C-B>', '<Left>'], 
+            \           '<ESC>': ['<C-T>', '<ESC>', '<C-Q>'],
+            \           '<Home>': ['<C-A>'],
+            \           '<End>': ['<C-E>'],
+            \           '<Left>': ['<C-B>', '<Left>'],
             \           '<Right>': ['<C-F>', '<Right>'],
-            \           '<Up>': ['<C-P>'], 
-            \           '<Down>': ['<C-N>'], 
+            \           '<Up>': ['<C-P>'],
+            \           '<Down>': ['<C-N>'],
             \           '<C-J>': ['<Down>'],
             \           '<C-K>': ['<Up>']
             \            }
 
 " ------------------------------ ctrlsf ----------------------------
-nmap     <C-f> <Plug>CtrlSFCwordPath
+" nmap     <C-f> <Plug>CtrlSFCwordPath
+command -nargs=+ Search CtrlSF <args>
 vmap     <C-f> <Plug>CtrlSFVwordPath
 nnoremap <leader>f :CtrlSFToggle<CR>
 
 " ------------------------- vim-visual-multi -------------------------
 let g:VM_theme = 'ocean'
 nmap   <S-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-nmap   <S-RightMouse>        <Plug>(VM-Mouse-Word)  
+nmap   <S-RightMouse>        <Plug>(VM-Mouse-Word)
 nmap   <S-C-RightMouse>      <Plug>(VM-Mouse-Column)
 let g:VM_maps = {}
 let g:VM_maps["Switch Mode"]        = 'v'
-let g:VM_maps['Find Under']         = '<C-n>'           
-let g:VM_maps["Add Cursor Down"]    = '<S-Down>'      
-let g:VM_maps["Add Cursor Up"]      = '<S-Up>'       
+let g:VM_maps['Find Under']         = '<C-n>'
+let g:VM_maps["Add Cursor Down"]    = '<S-Down>'
+let g:VM_maps["Add Cursor Up"]      = '<S-Up>'
 let g:VM_maps["Remove Region"]      = 'x'
 let g:VM_maps["x"]                  = ''
 let g:VM_maps["Skip Region"]        = '<C-x>'
@@ -412,10 +423,10 @@ let g:VM_maps["Redo"]               = '<C-r>'
 let g:VM_maps["Add Cursor At Pos"]  = '+'
 
 
-"------------------------- ultisnips -------------------------  
-let g:UltiSnipsExpandTrigger = 'C-;'
-let g:UltiSnipsJumpForwardTrigger = 'nn'
-let g:UltiSnipsJumpBackwardTrigger = '<S-tab>'
+" "------------------------- ultisnips -------------------------
+" let g:UltiSnipsExpandTrigger = 'C-;'
+" let g:UltiSnipsJumpForwardTrigger = 'nn'
+" let g:UltiSnipsJumpBackwardTrigger = '<S-tab>'
 
 " ------------------------- vterm -----------------------------
 let g:vterm_win_height = 20
@@ -434,7 +445,7 @@ map <leader><leader>] :+tabnext<CR>
 map <leader><leader>[ :-tabnext<CR>
 map <leader><leader>t : tabe<CR>
 function! g:BuffetSetCustomColors()
-    hi! link BuffetCurrentBuffer TabLineSel 
+    hi! link BuffetCurrentBuffer TabLineSel
     hi! link BuffetActiveBuffer  TabAlt
     hi! link BuffetBuffer        TabLine
     hi! link BuffetTab           Block
@@ -456,16 +467,20 @@ set conceallevel=0
 let g:tex_conceal='abdmgs'
 let g:vimtex_quickfix_mode=2
 let g:vimtex_quickfix_autoclose_after_keystrokes = 3
-let g:vimtex_quickfix_open_on_warning = 0 
+let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_quickfix_ignore_all_warnings = 1
 let g:vimtex_compiler_latexmk = {
             \ 'build_dir' : '.latex_aux',
+            \ 'options' : [
+            \       '--shell-escape',
+            \  ],
             \}
+
 augroup vimtex_config
     autocmd Filetype tex nmap <leader>c :VimtexCompile<CR>
     autocmd Filetype tex inoremap <expr> $ strpart(getline('.'), col('.')-1, 1) == "$" ? "\<Right>" : "$$<left>"
     " Start Compilation automatically on enter?
-    "autocmd User VimtexEventInitPost VimtexCompile 
+    "autocmd User VimtexEventInitPost VimtexCompile
 augroup end
 
 " ------------- Python ---------------
@@ -474,7 +489,7 @@ let g:pymode_python = 'python3'
 let g:pymode_warnings = 1
 let g:pymode_syntax_space_errors = 0
 let g:pymode_trim_whitespaces = 1
-let g:pymode_lint_cwindow = 0 
+let g:pymode_lint_cwindow = 0
 let g:pymode_motion = 1
 let g:pymode_lint_checkers = ['pep8']
 let g:pymode_run_bind = '<leader>c'
@@ -482,17 +497,17 @@ hi def link pythonParam             Identifier
 hi def link pythonClassParameters   Identifier
 hi def link pythonSelf              Conventional
 hi def link pythonOperator          Keyword
-hi def link pythonFunction          FunctionDeclaration 
-hi def link pythonBuiltinFunc       BuiltinFunc 
+hi def link pythonFunction          FunctionDeclaration
+hi def link pythonBuiltinFunc       BuiltinFunc
 au Filetype python syntax match pythonFunctionCall /\v[[:alpha:]_]+\ze(\s?\()/
 hi def link pythonFunctionCall FunctionCall
 
 " -------------- Lua -----------------
-hi def link LuaFunction             FunctionDeclaration 
+hi def link LuaFunction             FunctionDeclaration
 hi def link LuaIn                   Conditional
 
 " ----------------- C family --------------
-hi def link cFormat                 Type  
+hi def link cFormat                 Type
 
 au BufNewFile,BufRead,BufReadPost *.ejs set syntax=html
 
@@ -508,20 +523,20 @@ nnoremap <C-g> :call <SID>SynStack()<CR>
 
 fu! StartSetup()
     if (argc() == 0 && !exists("s:std_in"))
-        let g:DIR_START = 1 
+        let g:DIR_START = 1
         if !RestoreSess()
             exe 'NERDTreeToggle'
-        endif 
+        endif
     elseif argc() == 1 && isdirectory(argv()[0]) == 1 && !exists("s:std_in")
-        let g:DIR_START = 1 
+        let g:DIR_START = 1
         exe 'cd ' . argv()[0]
         if !RestoreSess()
-            exe 'NERDTreeToggle' argv()[0] | wincmd p | ene 
-        endif 
+            exe 'NERDTreeToggle' argv()[0] | wincmd p | ene
+        endif
     else
-        let g:DIR_START=0 
-    endif 
-endfu 
+        let g:DIR_START=0
+    endif
+endfu
 
 fu! RestoreSess()
     if filereadable(getcwd() . '/.Session.vim')
@@ -533,10 +548,10 @@ fu! RestoreSess()
                 endif
             endfor
         endif
-        exe 'NERDTreeFind' | wincmd p 
+        exe 'NERDTreeFind' | wincmd p
         return 1
-    else 
-        return 0 
+    else
+        return 0
     endif
 endfunction
 
@@ -551,7 +566,7 @@ fu! LeaveSetup()
     endif
     exe 'tabn ' . currTab
     mksession! ./.Session.vim
-endfu 
+endfu
 
 function! MyTabline()
     " let tabline=buffet#render()
@@ -559,7 +574,16 @@ function! MyTabline()
     if g:NERDTree.IsOpen()
         let width = winwidth(g:NERDTree.GetWinNum())
         let tabline = '%#Normal#' . repeat(' ', width) . '%#VertSplit# ' . tabline
-    endif 
+    endif
     return tabline
-endfunction 
+endfunction
 au VimEnter * set tabline=%!MyTabline()
+
+function! StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+command -nargs=0 StripTrailingSpaces call StripTrailingWhitespaces()
