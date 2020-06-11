@@ -167,7 +167,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp':'vim/'}
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen', 'TagbarShowTag'] }
 Plug 'ludovicchabant/vim-gutentags'
@@ -272,8 +272,8 @@ nmap  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
 "" ------------------------------------ coc.nvim -------------------------------------------
-" coc-python, coc-json, coc-pairs, coc-vimtex, coc-html,
-" coc-neosnippet, coc-java, coc-snippets
+" coc-pairs, coc-snippets
+" coc-python, coc-json, coc-vimtex, coc-html, coc-java
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -360,7 +360,10 @@ let g:tagbar_map_zoomwin = "a"
 let g:tagbar_map_togglesort = "so"
 
 " ------------------------------------ vim-gutentags ----------------------------------
-set statusline+=%{gutentags#statusline()}
+augroup statusline
+    " this one is which you're most likely to use?
+    autocmd VimEnter set statusline+=%{gutentags#statusline()}
+augroup end
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
 
@@ -484,15 +487,15 @@ augroup vimtex_config
 augroup end
 
 " ------------- Python ---------------
-au Filetype rst set nobuflisted     " do not list doc files
-let g:pymode_python = 'python3'
-let g:pymode_warnings = 1
-let g:pymode_syntax_space_errors = 0
-let g:pymode_trim_whitespaces = 1
-let g:pymode_lint_cwindow = 0
-let g:pymode_motion = 1
-let g:pymode_lint_checkers = ['pep8']
-let g:pymode_run_bind = '<leader>c'
+" au Filetype rst set nobuflisted     " do not list doc files
+" let g:pymode_python = 'python3'
+" let g:pymode_warnings = 1
+" let g:pymode_syntax_space_errors = 0
+" let g:pymode_trim_whitespaces = 1
+" let g:pymode_lint_cwindow = 0
+" let g:pymode_motion = 1
+" let g:pymode_lint_checkers = ['pep8']
+" let g:pymode_run_bind = '<leader>c'
 hi def link pythonParam             Identifier
 hi def link pythonClassParameters   Identifier
 hi def link pythonSelf              Conventional

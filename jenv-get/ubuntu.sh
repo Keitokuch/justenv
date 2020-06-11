@@ -66,9 +66,9 @@ get_nvim() {
     fi
 }
 
-_get_node() {
-    curl -sL install-node.now.sh/lts | sudo bash
-}
+# _get_node() {
+#     curl -sL install-node.now.sh/lts | sudo bash
+# }
 
 get_nodejs() {
     parse_options $@
@@ -129,6 +129,6 @@ get_ctags() {
     fi
 }
 
-_get_ag() {
-    sudo apt-get install -y silversearcher-ag
-}
+# _get_ag() {
+#     sudo apt-get install -y silversearcher-ag
+# }
