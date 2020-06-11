@@ -167,7 +167,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp':'vim/'}
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen', 'TagbarShowTag'] }
 Plug 'ludovicchabant/vim-gutentags'
@@ -373,8 +373,13 @@ let g:Lf_HideHelp = 1
 map <leader>r :LeaderfFunction<cr>
 map <leader>t :LeaderfBufTagAll<cr>
 map <leader>T :LeaderfTag<cr>
-map <leader>o :LeaderfBuffer<cr>
-map <leader>O :LeaderfFile<cr>
+" map <leader>o :LeaderfBuffer<cr>
+" map <leader>O :LeaderfFile<cr>
+let g:Lf_ShortCutB = '<leader>o'
+let g:Lf_ShortCutF = '<leader>O'
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_NeedCacheTime = 0.8
 nmap  /        :LeaderfLine<cr>
 let g:Lf_NormalMap = {
             \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>'],
@@ -487,15 +492,20 @@ augroup vimtex_config
 augroup end
 
 " ------------- Python ---------------
-" au Filetype rst set nobuflisted     " do not list doc files
-" let g:pymode_python = 'python3'
-" let g:pymode_warnings = 1
-" let g:pymode_syntax_space_errors = 0
-" let g:pymode_trim_whitespaces = 1
-" let g:pymode_lint_cwindow = 0
-" let g:pymode_motion = 1
-" let g:pymode_lint_checkers = ['pep8']
-" let g:pymode_run_bind = '<leader>c'
+au Filetype rst set nobuflisted     " do not list doc files
+let g:pymode_python = 'python3'
+let g:pymode_rope = 0
+let g:pymode_warnings = 1
+let g:pymode_syntex = 1
+let g:pymode_syntex_all = 1
+let g:pymode_syntax_space_errors = 0
+let g:pymode_trim_whitespaces = 1
+let g:pymode_motion = 1
+let g:pymode_lint_checkers = ['pep8']
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_signs = 0
+let g:pymode_run_bind = '<leader>c'
+let g:pymode_virtualenv = 1
 hi def link pythonParam             Identifier
 hi def link pythonClassParameters   Identifier
 hi def link pythonSelf              Conventional
