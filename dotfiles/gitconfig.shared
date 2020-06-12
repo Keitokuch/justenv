@@ -1,0 +1,9 @@
+[core]
+	editor = nvim
+[alias]
+    au = add -u
+	st = status
+    cmm = commit -m
+    rb = rebase -i @{u}
+    pl = pull
+    ps = push

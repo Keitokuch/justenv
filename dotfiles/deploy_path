@@ -2,6 +2,7 @@ zshrc                       ~/.zshrc
 init.vim                    ~/.config/nvim/init.vim
 tmux.conf                   ~/.tmux.conf
 tmux.remote.conf            ~/.tmux/tmux.remote.conf
-dotfiles/gitignore          ~/.config/git/ignore
+gitignore_global            ~/.config/git/ignore
+gitconfig.shared            ~/.gitconfig.shared
 themes/*.vim                ~/.config/nvim/colors/
 themes/*.zsh-theme          ~/.oh-my-zsh/themes/

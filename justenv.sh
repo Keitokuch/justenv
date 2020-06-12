@@ -40,7 +40,7 @@ do_deploy() {
             echo "No deployable config for $1"
         fi
     else
-        MSG+=(">>> Justenv deploy all")
+        MSG+=(">>> deploy configs")
         cd $CONFIG_PATH
         deploy_configs
         [[ -f $CONFIG_PATH/after_deploy ]] && . $CONFIG_PATH/after_deploy && MSG+=(">>> exec after_deploy")
