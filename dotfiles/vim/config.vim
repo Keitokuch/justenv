@@ -42,3 +42,8 @@ set noshowmode
 set splitbelow
 set splitright
 set cursorline
+
+" ======================== Languages ==========================
+" -------------- Lua -----------------
+hi def link LuaFunction             FunctionDeclaration
+hi def link LuaIn                   Conditional
