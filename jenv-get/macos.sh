@@ -12,6 +12,7 @@ get_prereq() {
 
 get_build() {
     xcode-select --install
+    return 0
 }
 
 _get_brew() {

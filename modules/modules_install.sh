@@ -1,39 +1,21 @@
-get_prereq
-get_update
-get_build
+JGET="$ENV/jenv-get.sh install"
+
+$JGET prereq update build
 
 if [[ $zsh == "y" ]]; then
-    jenv_get zsh
-    get_OMZ
-    deploy_zsh
+    $JGET zsh OMZ
 elif [[ $zsh == "r" ]]; then
-    jenv_get zsh -f
-    get_OMZ -f
-    deploy_zsh
+    $JGET -f zsh OMZ
 fi
 
 if [[ $nvim == "y" ]]; then
-    jenv_get node
-    jenv_get ctags
-    jenv_get ag
-    jenv_get nvim
-    get_vimplug
-    deploy_nvim
+    $JGET nvim vim-plug node ctags ag
 elif [[ $nvim == "r" ]]; then
-    jenv_get nvim   -f
-    get_vimplug     -f
-    jenv_get node   -f
-    jenv_get ctags  -f
-    jenv_get ag     -f
-    deploy_nvim
+    $JGET -f nvim vim-plug node ctags ag
 fi
 
 if [[ $tmux == "y" ]]; then
-    jenv_get tmux -f
-    get_tpm
-    deploy_tmux
+    $JGET tmux -f tpm
 elif [[ $tmux == "r" ]]; then
-    jenv_get tmux -f 
-    get_tpm -f
-    deploy_tmux
+    $JGET -f tmux tpm
 fi

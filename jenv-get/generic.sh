@@ -140,7 +140,7 @@ get_OMZ() {
     fi
 }
 
-get_vimplug() {
+get_vim-plug() {
     parse_options $@
     if [[ $forced ]] || [[ ! -f  ~/.local/share/nvim/site/autoload/plug.vim ]]; then 
         curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \

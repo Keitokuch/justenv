@@ -23,8 +23,6 @@ do_install() {
     done
 }
 
-. $ENV/utils/env_utils.sh
-CONFIG=$ENV/test
 do_test() {
     deploy_other
 }

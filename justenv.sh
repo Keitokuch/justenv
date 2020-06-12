@@ -25,12 +25,8 @@ usage() {
 }
 
 do_install() {
-    JGET=$ENV/jenv-get
-    . $JGET/jenv_core.sh
-    jenv_init
     . $MODULE/modules_install.sh
     do_deploy
-    jenv_after
 }
 
 do_deploy() {
