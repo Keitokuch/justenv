@@ -2,6 +2,8 @@
 
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 JGET=$ENV/jenv-get
+declare -a MSG=()
+declare -a CLEANUP=("put_msg")
 
 . $ENV/justenv.config
 . $JGET/jenv_core.sh
@@ -11,11 +13,7 @@ usage() {
 }
 
 do_install() {
-    while (( $# > 0 )) 
-    do
-        jenv_get $@
-        shift $(( OPTIND ))
-    done
+    jenv_install $@
 }
 
 do_test() {
@@ -28,8 +26,6 @@ main() {
 
     case $opt in
         install)
-            global_options $@
-            shift $(( OPTIND - 1 ))
             do_install $@
             ;;
         test)
@@ -43,8 +39,7 @@ main() {
             exit 0
             ;;
     esac
-
-    jenv_after
+    clean_up
 }
 
 main $@

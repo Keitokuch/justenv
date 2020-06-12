@@ -1,7 +1,6 @@
 # jenv-get Core
 # To be sourced from context where JGET is set
 
-declare -a MSG=()
 declare -a JENV_PATH=()
 
 JENV=$HOME/jenv
@@ -36,6 +35,17 @@ jenv_init() {
     JENV_PATH+=("$BIN")
     touch $JENV_RC
     check_append "source $JENV_RC" $SYS_RC
+}
+
+jenv_install() {
+    global_options $@
+    shift $(( OPTIND - 1 ))
+
+    while (( $# > 0 )) 
+    do
+        jenv_get $@
+        shift $(( OPTIND ))
+    done
 }
 
 jenv_get() {
@@ -80,19 +90,19 @@ load_source() {
 
 terminate() {
     MSG+=("Terminated. Cleaning up...")
-    jenv_after
+    clean_up
     exit 1
 }
 
 jenv_before() {
-    rm -rf $BUILD
+    rm -rf $BUILD/*
     trap terminate SIGINT
     trap terminate SIGTSTP
+    CLEANUP=("jenv_after" "${CLEANUP[@]}")
 }
 
 jenv_after() {
     jenv_setup
-    put_msg
     rm -rf $BUILD
 }
 

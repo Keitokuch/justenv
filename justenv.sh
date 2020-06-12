@@ -4,6 +4,8 @@ ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 MODULE=$ENV/modules
 UTILS=$ENV/utils
 SCRIPT=$ENV/scripts
+declare -a MSG=()
+declare -a CLEANUP=("put_msg")
 
 . $ENV/justenv.config
 . $ENV/src/env_utils.sh
@@ -25,7 +27,7 @@ usage() {
 }
 
 do_install() {
-    . $MODULE/modules_install.sh
+    modules_install
     do_deploy
 }
 
@@ -38,10 +40,10 @@ do_deploy() {
             echo "No deployable config for $1"
         fi
     else
-        echo "Justenv deploy all"
+        MSG+=(">>> Justenv deploy all")
         cd $CONFIG_PATH
         deploy_configs
-        [[ -f $CONFIG_PATH/after_deploy ]] && . $CONFIG_PATH/after_deploy && echo "exec after_deploy"
+        [[ -f $CONFIG_PATH/after_deploy ]] && . $CONFIG_PATH/after_deploy && MSG+=(">>> exec after_deploy")
         cd $ENV
     fi
 }
@@ -52,11 +54,12 @@ main() {
     case $opt in
         install)
             do_install
+            clean_up
             [[ "$zsh" =~  ^(y|r)$ ]] && zsh
             ;;
         deploy)
             do_deploy $@
-            put_msg
+            clean_up
             ;;
         uninstall)
             echo "Not implemented"

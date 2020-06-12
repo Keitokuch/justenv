@@ -25,3 +25,9 @@ put_msg() {
         echo $msg
     done
 }
+
+clean_up() {
+    for tsk in "${CLEANUP[@]}"; do
+        $tsk
+    done
+}

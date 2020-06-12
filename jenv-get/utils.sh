@@ -87,3 +87,9 @@ has_func() {
     declare -f $_func > /dev/null
     return $?
 }
+
+clean_up() {
+    for tsk in "${CLEANUP[@]}"; do
+        $tsk
+    done
+}
