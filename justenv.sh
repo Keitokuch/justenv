@@ -10,13 +10,15 @@ SCRIPT=$ENV/scripts
 . $ENV/src/justenv_core.sh
 
 JUSTENV=$HOME/.justenv
-CONFIG=${CONFIG_PATH:-"$ENV/configs"}
+CONFIG_PATH=${CONFIG_PATH:-"$ENV/configs"}
+OLD=$JUSTENV/oldconfigs
 mkdir -p $JUSTENV
-mkdir -p $CONFIG
+mkdir -p $CONFIG_PATH
+mkdir -p $OLD
 SYS_RC=$HOME/.bashrc
 
-THEME=$CONFIG/themes
-DOTFILE=$CONFIG/dotfiles
+THEME=$CONFIG_PATH/themes
+DOTFILE=$CONFIG_PATH
 
 usage() {
     echo "Usage: $0 install | deploy [config_item] | uninstall"
@@ -25,15 +27,13 @@ usage() {
 do_install() {
     JGET=$ENV/jenv-get
     . $JGET/jenv_core.sh
-    pull_configs
     jenv_init
     . $MODULE/modules_install.sh
-    deploy_terminfo
+    do_deploy
     jenv_after
 }
 
 do_deploy() {
-    pull_configs
     if [[ $# -gt 0 ]]; then
         if has_func deploy_$1 ; then
             deploy_$1 
@@ -43,7 +43,10 @@ do_deploy() {
         fi
     else
         echo "Justenv deploy all"
+        cd $CONFIG_PATH
         deploy_configs
+        [[ -f $CONFIG_PATH/after_deploy ]] && . $CONFIG_PATH/after_deploy && echo "exec after_deploy"
+        cd $ENV
     fi
 }
 
@@ -58,6 +61,9 @@ main() {
         deploy)
             do_deploy $@
             put_msg
+            ;;
+        uninstall)
+            echo "Not implemented"
             ;;
         func)
             $@

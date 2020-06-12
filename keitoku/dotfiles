@@ -50,7 +50,6 @@ autocmd FileType help wincmd L | vert resize 80
 
 
 " -------------------- Color Scheme -------------------
-let g:airline_theme='onehalfdark'
 colorscheme vim-keitoku
 
 " ============================ Key Mappings =============================
@@ -155,15 +154,12 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 call plug#begin()
 
 Plug 'scrooloose/nerdtree'
-""
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
-""
 Plug 'airblade/vim-gitgutter'
 Plug 'lfv89/vim-interestingwords'
-Plug 'connorholyday/vim-snazzy'
-" Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'connorholyday/vim-snazzy'
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-pairs coc-snippets'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp':'vim/'}
@@ -178,10 +174,10 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 "Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp', 'cuda'] }
-Plug 'vim-scripts/TagHighlight'
+" Plug 'vim-scripts/TagHighlight'
 "Plug 'mkitt/tabline.vim'
 "Plug 'jistr/vim-nerdtree-tabs'
-Plug 'bagrat/vim-buffet'
+" Plug 'bagrat/vim-buffet'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'Shougo/neosnippet.vim'
 " Plug 'Shougo/neosnippet-snippets'
@@ -224,9 +220,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "let g:nerdtree_tabs_autofind = 1
 
 " --------------------- vim-airline --------------------
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='onehalfdark'
 let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#show_close_button = 1
+let g:airline#extensions#tabline#middle_click_preserves_windows = 1
+let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtree', 'terminal', 'tagbar', 'help']
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -238,9 +238,6 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>[ <Plug>AirlineSelectPrevTab
 nmap <leader>] <Plug>AirlineSelectNextTab
-let g:airline#extensions#tabline#show_close_button = 1
-let g:airline#extensions#tabline#middle_click_preserves_windows = 1
-let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtree', 'terminal', 'tagbar', 'help']
 
 
 "" ------------------ vim-gitgutter -------------------
@@ -373,12 +370,12 @@ let g:Lf_HideHelp = 1
 map <leader>r :LeaderfFunction<cr>
 map <leader>t :LeaderfBufTagAll<cr>
 map <leader>T :LeaderfTag<cr>
-" map <leader>o :LeaderfBuffer<cr>
-" map <leader>O :LeaderfFile<cr>
-let g:Lf_ShortCutB = '<leader>o'
-let g:Lf_ShortCutF = '<leader>O'
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_WindowHeight = 0.30
+map <leader>o :LeaderfBuffer<cr>
+map <leader>O :LeaderfFile<cr>
+let g:Lf_ShortCutB = ''
+let g:Lf_ShortCutF = ''
+" let g:Lf_WindowPosition = 'popup'
+let g:Lf_WindowHeight = 0.35
 let g:Lf_NeedCacheTime = 0.8
 nmap  /        :LeaderfLine<cr>
 let g:Lf_NormalMap = {
@@ -448,22 +445,22 @@ hi def link cCustomPtr              Operator
 " ----------------------- vim-buffet -------------------------
 "map <silent><expr> <leader>] buflisted(bufnr("%"))? ":bn\<CR>" : ""
 "map <silent><expr> <leader>[ buflisted(bufnr("%"))? ":bp\<CR>" : ""
-map <silent><expr> <leader>w buflisted(bufnr("%"))? ":Bw\<CR>" : ":q\<CR>"
-map <leader><leader>] :+tabnext<CR>
-map <leader><leader>[ :-tabnext<CR>
-map <leader><leader>t : tabe<CR>
-function! g:BuffetSetCustomColors()
-    hi! link BuffetCurrentBuffer TabLineSel
-    hi! link BuffetActiveBuffer  TabAlt
-    hi! link BuffetBuffer        TabLine
-    hi! link BuffetTab           Block
-endfunction
-let g:buffet_show_index = 1
-let g:buffet_use_devicons = 0
-let g:buffet_powerline_separators = 0
-let g:buffet_tab_icon = "\uf00a"
-let g:buffet_left_trunc_icon = "\uf0a8"
-let g:buffet_right_trunc_icon = "\uf0a9"
+" map <silent><expr> <leader>w buflisted(bufnr("%"))? ":Bw\<CR>" : ":q\<CR>"
+" map <leader><leader>] :+tabnext<CR>
+" map <leader><leader>[ :-tabnext<CR>
+" map <leader><leader>t : tabe<CR>
+" function! g:BuffetSetCustomColors()
+"     hi! link BuffetCurrentBuffer TabLineSel
+"     hi! link BuffetActiveBuffer  TabAlt
+"     hi! link BuffetBuffer        TabLine
+"     hi! link BuffetTab           Block
+" endfunction
+" let g:buffet_show_index = 1
+" let g:buffet_use_devicons = 0
+" let g:buffet_powerline_separators = 0
+" let g:buffet_tab_icon = "\uf00a"
+" let g:buffet_left_trunc_icon = "\uf0a8"
+" let g:buffet_right_trunc_icon = "\uf0a9"
 
 
 " ======================== Languages ==========================
