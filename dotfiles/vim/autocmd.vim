@@ -1,5 +1,11 @@
 "  Vim autocmds
 "
+" Automatically install missing plugins on startup
+autocmd VimEnter *
+            \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+            \|   PlugInstall --sync | q
+            \| endif
+
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 autocmd FileType help wincmd L | vert resize 80
@@ -11,9 +17,4 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Automatically Save and Restore Session
 autocmd VimEnter * nested call StartSetup()
 autocmd VimLeave * call LeaveSetup()
-
-" Automatically install missing plugins on startup
-autocmd VimEnter *
-            \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-            \|   PlugInstall --sync | q
-            \| endif
+au VimEnter * set tabline=%!MyTabline()

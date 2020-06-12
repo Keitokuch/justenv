@@ -64,7 +64,6 @@ function! MyTabline()
     endif
     return tabline
 endfunction
-au VimEnter * set tabline=%!MyTabline()
 
 function! StripTrailingWhitespaces()
     let l = line(".")

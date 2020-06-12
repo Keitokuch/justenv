@@ -1,9 +1,45 @@
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-pairs coc-snippets'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 
 "" ------------------------------------ coc.nvim -------------------------------------------
 " coc-pairs, coc-snippets
 " coc-python, coc-json, coc-vimtex, coc-html, coc-java
+
+let g:coc_global_extensions=['coc-pairs', 'coc-snippets', 'coc-json', 'coc-python', 'coc-vimtex']
+
+" use <tab> and <s-tab> for trigger completion and navigate to complete items
+inoremap <silent><expr> <Tab>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<Tab>" :
+            \ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" use <tab> to jump in snippets
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>":
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+
+" use <cr> to confirm completion
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" make <cr> select the first completion item and confirm the completion when no item has been selected
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" Remap for rename current word
+nmap \rn <Plug>(coc-rename)
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -43,35 +79,3 @@ function! s:show_documentation()
     endif
 endfunction
 
-" use <tab> and <s-tab> for trigger completion and navigate to complete items
-inoremap <silent><expr> <Tab>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<Tab>" :
-            \ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" use <tab> to jump in snippets
-inoremap <silent><expr> <TAB>
-            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ pumvisible() ? "\<C-n>":
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-" use <cr> to confirm completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" make <cr> select the first completion item and confirm the completion when no item has been selected
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" Remap for rename current word
-nmap \rn <Plug>(coc-rename)
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'

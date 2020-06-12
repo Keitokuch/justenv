@@ -1,4 +1,4 @@
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 " ------------- Python ---------------
 au Filetype rst set nobuflisted     " do not list doc files
