@@ -69,9 +69,6 @@ nnoremap <leader>= gg=G<C-o>
 "" Sudo Write
 command Sudow w !sudo dd of=%
 cmap w!! w !sudo -S tee%
-"" In command panel
-cnoremap qq <C-c>
-cnoremap jj <C-c>
 
 "" Split
 map s <nop>
@@ -130,7 +127,7 @@ inoremap <silent><expr> <C-n> pumvisible()? "\<C-n>" : "\<down>"
 
 "" Terminal mode
 " qq to escape in terminal
-tnoremap qq <C-\><C-n>
+tnoremap QQ <C-\><C-n>
 
 " Minimal auto closing
 inoremap ( ()<left>
