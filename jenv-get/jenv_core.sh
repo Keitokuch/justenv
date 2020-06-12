@@ -20,6 +20,11 @@ SYS_RC=$HOME/.bash_profile
 . $JGET/utils.sh
 . $JGET/config
 
+check_jenv() {
+    [[ -f $JENV_RC ]] && return 0
+    return 1
+}
+
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 
         check_append "export PATH=$path:\$PATH" $JENV_RC
@@ -73,6 +78,18 @@ load_source() {
     fi
 }
 
+terminate() {
+    MSG+=("Terminated. Cleaning up...")
+    jenv_after
+    exit 1
+}
+
+jenv_before() {
+    rm -rf $BUILD
+    trap terminate SIGINT
+    trap terminate SIGTSTP
+}
+
 jenv_after() {
     jenv_setup
     put_msg
@@ -80,6 +97,8 @@ jenv_after() {
 }
 
 main() {
+    check_jenv   || jenv_init
+    jenv_before
     parse_ostype || { jenv_after; exit 1; }
     load_source  || { jenv_after; exit 1; }
 }

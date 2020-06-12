@@ -10,11 +10,6 @@ usage() {
     echo "Usage: $0 install [-f] PACKAGE"
 }
 
-check_jenv() {
-    [[ -f $JENV_RC ]] && return 0
-    return 1
-}
-
 do_install() {
     while (( $# > 0 )) 
     do
@@ -28,8 +23,6 @@ do_test() {
 }
 
 main() {
-    check_jenv || jenv_init
-
     opt=$1
     shift
 
