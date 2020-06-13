@@ -1,20 +1,27 @@
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
+" ------------------- Mappings -----------------
+map <leader>r :LeaderfFunction<cr>
+map <leader>R :LeaderfFunctionAll<cr>
+map <leader>t :LeaderfBufTagAll<cr>
+map <leader>T :LeaderfTag<cr>
+map <leader>o :LeaderfBuffer<cr>
+map <leader>O :LeaderfFile<cr>
+nmap  /       :LeaderfLine<cr>
+
+command Color       LeaderfColorscheme
+command Filetype    LeaderfFiletype
+command Ft          LeaderfFiletype
+let g:Lf_ShortCutB = '<C-B>'
+let g:Lf_ShortCutF = '<C-B>'
+
 " ---------------------------------------- Leaderf ---------------------------------------------
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_PythonVersion = 3
 let g:Lf_UseCache = 0
-map <leader>r :LeaderfFunction<cr>
-map <leader>t :LeaderfBufTagAll<cr>
-map <leader>T :LeaderfTag<cr>
-map <leader>o :LeaderfBuffer<cr>
-map <leader>O :LeaderfFile<cr>
-let g:Lf_ShortCutB = '<C-B>'
-let g:Lf_ShortCutF = '<C-B>'
 " let g:Lf_WindowPosition = 'popup'
 let g:Lf_WindowHeight = 0.35
-nmap  /        :LeaderfLine<cr>
 let g:Lf_NormalMap = {
             \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>'],
             \            ["<C-C>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],

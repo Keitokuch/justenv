@@ -5,10 +5,11 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 map <leader>d :NERDTreeToggle<CR>
 map <silent><expr> sf exists("b:NERDTree") ? "\<C-w>p" : ":NERDTreeFocus<CR>"
 map <silent><expr> sF exists("b:NERDTree") ? "\<C-w>p" : ":NERDTreeFind<CR>"
-let g:NERDTreeWinSize=24
-let g:NERDTreeMinimalUI=1
 let NERDTreeMapOpenVSplit='so'
 let NERDTreeMapToggleZoom='a'
+
+let g:NERDTreeWinSize=24
+let g:NERDTreeMinimalUI=1
 autocmd StdinReadPre * let s:std_in=1
 
 " When NERDTree is the only window left
