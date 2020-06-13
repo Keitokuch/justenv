@@ -11,6 +11,7 @@ let plugins = [
             \ 'leaderf',
             \ 'nerdcommenter',
             \ 'nerdtree',
+            \ 'polyglot',
             \ 'python',
             \ 'tagbar',
             \ 'tags',
@@ -26,6 +27,5 @@ for plug in plugins
     let f = plug_path . plug . '.vim'
     exec 'source' f
 endfor
-
 
 call plug#end()
