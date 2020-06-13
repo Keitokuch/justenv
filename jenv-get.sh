@@ -1,7 +1,7 @@
 #! /usr/bin/env bash 
 
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-JGET=$ENV/jenv-get
+JGET=$ENV/jenv
 declare -ga MSG=()
 declare -ga CLEANUP=("put_msg")
 

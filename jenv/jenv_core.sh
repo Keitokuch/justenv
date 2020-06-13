@@ -33,7 +33,6 @@ jenv_setup() {
 
 jenv_init() {
     JENV_PATH+=("$BIN")
-    echo $JENV_PATH
     touch $JENV_RC
     check_append "source $JENV_RC" $SYS_RC
 }

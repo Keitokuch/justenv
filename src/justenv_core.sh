@@ -1,5 +1,5 @@
 modules_install() {
-    JGET=$ENV/jenv-get
+    JGET=$ENV/jenv
     . $JGET/jenv_core.sh
 
     jenv_install -s prereq update build
