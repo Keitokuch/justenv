@@ -8,3 +8,5 @@
     rb = rebase -i @{u}
     pl = pull
     ps = push
+[color]
+    ui = auto
