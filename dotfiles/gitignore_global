@@ -12,3 +12,6 @@
 
 # vi
 *~
+
+# tex
+.latex_aux/
