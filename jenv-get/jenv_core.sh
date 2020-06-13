@@ -1,7 +1,7 @@
 # jenv-get Core
 # To be sourced from context where JGET is set
 
-declare -a JENV_PATH=()
+declare -ga JENV_PATH=()
 
 JENV=$HOME/jenv
 BIN=$JENV/bin
@@ -33,6 +33,7 @@ jenv_setup() {
 
 jenv_init() {
     JENV_PATH+=("$BIN")
+    echo $JENV_PATH
     touch $JENV_RC
     check_append "source $JENV_RC" $SYS_RC
 }
