@@ -17,17 +17,16 @@ let plugins = [
             \ 'tagbar',
             \ 'tags',
             \ 'visual-multi',
-            \ 'vimtex'
+            \ 'vimtex',
             \]
 
 call plug#begin()
-
-" exec 'source' plug_path . 'plugins.vim'
 for plug in plugins
     let f = plug_path . plug . '.vim'
     exec 'source' f
 endfor
-
 call plug#end()
 
 """""" Unloaded Plugins 
+            \ 'buffet',
+            \ 'snazzy',
