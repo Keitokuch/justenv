@@ -6,20 +6,23 @@ Plug 'honza/vim-snippets'
 " coc-python, coc-json, coc-vimtex, coc-html, coc-java
 
 let g:coc_global_extensions=['coc-pairs', 'coc-snippets', 'coc-json', 'coc-python', 'coc-vimtex']
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
-" use <tab> and <s-tab> for trigger completion and navigate to complete items
-inoremap <silent><expr> <Tab>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<Tab>" :
-            \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " use <tab> to jump in snippets
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>":
             \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+            \ "\<TAB>"
+
+" use <tab> and <s-tab> for trigger completion and navigate to complete items
+" inoremap <silent><expr> <Tab>
+"             \ pumvisible() ? "\<C-n>" :
+"             \ <SID>check_back_space() ? "\<Tab>" :
+"             \ coc#refresh()
+
 
 " use <cr> to confirm completion
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -36,9 +39,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
 
 " TextEdit might fail if hidden is not set.
 set hidden
