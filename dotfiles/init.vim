@@ -1,5 +1,5 @@
 " Neovim Configuration
-let g:loaded_python_provider = 0
+let g:python_host_prog = system('which python')[:-2]
 let g:python3_host_prog = system('which python3')[:-2]
 
 let g:config_path = expand('~/.config/nvim/')

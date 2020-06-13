@@ -1,18 +1,19 @@
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " ---------------------------------------- Leaderf ---------------------------------------------
-let g:Lf_ShowRelativePath = -1
+let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
+let g:Lf_PythonVersion = 3
+let g:Lf_UseCache = 0
 map <leader>r :LeaderfFunction<cr>
 map <leader>t :LeaderfBufTagAll<cr>
 map <leader>T :LeaderfTag<cr>
 map <leader>o :LeaderfBuffer<cr>
 map <leader>O :LeaderfFile<cr>
-let g:Lf_ShortCutB = ''
-let g:Lf_ShortCutF = ''
+let g:Lf_ShortCutB = '<C-B>'
+let g:Lf_ShortCutF = '<C-B>'
 " let g:Lf_WindowPosition = 'popup'
 let g:Lf_WindowHeight = 0.35
-let g:Lf_NeedCacheTime = 0.8
 nmap  /        :LeaderfLine<cr>
 let g:Lf_NormalMap = {
             \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>'],
