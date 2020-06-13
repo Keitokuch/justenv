@@ -1,12 +1,13 @@
 let plug_path = g:config_path.'plugins/'
 let plugins = [
+            \ 'vterm',
+            \ 'devicons',
+            \ 'gitgutter',
             \ 'airline',
             \ 'coc',
             \ 'cpp',
             \ 'ctrlsf',
-            \ 'devicons',
             \ 'easymotion',
-            \ 'gitgutter',
             \ 'interestingwords',
             \ 'leaderf',
             \ 'nerdcommenter',
@@ -15,7 +16,6 @@ let plugins = [
             \ 'python',
             \ 'tagbar',
             \ 'tags',
-            \ 'vterm',
             \ 'visual-multi',
             \ 'vimtex'
             \]
@@ -29,3 +29,5 @@ for plug in plugins
 endfor
 
 call plug#end()
+
+"""""" Unloaded Plugins 

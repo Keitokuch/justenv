@@ -5,12 +5,12 @@ inoremap jj <ESC>
 "" Use q for escape
 map q <ESC>
 nnoremap Q q
-"" Up down scrolling
+"" Up Down scrolling
 map <C-i> 10k
 map <C-d> 10j
 "" Copy All
 nnoremap Y :%y<CR>
-"" Indent All
+"" <space>= Indent All
 nnoremap <leader>= gg=G<C-o>
 "" Sudo Write
 command Sudow w !sudo dd of=%
@@ -61,18 +61,18 @@ nnoremap <C-u> <C-i>
 nnoremap <C-y> <C-t>
 
 "" Insert mode emacs bindings
-inoremap <silent><expr> <C-e> pumvisible()? "\<C-e>" : "\<ESC>A"
 inoremap <C-a> <ESC>I
 inoremap <C-f> <right>
 inoremap <C-b> <left>
 inoremap <C-M-b> <ESC>bi
 inoremap <C-M-f> <right><ESC>wi
 inoremap <C-M-d> <right><ESC>wcw
+inoremap <silent><expr> <C-e> pumvisible()? "\<C-e>" : "\<ESC>A"
 inoremap <silent><expr> <C-p> pumvisible()? "\<C-p>" : "\<up>"
 inoremap <silent><expr> <C-n> pumvisible()? "\<C-n>" : "\<down>"
 
 "" Terminal mode
-" qq to escape in terminal
+" QQ to escape in terminal
 tnoremap QQ <C-\><C-n>
 
 " Minimal auto closing
