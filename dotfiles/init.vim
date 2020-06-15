@@ -1,8 +1,7 @@
-" Neovim Configuration
-let g:python_host_prog = system('which python')[:-2]
-let g:python3_host_prog = system('which python3')[:-2]
-
-let g:config_path = expand('~/.config/nvim/')
+let g:config_path = resolve(expand('<sfile>:p:h')).'/'
+if has('nvim')
+    exec 'source' g:config_path . 'nvim.vim'
+endif
 
 exec 'source' g:config_path . 'config.vim'
 exec 'source' g:config_path . 'functions.vim'
