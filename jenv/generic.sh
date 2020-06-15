@@ -145,9 +145,17 @@ get_vim-plug() {
     if [[ $forced ]] || [[ ! -f  ~/.local/share/nvim/site/autoload/plug.vim ]]; then 
         curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        [[ $silent ]] || MSG+=(">>> installed vim-plug <<<")
+        [[ $silent ]] || MSG+=(">>> installed vim-plug for neovim <<<")
     else
-        [[ $silent ]] || MSG+=("=== vim-plug already installed ===")
+        [[ $silent ]] || MSG+=("=== vim-plug already installed for neovim ===")
+    fi 
+
+    if [[ $forced ]] || [[ ! -f  ~/.vim/autoload/plug.vim ]]; then 
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        [[ $silent ]] || MSG+=(">>> installed vim-plug for vim <<<")
+    else
+        [[ $silent ]] || MSG+=("=== vim-plug already installed for vim ===")
     fi 
 }
 
