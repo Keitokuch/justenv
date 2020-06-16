@@ -18,7 +18,7 @@ fu! StartSetup()
         let g:DIR_START = 1
         exe 'cd ' . argv()[0]
         if !RestoreSess()
-            exe 'NERDTreeToggle' argv()[0] | wincmd p | ene
+            exe 'NERDTreeToggle' argv()[0] | wincmd p | enew
         endif
     else
         let g:DIR_START=0
@@ -34,8 +34,9 @@ fu! RestoreSess()
                     exe 'sbuffer ' . l
                 endif
             endfor
+        else
+            exe 'NERDTreeFind' | wincmd p
         endif
-        exe 'NERDTreeFind' | wincmd p
         return 1
     else
         return 0
@@ -44,6 +45,7 @@ endfunction
 
 fu! LeaveSetup()
     let currTab = tabpagenr()
+    let restore_tree = g:NERDTree.IsOpen() ? 1 : 0
     tabdo helpclose
     if exists('g:loaded_nerd_tree') | tabdo NERDTreeClose
     endif
@@ -53,6 +55,9 @@ fu! LeaveSetup()
     endif
     exe 'tabn ' . currTab
     mksession! ./.Session.vim
+    if restore_tree
+        call writefile(["NERDTreeToggle | wincmd p"], "./.Session.vim", "a")
+    endif
 endfu
 
 function! MyTabline()
@@ -72,3 +77,28 @@ function! StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 command -nargs=0 StripTrailingSpaces call StripTrailingWhitespaces()
+
+function! CloseBuffer()
+    if len(getbufinfo({'buflisted':1})) == 1
+        enew
+        bd #
+    else
+        if buflisted(bufnr("%"))
+            bp | bd #
+        else
+            q
+        endif
+    endif
+endfu
+command! -n=0 CloseBuffer call CloseBuffer()
+
+function! SaveFile()
+    if bufname("%") != ""
+        write 
+    else
+        let currentpath = getcwd()
+        let filename = input("Save as: ", currentpath."/filename")
+        exe "write " . filename
+    endif
+endfu
+command! -n=0 SaveFile call SaveFile()

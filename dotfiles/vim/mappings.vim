@@ -19,15 +19,17 @@ cmap w!! w !sudo -S tee%
 "" Split
 map s <nop>
 map S <nop>
-map sl :set splitright<CR>:vsplit<CR>
-map sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-map sj :set splitbelow<CR>:split<CR>
-map sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+map s_ :set splitbelow<CR>:split<CR>
+map s\| :set splitright<CR>:vsplit<CR>
 map <leader>l <C-w>l
 map <leader>h <C-w>h
 map <leader>k <C-w>k
 map <leader>j <C-w>j
 map <leader>p <C-w>p
+" map sl :set splitright<CR>:vsplit<CR>
+" map sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+" map sj :set splitbelow<CR>:split<CR>
+" map sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 
 " Use <Meta-Arrow> or <Space><Arrow> to resize split window
 map <M-Up> :resize +5<CR>
@@ -45,14 +47,15 @@ map <leader><Right> :vertical resize+5<CR>
 " map <leader>[ :-tabnext<CR>
 
 "" <Space s> to save
-map <leader>s :w<CR>
+map <leader>s :SaveFile<CR>
 "" <Space q> to quit
 map <leader>q :qall<CR>
 "" <Space Q> to force quit
 map <leader>Q :qall!<CR>
-"" <Space w> to close buffer
-map <silent><expr> <leader>w buflisted(bufnr("%"))? ":bp<cr>:bd #<cr>" : ":q\<CR>"
-"" <Space W> to force close buffer
+"" <Space w> to close file
+" map <silent><expr> <leader>w buflisted(bufnr("%"))? ":bp<cr>:bd #<cr>" : ":q\<CR>"
+map <leader>w :CloseBuffer<CR>
+"" <Space W> to force close file
 map <silent><expr> <leader>W buflisted(bufnr("%"))? ":bp<cr>:bd! #<cr>" : ":q!\<CR>"
 "" <Space Ctrl-W> to close window
 map <leader><C-w> :q<CR>

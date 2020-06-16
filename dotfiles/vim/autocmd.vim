@@ -9,6 +9,7 @@ autocmd VimEnter *
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 autocmd FileType help wincmd L | vert resize 80
+autocmd BufWinEnter * if &buftype == "help" | wincmd L | vert resize 80 | endif
 
 "" ====================== Additional Features ========================
 " Start from last position
