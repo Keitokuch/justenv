@@ -1,6 +1,5 @@
 let plug_path = g:config_path.'plugins/'
-let plugins = [
-            \ 'vterm',
+let g:plugins = [
             \ 'devicons',
             \ 'gitgutter',
             \ 'airline',
@@ -9,7 +8,6 @@ let plugins = [
             \ 'ctrlsf',
             \ 'easymotion',
             \ 'interestingwords',
-            \ 'leaderf',
             \ 'nerdcommenter',
             \ 'nerdtree',
             \ 'polyglot',
@@ -18,15 +16,23 @@ let plugins = [
             \ 'tags',
             \ 'visual-multi',
             \ 'vimtex',
+            \ 'vterm',
+            \ 'leaderf',
             \]
 
+let nvim_plugins = [
+            \]
+
+
+"""""" Unloaded Plugins 
+            \ 'buffet',
+            \ 'snazzy',
+
 call plug#begin()
+let plugins = has('nvim') ? plugins + nvim_plugins : plugins
 for plug in plugins
     let f = plug_path . plug . '.vim'
     exec 'source' f
 endfor
 call plug#end()
 
-"""""" Unloaded Plugins 
-            \ 'buffet',
-            \ 'snazzy',

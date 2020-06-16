@@ -33,9 +33,15 @@ _get_nvim() {
     cd $ENV
 }
 
+_get_vim() {
+    brew install vim
+    brew link vim
+}
+
 _get_zsh() {
     brew install zsh zsh-completions
 }
+
 
 _get_curl() {
     brew install curl

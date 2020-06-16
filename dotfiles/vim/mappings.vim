@@ -29,10 +29,15 @@ map <leader>k <C-w>k
 map <leader>j <C-w>j
 map <leader>p <C-w>p
 
-map <M-up> :resize +5<CR>
-map <M-down> :resize -5<CR>
-map <M-left> :vertical resize-5<CR>
-map <M-right> :vertical resize+5<CR>
+" Use <Meta-Arrow> or <Space><Arrow> to resize split window
+map <M-Up> :resize +5<CR>
+map <M-Down> :resize -5<CR>
+map <M-Left> :vertical resize-5<CR>
+map <M-Right> :vertical resize+5<CR>
+map <leader><Up> :resize +5<CR>
+map <leader><Down> :resize -5<CR>
+map <leader><Left> :vertical resize-5<CR>
+map <leader><Right> :vertical resize+5<CR>
 
 "" Tab
 " map <leader>t :tabe<CR>
@@ -73,7 +78,8 @@ inoremap <silent><expr> <C-n> pumvisible()? "\<C-n>" : "\<down>"
 
 "" Terminal mode
 " QQ to escape in terminal
-tnoremap QQ <C-\><C-n>
+tnoremap QQ     <C-\><C-n>
+tnoremap <Esc>  <C-\><C-n>
 
 " Minimal auto closing
 inoremap ( ()<left>

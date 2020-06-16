@@ -52,6 +52,18 @@ _get_nvim() {
     python3 -m pip install neovim --user
 }
 
+_get_vim() {
+    version=${VERSION:-$VIM_VERSION}
+    cd $BUILD
+    wget https://github.com/vim/vim/archive/v$version.tar.gz -O vim-$version.tar.gz
+    tar xzf vim-$version.tar.gz
+    cd vim-$version
+    ./configure --prefix=$JENV
+    make -j $nr_worker
+    make install
+    cd $ENV
+}
+
 _get_ag() {
     version=${VERSION:-$AG_VERSION}
     cd $BUILD

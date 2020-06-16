@@ -2,7 +2,6 @@
 colorscheme vim-keitoku
 
 " ----------------- Options ----------------
-syntax on
 set nocompatible
 set number
 set relativenumber
@@ -34,7 +33,6 @@ set history=1000
 set laststatus=2    "always show status
 set clipboard=unnamed
 set mouse=a
-set termguicolors
 set scrolloff=13
 set showtabline=2
 set noswapfile
@@ -42,6 +40,9 @@ set noshowmode
 set splitbelow
 set splitright
 set cursorline
+
+set termguicolors
+syntax on
 
 " ======================== Languages ==========================
 " -------------- Lua -----------------
