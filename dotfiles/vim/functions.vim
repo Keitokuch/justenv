@@ -84,7 +84,12 @@ function! CloseBuffer()
         bd #
     else
         if buflisted(bufnr("%"))
-            bp | bd #
+            if &modified
+                echo "Changes Not Saved!"
+            else
+                bp
+                bd #
+            endif
         else
             q
         endif
@@ -97,8 +102,15 @@ function! SaveFile()
         write 
     else
         let currentpath = getcwd()
-        let filename = input("Save as: ", currentpath."/filename")
+        let filename = input("Save as: ", currentpath."/")
         exe "write " . filename
     endif
 endfu
 command! -n=0 SaveFile call SaveFile()
+
+function! NewFile()
+    let currentpath = getcwd()
+    let filename = input("New File: ", currentpath. "/")
+    exe "edit " . filename
+endfu
+command! -n=0 NewFile call NewFile()
