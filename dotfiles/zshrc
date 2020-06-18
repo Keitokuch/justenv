@@ -38,7 +38,7 @@ CASE_SENSITIVE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -128,6 +128,8 @@ function spectrum_ls() {
 
 precmd() {
 	if [ -n "$TMUX" ]; then
+        continuum_save=~/.tmux/plugins/tmux-continuum/scripts/continuum_save.sh
+        [[ -x $continuum_save ]] && $continuum_save
     	tmux refresh-client -S
 	fi
 }
