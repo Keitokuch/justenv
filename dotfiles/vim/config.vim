@@ -40,6 +40,7 @@ set noshowmode
 set splitbelow
 set splitright
 set cursorline
+set exrc
 
 set termguicolors
 syntax on
