@@ -18,6 +18,7 @@ let g:plugins = [
             \ 'vimtex',
             \ 'vterm',
             \ 'leaderf',
+            \ 'go',
             \]
 
 let nvim_plugins = [
