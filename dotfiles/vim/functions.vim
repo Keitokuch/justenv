@@ -34,8 +34,8 @@ fu! RestoreSess()
                     exe 'sbuffer ' . l
                 endif
             endfor
-        else
-            exe 'NERDTreeFind' | wincmd p
+        " else
+        "     exe 'NERDTreeFind' | wincmd p
         endif
         return 1
     else
