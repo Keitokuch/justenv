@@ -102,6 +102,16 @@ _get_gdb() {
     ../configure --prefix=$JENV  || return 1
     make -j $nr_worker          || return 1
     make install                || return 1
+    cd $ENV
+}
+
+_get_go() {
+    version=${VERSION:-$GO_VERSION}
+    cd $BUILD
+    wget https://dl.google.com/go/go$version.$ostype-amd64.tar.gz
+    tar -C $JENV -xzf go$version.$ostype-amd64.tar.gz
+    JENV_PATH+=("$JENV/go/bin")
+    cd $ENV
 }
 
 get_gef() {
