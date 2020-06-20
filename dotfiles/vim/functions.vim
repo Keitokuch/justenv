@@ -79,20 +79,18 @@ endfun
 command -nargs=0 StripTrailingSpaces call StripTrailingWhitespaces()
 
 function! CloseBuffer()
-    if len(getbufinfo({'buflisted':1})) == 1
-        enew
-        bd #
-    else
-        if buflisted(bufnr("%"))
-            if &modified
-                echo "Changes Not Saved!"
-            else
-                bp
-                bd #
-            endif
+    if buflisted(bufnr("%"))
+        if &modified
+            echo "Changes Not Saved!"
+        elseif len(getbufinfo({'buflisted':1})) == 1
+            enew
+            bd #
         else
-            q
+            bp
+            bd #
         endif
+    else
+        q
     endif
 endfu
 command! -n=0 CloseBuffer call CloseBuffer()
