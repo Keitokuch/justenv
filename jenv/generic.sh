@@ -15,6 +15,20 @@ _get_node() {
     cd $ENV
 }
 
+_get_cmake() {
+    version=${VERSION:-$CMAKE_VERSION}
+    [[ $ostype == darwin ]] && _ostype=Darwin
+    [[ $ostype == linux ]] && _ostype=Linux
+    tarball=cmake-$version-$_ostype-x86_64.tar.gz
+    dir=cmake-$version-$_ostype-x86_64
+    cd $BUILD
+    wget https://github.com/Kitware/CMake/releases/download/v$version/$tarball
+    tar xvf $tarball
+    mv $dir $JENV
+    JENV_PATH+=("$JENV/$dir/bin")
+    cd $ENV
+}
+
 _get_ctags() {
     build=$BUILD/ctags
     mkdir -p $build 
