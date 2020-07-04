@@ -21,11 +21,11 @@ map s <nop>
 map S <nop>
 map s_ :set splitbelow<CR>:split<CR>
 map s\| :set splitright<CR>:vsplit<CR>
-map <leader>l <C-w>l
-map <leader>h <C-w>h
-map <leader>k <C-w>k
-map <leader>j <C-w>j
-map <leader>p <C-w>p
+map sl <C-w>l
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sp <C-w>p
 " map sl :set splitright<CR>:vsplit<CR>
 " map sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 " map sj :set splitbelow<CR>:split<CR>

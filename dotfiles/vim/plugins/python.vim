@@ -23,4 +23,3 @@ au Filetype python syntax match pythonFunctionCall /\v[[:alpha:]_]+\ze(\s?\()/
 hi def link pythonFunctionCall FunctionCall
 
 au BufNewFile,BufRead,BufReadPost *.ejs set syntax=html
-au Filetype rst set nobuflisted     " do not list doc files

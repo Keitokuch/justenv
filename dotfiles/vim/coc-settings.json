@@ -14,9 +14,6 @@
             "filetypes": ["c", "cpp", "objc", "objcpp"],
             "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
             "initializationOptions": {
-                "clang": {
-                    "resourceDir": "/usr/local/depot/llvm-7.0/lib/clang/7.0.0"
-                }
             }
         }
     }
