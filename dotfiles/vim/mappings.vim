@@ -84,6 +84,7 @@ inoremap <silent><expr> <C-n> pumvisible()? "\<C-n>" : "\<down>"
 "" Terminal mode
 " QQ to escape in terminal
 tnoremap QQ     <C-\><C-n>
+tnoremap ;;     <C-\><C-n>
 tnoremap <Esc>  <C-\><C-n>
 
 " Minimal auto closing
