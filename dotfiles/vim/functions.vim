@@ -20,6 +20,7 @@ fu! StartSetup()
         if !RestoreSess()
             exe 'NERDTreeToggle' argv()[0] | wincmd p | enew
         endif
+        exe '%argd'
     else
         let g:DIR_START=0
     endif
