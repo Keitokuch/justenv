@@ -7,7 +7,7 @@ map <leader>t :LeaderfBufTagAll<cr>
 map <leader>T :LeaderfTag<cr>
 map <leader>o :LeaderfBuffer<cr>
 map <leader>O :LeaderfFile<cr>
-" nmap  /       :LeaderfLine<cr>
+nmap  /       :LeaderfLine<cr>
 
 command Color       LeaderfColorscheme
 command Filetype    LeaderfFiletype
