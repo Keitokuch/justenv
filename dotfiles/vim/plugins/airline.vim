@@ -2,6 +2,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sonph/onehalf', {'rtp':'vim/'}
 
+nmap <leader>[ <Plug>AirlineSelectPrevTab
+nmap <leader>] <Plug>AirlineSelectNextTab
 " --------------------- vim-airline --------------------
 let g:airline_theme='onehalfdark'
 let g:airline#extensions#coc#enabled = 1
@@ -22,5 +24,3 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>[ <Plug>AirlineSelectPrevTab
-nmap <leader>] <Plug>AirlineSelectNextTab
