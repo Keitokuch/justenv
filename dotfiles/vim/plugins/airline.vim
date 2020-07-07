@@ -13,8 +13,10 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_close_button = 1
 let g:airline#extensions#tabline#exclude_preview = 1
 let g:airline#extensions#tabline#middle_click_preserves_windows = 1
-let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtree', 'terminal', 'tagbar', 'help']
+let g:airline#extensions#tabline#keymap_ignored_filetypes = ['vimfiler', 'nerdtree', 'terminal', 'tagbar', 'help', 'vterm']
 let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3

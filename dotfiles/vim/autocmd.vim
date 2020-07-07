@@ -27,3 +27,6 @@ augroup unlistbuf
     au Filetype rst set nobuflisted     " do not list python doc files
     au Filetype log set nobuflisted     " do not list log files
 augroup end
+
+" Remove empty buffers
+au BufWinLeave * if bufname("%") == "" && line('$') == 1 && getline(1) == ''| set nobuflisted | endif

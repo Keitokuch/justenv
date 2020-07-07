@@ -1,26 +1,29 @@
 " ============================ Key Mappings =============================
 let mapleader=" "
-"" jj to exit insert mode
+" jj to exit insert mode
 inoremap jj <ESC>
-"" Use q for escape
+" Use q for escape
 map q <ESC>
 nnoremap Q q
-"" Up Down scrolling
+" Up Down scrolling
 map <C-i> 10k
 map <C-d> 10j
-"" Copy All
-nnoremap Y :%y<CR>
-"" <space>= Indent All
+" Copy All
+nnoremap <leader>y :%y<CR>
+" Copy Line
+nnoremap Y y$
+" <space>= Indent All
 nnoremap <leader>= gg=G<C-o>
-"" Sudo Write
+" Sudo Write
 command Sudow w !sudo dd of=%
-cmap w!! w !sudo -S tee%
+command W w !sudo -S tee%
+" cmap w!! w !sudo -S tee%
 
-"" Split
+" Split
 map s <nop>
 map S <nop>
-map s_ :set splitbelow<CR>:split<CR>
-map s\| :set splitright<CR>:vsplit<CR>
+map s_ :set splitbelow<CR>:new<CR>
+map s\| :set splitright<CR>:vnew<CR>
 map sl <C-w>l
 map sh <C-w>h
 map sk <C-w>k
