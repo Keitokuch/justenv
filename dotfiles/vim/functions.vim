@@ -26,9 +26,11 @@ fu! StartSetup()
     endif
 endfu
 
+let s:session_file = has('nvim') ? '.Session.nvim' : '.Session.vim'
+
 fu! RestoreSess()
-    if filereadable(getcwd() . '/.Session.vim')
-        exe 'so ' . getcwd() . '/.Session.vim'
+    if filereadable(getcwd() . '/' . s:session_file)
+        exe 'so ' . getcwd() . '/' . s:session_file
         if bufexists(1)
             for l in range(1, bufnr('$'))
                 if bufwinnr(l) == -1
@@ -55,9 +57,9 @@ fu! LeaveSetup()
     if exists('g:loaded_tagbar') | tabdo TagbarClose
     endif
     exe 'tabn ' . currTab
-    mksession! ./.Session.vim
+    exe 'mksession! ./' . s:session_file
     if restore_tree
-        call writefile(["NERDTreeToggle | wincmd p"], "./.Session.vim", "a")
+        call writefile(["NERDTreeToggle | wincmd p"], "./" . s:session_file, "a")
     endif
 endfu
 
