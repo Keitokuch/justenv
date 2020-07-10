@@ -7,6 +7,8 @@ get_update() {
 get_prereq() {
     sudo apt install -y curl
     sudo apt install -y wget
+    sudo apt install -y autoconf
+    sudo apt install -y pkg-config
 }
 
 get_curl() {
@@ -129,6 +131,6 @@ get_ctags() {
     fi
 }
 
-# _get_ag() {
-#     sudo apt-get install -y silversearcher-ag
-# }
+_get_ag() {
+    sudo apt-get install -y silversearcher-ag
+}
