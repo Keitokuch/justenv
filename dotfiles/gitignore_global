@@ -10,6 +10,7 @@
 *~
 .exrc
 .Session.vim
+.Session.nvim
 .tags*
 
 # tex
