@@ -17,6 +17,7 @@ get_curl() {
 
 get_build() {
     sudo apt install -y build-essential
+    sudo apt install -y libncurses5-dev
 }
 
 get_tmux() {
@@ -94,7 +95,7 @@ get_python3() {
 }
 
 get_kbuild() {
-    sudo apt install build-essential kernel-package libncurses5-dev
+    sudo apt install -y build-essential kernel-package libncurses5-dev
     apt install -y flex bison
     apt install -y openssl libssl-dev libelf-dev
     MSG+=(">>> installed kernel build dependencies.")
@@ -129,6 +130,10 @@ get_ctags() {
     else
         [[ $silent ]] || MSG+=('=== ctags already installed ===')
     fi
+}
+
+get_ncurses() {
+   apt install -y libncurses5-dev 
 }
 
 _get_ag() {
