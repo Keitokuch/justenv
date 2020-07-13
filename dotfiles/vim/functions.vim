@@ -11,12 +11,14 @@ nnoremap <C-g> :call <SID>SynStack()<CR>
 fu! StartSetup()
     if (argc() == 0 && !exists("s:std_in"))
         let g:DIR_START = 1
+        let g:START_DIR = getcwd()
         if !RestoreSess()
             exe 'NERDTreeToggle'
         endif
     elseif argc() == 1 && isdirectory(argv()[0]) == 1 && !exists("s:std_in")
         let g:DIR_START = 1
         exe 'cd ' . argv()[0]
+        let g:START_DIR = getcwd()
         if !RestoreSess()
             exe 'NERDTreeToggle' argv()[0] | wincmd p | enew
         endif
@@ -57,9 +59,12 @@ fu! LeaveSetup()
     if exists('g:loaded_tagbar') | tabdo TagbarClose
     endif
     exe 'tabn ' . currTab
-    exe 'mksession! ./' . s:session_file
-    if restore_tree
-        call writefile(["NERDTreeToggle | wincmd p"], "./" . s:session_file, "a")
+    if g:DIR_START
+        let l:session_file = g:START_DIR . '/' . s:session_file 
+        exe 'mksession! ' . l:session_file
+        if restore_tree
+            call writefile(["NERDTreeToggle | wincmd p"], l:session_file, "a")
+        endif
     endif
 endfu
 
