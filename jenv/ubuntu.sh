@@ -73,6 +73,17 @@ get_nvim() {
 #     curl -sL install-node.now.sh/lts | sudo bash
 # }
 
+_get_mosh() {
+    sudo apt-get install -y automake libtool g++ protobuf-compiler libprotobuf-dev libboost-dev libutempter-dev libncurses5-dev zlib1g-dev libio-pty-perl libssl-dev pkg-config
+    cd $BUILD
+    git clone https://github.com/keithw/mosh.git
+    cd mosh
+    ./autogen.sh                    || return 1
+    ./configure --prefix=$JENV      || return 1
+    make && make install            || return 1
+    cd $ENV
+}
+
 get_nodejs() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v node) ]]; then
