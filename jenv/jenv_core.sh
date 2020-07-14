@@ -103,7 +103,7 @@ jenv_before() {
 
 jenv_after() {
     jenv_setup
-    # rm -rf $BUILD
+    rm -rf $BUILD
 }
 
 main() {
