@@ -12,6 +12,7 @@
 .Session.vim
 .Session.nvim
 .tags*
+.ccls-cache
 
 # tex
 .latex_aux/
