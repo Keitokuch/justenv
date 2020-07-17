@@ -43,7 +43,7 @@ do_deploy() {
         MSG+=(">>> deploy configs")
         cd $CONFIG_PATH
         deploy_configs
-        [[ -f $CONFIG_PATH/after_deploy ]] && . $CONFIG_PATH/after_deploy && MSG+=(">>> exec after_deploy")
+        [[ -f $CONFIG_PATH/after_deploy.sh ]] && . $CONFIG_PATH/after_deploy.sh && MSG+=(">>> exec after_deploy")
         cd $ENV
     fi
 }

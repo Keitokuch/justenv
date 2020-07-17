@@ -16,3 +16,6 @@
 
 # tex
 .latex_aux/
+
+# backup
+*.bak

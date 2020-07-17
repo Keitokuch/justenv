@@ -14,7 +14,7 @@ BUILD=$JGET/build
 mkdir -p $BUILD
 
 JENV_RC=$HOME/.jenv_profile
-SYS_RC=$HOME/.bash_profile
+SYS_RC=($HOME/.bash_profile $HOME/.zprofile)
 
 . $JGET/utils.sh
 . $JGET/config
@@ -34,7 +34,9 @@ jenv_setup() {
 jenv_init() {
     JENV_PATH+=("$BIN")
     touch $JENV_RC
-    check_append "source $JENV_RC" $SYS_RC
+    for profile in "${SYS_RC[@]}"; do 
+        check_append "source $JENV_RC" $profile
+    done
 }
 
 jenv_install() {
@@ -107,7 +109,8 @@ jenv_after() {
 }
 
 main() {
-    check_jenv   || jenv_init
+    # check_jenv   || jenv_init
+    jenv_init
     jenv_before
     parse_ostype || { jenv_after; exit 1; }
     load_source  || { jenv_after; exit 1; }
