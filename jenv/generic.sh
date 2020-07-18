@@ -114,7 +114,6 @@ _get_autojump() {
     ./install.py
     cd $ENV
 }
-
 _rm_autojump() {
     cd $BUILD
     git clone git://github.com/wting/autojump.git

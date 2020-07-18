@@ -53,11 +53,13 @@ jenv_install() {
 jenv_get() {
     local app=$1 && shift
     parse_options $@ 
+    local forced=$_forced
+    local silent=$_silent
     local optind=$OPTIND
-    local _func=_get_$app
-    has_func $_func || { _func=get_$app ; forced=1 ; has_func $_func ; } || { MSG+=("$_func not implemented for $OS") ; return 1 ;}
+    local func=_get_$app
+    has_func $func || { func=get_$app ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $OS") ; return 1 ;}
     if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
-        if $_func ; then
+        if $func ; then
             [[ $silent ]] || MSG+=(">>> installed $app <<<")
         else
             MSG+=("[ ERROR ] Failed to install $app")

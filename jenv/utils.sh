@@ -6,23 +6,23 @@ parse_options() {
     #    [[ $var == v ]] && ver=1
     #    [[ $ver ]] && VERSION=$var
     #done
-    unset forced silent VERSION
+    unset _forced _silent VERSION
     OPTIND=1
     while getopts ":fsv:" opt ; do
         case $opt in
             f)
-                forced=1
+                _forced=1
                 ;;
             s)
-                silent=1
+                _silent=1
                 ;;
             v)
                 VERSION=$OPTARG
                 ;; 
         esac 
     done
-    forced=${forced:-$FORCED}
-    silent=${silent:-$SILENT}
+    _forced=${_forced:-$FORCED}
+    _silent=${_silent:-$SILENT}
 }
 
 global_options() {
