@@ -53,8 +53,8 @@ function spectrum_ls() {
 precmd() {
 	if [ -n "$TMUX" ]; then
     	tmux refresh-client -S
-        continuum_save=~/.tmux/plugins/tmux-continuum/scripts/continuum_save.sh
-        [[ -x $continuum_save ]] && $continuum_save
+        # continuum_save=~/.tmux/plugins/tmux-continuum/scripts/continuum_save.sh
+        # [[ -x $continuum_save ]] && $continuum_save
 	fi
 }
 
