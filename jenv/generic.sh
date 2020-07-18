@@ -122,6 +122,21 @@ _rm_autojump() {
     cd $ENV
 }
 
+_get_v2ray() {
+    local version=${VERSION}
+    local version_cmd
+    local forced_cmd
+    [[ $version ]] && version_cmd="--version v${version}"
+    [[ $_forced ]] && forced_cmd="--force"
+    cd $BUILD
+    echo fff$_forced$forced_cmd
+    wget https://install.direct/go.sh   || return 1
+    bash ./go.sh $version_cmd $forced_cmd
+    ln -sf /usr/bin/v2ray $BIN/
+    JENV_PATH+=("$BIN/v2ray")
+    cd $ENV
+}
+
 _get_gdb() {
     local version=${VERSION:-$GDB_VERSION}
     cd $BUILD

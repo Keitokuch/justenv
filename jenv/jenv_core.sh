@@ -14,7 +14,7 @@ BUILD=$JENV/build
 mkdir -p $BUILD
 
 JENV_RC=$HOME/.jenv_profile
-SYS_RC=($HOME/.bash_profile $HOME/.zprofile)
+SYS_RC=($HOME/.bash_profile $HOME/.zprofile $HOME/.zshenv)
 
 . $JGET/utils.sh
 . $JGET/config

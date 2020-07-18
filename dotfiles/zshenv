@@ -1,2 +1,3 @@
 # setopt SOURCE_TRACE
 export PATH=/usr/local/bin:$PATH
+source /root/.jenv_profile
