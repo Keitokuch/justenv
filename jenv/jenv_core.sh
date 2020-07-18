@@ -13,29 +13,30 @@ mkdir -p $LIB
 BUILD=$JENV/build
 mkdir -p $BUILD
 
-JENV_RC=$HOME/.jenv_profile
+JENV_PROFILE=~/.jenv_profile
+JENV_RC="~/.jenv_profile"
 SYS_RC=($HOME/.bash_profile $HOME/.zprofile $HOME/.zshenv)
 
 . $JGET/utils.sh
 . $JGET/config
 
 check_jenv() {
-    [[ -f $JENV_RC ]] && return 0
+    [[ -f $JENV_PROFILE ]] && return 0
     return 1
 }
 
 jenv_setup() {
     for path in "${JENV_PATH[@]}"; do 
-        check_append "export PATH=$path:\$PATH" $JENV_RC
+        check_append "export PATH=$path:\$PATH" $JENV_PROFILE
     done
-    check_append "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$LIB" $JENV_RC
+    check_append "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$LIB" $JENV_PROFILE
 }
 
 jenv_init() {
     JENV_PATH+=("$BIN")
-    touch $JENV_RC
+    touch $JENV_PROFILE
     for profile in "${SYS_RC[@]}"; do 
-        check_append "source $JENV_RC" $profile
+        check_append "source "$JENV_RC"" $profile
     done
 }
 
