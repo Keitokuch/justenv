@@ -27,6 +27,7 @@ parse_options() {
 
 global_options() {
     unset FORCED SILENT
+    OPTIND=1
     while getopts ":fs" opt ; do
         case $opt in 
             f)

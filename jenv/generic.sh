@@ -2,8 +2,8 @@ OMZ=$HOME/.oh-my-zsh
 TMP=$HOME/.tmux/plugins
 
 _get_node() {
-    version=${VERSION:-$NODEJS_VERSION}
-    distro=$ostype-x64
+    local version=${VERSION:-$NODEJS_VERSION}
+    local distro=$ostype-x64
     lib_nodejs=$JENV/lib/nodejs
     nodejs=node-$version-$distro
     mkdir -p $lib_nodejs
@@ -16,7 +16,7 @@ _get_node() {
 }
 
 _get_cmake() {
-    version=${VERSION:-$CMAKE_VERSION}
+    local version=${VERSION:-$CMAKE_VERSION}
     [[ $ostype == darwin ]] && _ostype=Darwin
     [[ $ostype == linux ]] && _ostype=Linux
     tarball=cmake-$version-$_ostype-x86_64.tar.gz
@@ -30,7 +30,7 @@ _get_cmake() {
 }
 
 _get_ctags() {
-    build=$BUILD/ctags
+    local build=$BUILD/ctags
     mkdir -p $build 
     git clone https://github.com/universal-ctags/ctags.git $build   || return 1
     cd $build
@@ -56,7 +56,7 @@ _get_zsh() {
 }
 
 _get_nvim() {
-    version=${VERSION:-$NVIM_VERSION}
+    local version=${VERSION:-$NVIM_VERSION}
     cd $BIN
     wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
     chmod +x nvim.appimage
@@ -67,7 +67,7 @@ _get_nvim() {
 }
 
 _get_vim() {
-    version=${VERSION:-$VIM_VERSION}
+    local version=${VERSION:-$VIM_VERSION}
     cd $BUILD
     wget https://github.com/vim/vim/archive/v$version.tar.gz -O vim-$version.tar.gz
     tar xzf vim-$version.tar.gz
@@ -79,7 +79,7 @@ _get_vim() {
 }
 
 _get_ag() {
-    version=${VERSION:-$AG_VERSION}
+    local version=${VERSION:-$AG_VERSION}
     cd $BUILD
     ag=the_silver_searcher-$version
     wget https://geoff.greer.fm/ag/releases/$ag.tar.gz || return 1
@@ -93,7 +93,7 @@ _get_ag() {
 }
 
 _get_tmux() {
-    version=${VERSION:-$TMUX_VERSION}
+    local version=${VERSION:-$TMUX_VERSION}
     get_libevent
     get_ncurses
     cd $BUILD
@@ -106,8 +106,25 @@ _get_tmux() {
     cd $ENV
 }
 
+_get_autojump() {
+    jenv_get python -s
+    cd $BUILD
+    git clone git://github.com/wting/autojump.git
+    cd autojump
+    ./install.py
+    cd $ENV
+}
+
+_rm_autojump() {
+    cd $BUILD
+    git clone git://github.com/wting/autojump.git
+    cd autojump
+    ./uninstall.py      || return 1
+    cd $ENV
+}
+
 _get_gdb() {
-    version=${VERSION:-$GDB_VERSION}
+    local version=${VERSION:-$GDB_VERSION}
     cd $BUILD
     wget http://ftp.gnu.org/gnu/gdb/gdb-$version.tar.xz || return 1
     tar xvf gdb-$version.tar.xz
@@ -120,7 +137,7 @@ _get_gdb() {
 }
 
 _get_go() {
-    version=${VERSION:-$GO_VERSION}
+    local version=${VERSION:-$GO_VERSION}
     cd $BUILD
     wget https://dl.google.com/go/go$version.$ostype-amd64.tar.gz
     tar -C $JENV -xzf go$version.$ostype-amd64.tar.gz

@@ -84,6 +84,11 @@ _get_mosh() {
     cd $ENV
 }
 
+_get_python() {
+    sudo apt-get install -y python
+    cd $ENV
+}
+
 get_nodejs() {
     parse_options $@
     if [[ $forced ]] || ! [[ -x $(command -v node) ]]; then

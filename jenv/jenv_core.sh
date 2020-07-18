@@ -10,7 +10,7 @@ mkdir -p $JENV
 mkdir -p $BIN
 mkdir -p $LIB
 
-BUILD=$JGET/build
+BUILD=$JENV/build
 mkdir -p $BUILD
 
 JENV_RC=$HOME/.jenv_profile
@@ -41,22 +41,21 @@ jenv_init() {
 
 jenv_install() {
     global_options $@
-    shift $(( OPTIND - 1 ))
+    shift "$(( OPTIND - 1 ))"
 
-    while (( $# > 0 )) 
+    while (( ${#@} > 0 ))
     do
         jenv_get $@
-        shift $(( OPTIND ))
+        shift "$OPTIND"
     done
 }
 
 jenv_get() {
-    app=$1
-    shift
-    _func=_get_$app
+    local app=$1 && shift
+    parse_options $@ 
+    local optind=$OPTIND
+    local _func=_get_$app
     has_func $_func || { _func=get_$app ; forced=1 ; has_func $_func ; } || { MSG+=("$_func not implemented for $OS") ; return 1 ;}
-    parse_options $@
-    shift $(( OPTIND - 1 ))
     if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
         if $_func ; then
             [[ $silent ]] || MSG+=(">>> installed $app <<<")
@@ -66,6 +65,8 @@ jenv_get() {
     else
        [[ $silent ]] || MSG+=("=== $app already installed ===")
     fi
+    # global variable position can be changed by nested calls
+    OPTIND=optind
 }
 
 load_source() {

@@ -24,7 +24,7 @@ _get_ctags() {
 }
 
 _get_nvim() {
-    version=${VERSION:-$NVIM_VERSION}
+    local version=${VERSION:-$NVIM_VERSION}
     cd $BIN
     wget https://github.com/neovim/neovim/releases/download/$version/nvim-macos.tar.gz || return 1
     tar xzvf nvim-macos.tar.gz
@@ -77,4 +77,3 @@ get_ag() {
         [[ $silent ]] || MSG+=("=== ag already installed ===")
     fi 
 }
-
