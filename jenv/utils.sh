@@ -85,7 +85,7 @@ has_lib() {
 }
 
 has_func() {
-    declare -f $_func > /dev/null
+    declare -f $1 > /dev/null
     return $?
 }
 
