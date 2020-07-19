@@ -29,6 +29,19 @@ _get_cmake() {
     cd $ENV
 }
 
+_get_BaiduPCS-Go() {
+    local version=${VERSION:-$BAIDUPCS_VERSION} 
+    [[ $ostype == darwin ]] && _ostype=darwin-osx
+    [[ $ostype == linux ]] && _ostype=linux
+    zipfile=BaiduPCS-Go-v$version-$_ostype-amd64.zip
+    dir=BaiduPCS-Go-v$version-$_ostype-amd64
+    cd $BUILD
+    wget https://github.com/felixonmars/BaiduPCS-Go/releases/download/v$version/$zipfile    || return 1
+    unzip $zipfile      || return 1
+    mv $dir/BaiduPCS-Go $BIN
+    cd $ENV
+}
+
 _get_ctags() {
     local build=$BUILD/ctags
     mkdir -p $build 
