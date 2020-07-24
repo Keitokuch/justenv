@@ -1,5 +1,7 @@
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
+let g:coc_global_extensions+=['coc-vimtex']
+
 " ---------------- tex -----------------
 let g:tex_flavor='latex'
 let g:vimtex_view_method='general'

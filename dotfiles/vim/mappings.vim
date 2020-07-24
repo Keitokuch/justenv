@@ -84,10 +84,6 @@ inoremap <silent><expr> <C-e> pumvisible()? "\<C-e>" : "\<ESC>A"
 inoremap <silent><expr> <C-p> pumvisible()? "\<C-p>" : "\<up>"
 inoremap <silent><expr> <C-n> pumvisible()? "\<C-n>" : "\<down>"
 
-"" Terminal mode
-" QQ to escape in terminal
-tnoremap QQ     <C-\><C-n>
-
 " Minimal auto closing
 inoremap ( ()<left>
 inoremap [ []<left>

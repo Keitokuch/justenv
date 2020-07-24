@@ -31,7 +31,15 @@ set nohls
 "set runtimepath+=~/.vim
 set history=1000
 set laststatus=2    "always show status
-set clipboard=unnamed
+" set clipboard^=unnamed
+" set clipboard^=unnamedplus,unnamed
+set clipboard=""
+nnoremap p "*p
+vnoremap p "*p
+nnoremap d "*d
+vnoremap d "*d
+nnoremap y "*y
+vnoremap y "*y
 set mouse=a
 set scrolloff=13
 set showtabline=2

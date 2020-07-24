@@ -1,6 +1,8 @@
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 
+let g:coc_global_extensions=['coc-snippets', 'coc-json', 'coc-python']
+
 " ------------------------ Mappings -------------------------
 
 " Rename current word
@@ -30,8 +32,6 @@ let g:coc_snippet_prev = '<S-Tab>'
 "" ------------------------------------ coc.nvim -------------------------------------------
 " coc-pairs, coc-snippets
 " coc-python, coc-json, coc-vimtex, coc-html, coc-java
-
-let g:coc_global_extensions=['coc-pairs', 'coc-snippets', 'coc-json', 'coc-python', 'coc-vimtex']
 
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
