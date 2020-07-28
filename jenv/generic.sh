@@ -71,9 +71,9 @@ _get_zsh() {
 _get_nvim() {
     local version=${VERSION:-$NVIM_VERSION}
     cd $BIN
-    wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
+    wget -O nvim.appimage https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
     chmod +x nvim.appimage
-    ln -f nvim.appimage $BIN/nvim
+    ln -sf nvim.appimage $BIN/nvim
     cd $ENV
     python -m pip install neovim --user
     python3 -m pip install neovim --user
