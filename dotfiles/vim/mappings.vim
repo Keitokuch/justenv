@@ -9,9 +9,9 @@ nnoremap Q q
 map <C-i> 10k
 map <C-d> 10j
 " Copy All
-nnoremap <leader>y :%y<CR>
+nmap <leader>y :%yank *<CR>
 " Copy Line
-nnoremap Y y$
+nmap Y y$
 " <space>= Indent All
 nnoremap <leader>= gg=G<C-o>
 " Sudo Write
