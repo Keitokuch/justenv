@@ -20,7 +20,7 @@ fu! StartSetup()
         exe 'cd ' . argv()[0]
         let g:START_DIR = getcwd()
         if !RestoreSess()
-            exe 'NERDTreeToggle' argv()[0] | wincmd p | enew
+            exe 'NERDTreeToggle' g:START_DIR | wincmd p | enew
         endif
         exe '%argd'
     else
