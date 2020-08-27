@@ -15,6 +15,7 @@ let g:plugins = [
             \ 'tagbar',
             \ 'tags',
             \ 'visual-multi',
+            \ 'indent',
             \ 'vimtex',
             \ 'vterm',
             \ 'leaderf',
