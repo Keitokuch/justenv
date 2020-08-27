@@ -25,9 +25,11 @@ _get_ctags() {
 
 _get_nvim() {
     local version=${VERSION:-$NVIM_VERSION}
-    cd $BIN
+    cd $BUILD
     wget https://github.com/neovim/neovim/releases/download/$version/nvim-macos.tar.gz || return 1
     tar xzvf nvim-macos.tar.gz
+    mv $BIN/nvim-osx64 $BUILD/nvim-bak
+    mv nvim-osx64 $BIN/
     JENV_PATH+=("$BIN/nvim-osx64/bin")
     rm nvim-macos.tar.gz
     cd $ENV
