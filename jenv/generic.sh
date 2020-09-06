@@ -105,6 +105,7 @@ _get_ag() {
     cd $ENV
 }
 
+
 _get_tmux() {
     local version=${VERSION:-$TMUX_VERSION}
     get_libevent
@@ -135,6 +136,22 @@ _rm_autojump() {
     cd $ENV
 }
 
+_get_gradle() {
+    local version=${VERSION:-$GRADLE_VERSION}
+    cd $BUILD
+    zipfile=gradle-$version-bin.zip
+    unzipped=gradle-$version
+    target_dir=$BIN/gradle
+    target=$target_dir/$unzipped
+    wget https://services.gradle.org/distributions/$zipfile || return 1
+    unzip $zipfile
+    [[ -d $target_dir ]] && mv $target_dir $BUILD/gradle-bak
+    mkdir -p $BIN/gradle
+    mv $unzipped $target
+    JENV_PATH+=("$target/bin")
+    cd $ENV
+}
+
 _get_v2ray() {
     local version=${VERSION}
     local version_cmd
@@ -142,7 +159,6 @@ _get_v2ray() {
     [[ $version ]] && version_cmd="--version v${version}"
     [[ $_forced ]] && forced_cmd="--force"
     cd $BUILD
-    echo fff$_forced$forced_cmd
     wget https://install.direct/go.sh   || return 1
     bash ./go.sh $version_cmd $forced_cmd
     ln -sf /usr/bin/v2ray $BIN/
