@@ -68,6 +68,7 @@ _get_zsh() {
     chsh -s $(chsh -l | grep zsh) $USER 
 }
 
+
 _get_nvim() {
     local version=${VERSION:-$NVIM_VERSION}
     cd $BIN
@@ -78,6 +79,7 @@ _get_nvim() {
     python -m pip install neovim --user
     python3 -m pip install neovim --user
 }
+
 
 _get_vim() {
     local version=${VERSION:-$VIM_VERSION}
@@ -91,6 +93,7 @@ _get_vim() {
     cd $ENV
 }
 
+
 _get_ag() {
     local version=${VERSION:-$AG_VERSION}
     cd $BUILD
@@ -102,6 +105,10 @@ _get_ag() {
     ./configure --prefix=$JENV  || return 1
     make -j $nr_worker           || return 1
     make install        || return 1
+    cd $ENV
+}
+_rm_ag() {
+    cd $BIN && rm -f ag
     cd $ENV
 }
 
@@ -119,6 +126,11 @@ _get_tmux() {
     make install
     cd $ENV
 }
+_rm_tmux() {
+    cd $BIN && rm -f tmux
+    cd $ENV
+}
+
 
 _get_autojump() {
     jenv_get python -s
@@ -136,6 +148,7 @@ _rm_autojump() {
     cd $ENV
 }
 
+
 _get_gradle() {
     local version=${VERSION:-$GRADLE_VERSION}
     cd $BUILD
@@ -149,6 +162,10 @@ _get_gradle() {
     mkdir -p $BIN/gradle
     mv $unzipped $target
     JENV_PATH+=("$target/bin")
+    cd $ENV
+}
+_rm_gradle() {
+    cd $BIN && rm -rf gradle
     cd $ENV
 }
 
