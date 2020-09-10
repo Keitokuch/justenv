@@ -26,22 +26,28 @@ let s:purple      = { "gui": "#d787d7", "cterm": "176" }
 let s:cyan        = { "gui": "#5ccfe6", "cterm": "81"  }
 let s:white       = { "gui": "#e0e3e3", "cterm": "188" }
 let s:orange      = { "gui": "#f99157", "cterm": "208" }
-let s:opt         = { "gui": "#5fb3b3", "cterm": "74"} 
+let s:opt         = { "gui": "#5fb3b3", "cterm": "74"  } 
 let s:greyblue    = { "gui": "#6699cc", "cterm": "39"  }
 let s:darkblue    = { "gui": "#1d87b8", "cterm": "39"  }
 let s:lightblue   = { "gui": "#4faadd", "cterm": "12"  }
-let s:class       = { "gui": "#c594c5", "cterm": "168" } 
+let s:purplepink  = { "gui": "#c594c5", "cterm": "168" } 
+let s:grey        = { "gui": "#5c6370", "cterm": "241" }
+let s:rose        = { "gui": "#F48FA8", "cterm": "168" }
+let s:cool        = { "gui": "#556Aff", "cterm": "000" }
+let s:grass       = { "gui": "#dbff33", "cterm": "000" }
+let s:lll         = { "gui": "#e6a58a", "cterm": "000" }
+
+let s:yellow_bg   = { "gui": "#bba036", "cterm": "216" }
+let s:navy_bg     = { "gui": "#1b3e5e", "cterm": "237" }
+let s:grey_bg     = { "gui": "#313640", "cterm": "237" }
 
 let s:fg          = s:white
 let s:bg          = s:black
+let s:comment_fg  = s:grey
+let s:cursor_line = s:navy_bg
 
-let s:comment_fg  = { "gui": "#5c6370", "cterm": "241" }
-let s:gutter_bg   = { "gui": "#282c34", "cterm": "236" }
 let s:gutter_fg   = { "gui": "#919baa", "cterm": "247" }
-
-let s:cursor_line = { "gui": "#1b3e5e", "cterm": "237" }
-let s:color_col   = { "gui": "#313640", "cterm": "237" }
-
+let s:gutter_bg   = { "gui": "#282c34", "cterm": "236" }
 let s:selection   = { "gui": "#474e5d", "cterm": "239" }
 let s:vertsplit   = { "gui": "#313640", "cterm": "237" }
 
@@ -114,7 +120,7 @@ call s:hi("Block", s:bg, s:green, "")
 call s:hi("Visual", {}, s:selection, "")
 call s:hi("VisualNOS", {}, s:selection, "")
 
-call s:hi("ColorColumn", {}, s:color_col, "")
+call s:hi("ColorColumn", {}, s:grey_bg, "")
 call s:hi("Conceal", s:fg, {}, "")
 call s:hi("Directory", s:blue, {}, "")
 call s:hi("VertSplit", s:vertsplit, s:vertsplit, "")
@@ -128,9 +134,8 @@ call s:hi("Title", s:green, {}, "")
 call s:hi("WildMenu", s:fg, {}, "")
 
 " Syntax colors
-call s:hi("Comment", s:comment_fg, {}, "italic")
 
-call s:hi("Constant", s:constant, {}, "")
+call s:hi("Constant", s:green, {}, "")
 call s:hi("String", s:green, {}, "")
 call s:hi("Character", s:green, {}, "")
 call s:hi("Number", s:constant, {}, "")
@@ -154,9 +159,9 @@ call s:hi("Define", s:red, {}, "")
 call s:hi("Macro", s:red, {}, "")
 call s:hi("PreCondit", s:macro, {}, "")
 
-call s:hi("Type", s:red, {}, "")
-call s:hi("StorageClass", s:class, {}, "")
-call s:hi("Structure", s:class, {}, "")
+call s:hi("Type", s:lll, {}, "")
+call s:hi("StorageClass", s:purplepink, {}, "")
+call s:hi("Structure", s:rose, {}, "")
 call s:hi("Typedef", s:yellow, {}, "")
 
 call s:hi("Conventional", s:opt, {}, "italic") 
@@ -174,5 +179,10 @@ call s:hi("Debug", s:fg, {}, "")
 call s:hi("Underlined", s:fg, {}, "")
 call s:hi("Ignore", s:fg, {}, "")
 call s:hi("Error", s:red, s:gutter_bg, "")
-call s:hi("Todo", s:purple, {}, "")
+call s:hi("Todo", s:yellow, s:grey_bg, "")
 
+call s:hi("PreProc", s:yellow, {}, "")
+call s:hi("SpecialComment", s:comment_fg, {}, "italic")
+call s:hi("Comment", s:comment_fg, {}, "italic")
+
+call s:hi("javaDocTags", s:comment_fg, {}, "underline,italic")
