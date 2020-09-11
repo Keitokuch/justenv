@@ -17,6 +17,7 @@ let g:plugins = [
             \ 'visual-multi',
             \ 'colors',
             \ 'colorschemes',
+            \ 'syntastic',
             \ 'java',
             \ 'indent',
             \ 'vimtex',

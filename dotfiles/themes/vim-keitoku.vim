@@ -35,7 +35,8 @@ let s:grey        = { "gui": "#5c6370", "cterm": "241" }
 let s:rose        = { "gui": "#F48FA8", "cterm": "168" }
 let s:cool        = { "gui": "#556Aff", "cterm": "000" }
 let s:grass       = { "gui": "#dbff33", "cterm": "000" }
-let s:lll         = { "gui": "#e6a58a", "cterm": "000" }
+let s:coral       = { "gui": "#e6a58a", "cterm": "000" }
+let s:lightyellow = { "gui": "#f2e361", "cterm": "000" }
 
 let s:yellow_bg   = { "gui": "#bba036", "cterm": "216" }
 let s:navy_bg     = { "gui": "#1b3e5e", "cterm": "237" }
@@ -159,9 +160,9 @@ call s:hi("Define", s:red, {}, "")
 call s:hi("Macro", s:red, {}, "")
 call s:hi("PreCondit", s:macro, {}, "")
 
-call s:hi("Type", s:lll, {}, "")
+call s:hi("Type", s:lightyellow, {}, "")
 call s:hi("StorageClass", s:purplepink, {}, "")
-call s:hi("Structure", s:rose, {}, "")
+call s:hi("Structure", s:purple, {}, "")
 call s:hi("Typedef", s:yellow, {}, "")
 
 call s:hi("Conventional", s:opt, {}, "italic") 
