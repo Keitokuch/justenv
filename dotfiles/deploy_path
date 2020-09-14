@@ -1,4 +1,5 @@
 zshrc                       ~/.zshrc
+zshrc.$OS                   ~/.zshrc.$OS
 zshenv                      ~/.zshenv
 init.vim                    ~/.config/nvim/init.vim
 init.vim                    ~/.vim/vimrc

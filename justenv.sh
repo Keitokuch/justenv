@@ -56,6 +56,26 @@ clean_up() {
     done
 }
 
+parse_ostype() {
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        ostype=linux
+        if [ -f /etc/os-release ]; then
+            . /etc/os-release
+            OS=$ID
+            OSVER=$VERSION_ID
+        else
+            MSG+=("Failed: linux distro not recognized.")
+            return 1
+        fi
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        OS=macos
+        ostype=darwin
+    else
+        MSG+=("Failed: OS type $OSTYPE not supported.")
+        return 1
+    fi
+}
+
 modules_install() {
     jenv_install -s prereq update build
 
@@ -73,12 +93,14 @@ deploy_configs() {
     while read src dst
     do
         dst=${dst/#~/$HOME}
+        src=${src/\$OS/$OS}
+        dst=${dst/\$OS/$OS}
         dstdir=`dirname "$dst"`
         dstname=`basename "$dst"`
         [[ -f $dst ]] && cp $dst "$OLD/$dstname.old"
         [[ $dst == */ ]] && mkdir -p $dst || mkdir -p $dstdir
-        ln -sf $CONFIG_PATH/$src $dst
-        echo "softlink $src to $dst"
+        ln -sf $CONFIG_PATH/${src} ${dst}
+        echo "softlink ${src} to ${dst}"
     done <"$CONFIG_PATH/deploy_path"
 }
 
@@ -94,6 +116,7 @@ do_install() {
 }
 
 do_deploy() {
+    parse_ostype
     if [[ $# -gt 0 ]]; then
         if has_func deploy_$1 ; then
             deploy_$1 
@@ -102,7 +125,7 @@ do_deploy() {
             echo "No deployable config for $1"
         fi
     else
-        MSG+=(">>> deploy configs")
+        MSG+=(">>> deploying configs")
         cd $CONFIG_PATH
         deploy_configs
         [[ -f $CONFIG_PATH/after_deploy.sh ]] && . $CONFIG_PATH/after_deploy.sh && MSG+=(">>> exec after_deploy")
