@@ -19,7 +19,7 @@ let s:black       = { "gui": "#141e26", "cterm": "234" } "blue
 let s:red         = { "gui": "#e06c75", "cterm": "168" }
 let s:macro       = { "gui": "#ffa091", "cterm": "168" }
 let s:green       = { "gui": "#bae67e", "cterm": "149" }
-let s:constant    = { "gui": "#80d4ff", "cterm": "12" }
+let s:skyblue    = { "gui": "#80d4ff", "cterm": "12" }
 let s:yellow      = { "gui": "#ffd073", "cterm": "215" }
 let s:blue        = { "gui": "#5ea6ed", "cterm": "75"  }
 let s:purple      = { "gui": "#d787d7", "cterm": "176" }
@@ -139,9 +139,9 @@ call s:hi("WildMenu", s:fg, {}, "")
 call s:hi("Constant", s:green, {}, "")
 call s:hi("String", s:green, {}, "")
 call s:hi("Character", s:green, {}, "")
-call s:hi("Number", s:constant, {}, "")
+call s:hi("Number", s:skyblue, {}, "")
 call s:hi("Boolean", s:orange, {}, "")
-call s:hi("Float", s:constant, {}, "")
+call s:hi("Float", s:skyblue, {}, "")
 
 call s:hi("Identifier", s:yellow, {}, "")
 call s:hi("Function", s:blue, {}, "")
@@ -160,7 +160,7 @@ call s:hi("Define", s:red, {}, "")
 call s:hi("Macro", s:red, {}, "")
 call s:hi("PreCondit", s:macro, {}, "")
 
-call s:hi("Type", s:lightyellow, {}, "")
+call s:hi("Type", s:skyblue, {}, "")
 call s:hi("StorageClass", s:purplepink, {}, "")
 call s:hi("Structure", s:purple, {}, "")
 call s:hi("Typedef", s:yellow, {}, "")
