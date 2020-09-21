@@ -78,7 +78,7 @@ ZSH_THEME="keitoku"
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 #vi-mode 
-plugins=( git osx pip sudo mosh autojump)
+plugins=( git osx pip sudo mosh autojump gradle-completion)
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
