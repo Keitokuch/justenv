@@ -1,8 +1,8 @@
 Plug 'easymotion/vim-easymotion'
 
 "" ---------------------- easymotion -------------------------------
-map <space>; <Plug>(easymotion-overwin-f)
-map ; <Plug>(easymotion-s)
+" map <space>; <Plug>(easymotion-overwin-f)
+map ; <Plug>(easymotion-overwin-f)
 map f <Plug>(easymotion-fl)
 map F <Plug>(easymotion-Fl)
 let g:EasyMotion_smartcase = 1
