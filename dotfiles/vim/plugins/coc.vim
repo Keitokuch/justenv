@@ -1,7 +1,7 @@
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 
-let g:coc_global_extensions=['coc-snippets', 'coc-json', 'coc-python']
+let g:coc_global_extensions=['coc-snippets', 'coc-json']
 
 " ------------------------ Mappings -------------------------
 
