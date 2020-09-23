@@ -5,13 +5,27 @@ let g:coc_global_extensions=['coc-snippets', 'coc-json']
 
 " ------------------------ Mappings -------------------------
 
-" Rename current word
 nmap \rn <Plug>(coc-rename)
+nmap \rf <Plug>(coc-refactor)
+nmap \i  :call CocActionAsync('organizeImport')<CR>:echo 'imports organized'<CR>
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" Formatting selected code.
+xmap \f  <Plug>(coc-format-selected)
+nmap \f  <Plug>(coc-format)
+nmap \qf <Plug>(coc-fix-current)
+
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " use <tab> <S-tab> to select completion and jump in snippets
 inoremap <silent><expr> <TAB>
@@ -55,10 +69,10 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
 else
-  set signcolumn=yes
+    set signcolumn=yes
 endif
 
 function! s:check_back_space() abort

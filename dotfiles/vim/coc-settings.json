@@ -6,5 +6,5 @@
     "snippets.priority": 92,
     "python.disableInstallationCheck": true,
     "python.jediEnabled": false,
-    "python.pythonPath": "python3",
+    "python.pythonPath": "python3"
 }
