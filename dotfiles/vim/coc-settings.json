@@ -1,9 +1,9 @@
 {
-    "coc.source.around.priority": 99,
-    "coc.source.buffer.priority": 97,
-    "coc.source.file.priority": 94,
-    "suggest.languageSourcePriority": 97,
-    "snippets.priority": 92,
+    "suggest.languageSourcePriority": 98,
+    "coc.source.around.priority": 97,
+    "coc.source.buffer.priority": 95,
+    "coc.source.file.priority": 93,
+    "snippets.priority": 96,
     "python.disableInstallationCheck": true,
     "python.jediEnabled": false,
     "python.pythonPath": "python3"
