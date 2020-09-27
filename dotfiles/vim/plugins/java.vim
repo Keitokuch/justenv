@@ -1,6 +1,6 @@
 Plug 'uiiaoo/java-syntax.vim', { 'for' : 'java' }
 Plug 'keitokuch/vim-junit-jump', { 'for' : 'java' }
-Plug 'vim-scripts/jcommenter.vim', { 'for' : 'java' }
+Plug 'keitokuch/jcommenter.vim', { 'for' : 'java' }
 
 let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_java_checkstyle_classpath = '~/.vim/checkstyle-8.7-all.jar'
