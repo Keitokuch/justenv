@@ -6,7 +6,20 @@ let g:syntastic_java_checkers = ['checkstyle']
 let g:syntastic_java_checkstyle_classpath = '~/.vim/checkstyle-8.7-all.jar'
 let g:syntastic_java_checkstyle_conf_file = './config/checkstyle/checkstyle.xml'
 
-au filetype java nnoremap gt :JavaJUnitJump<CR>
+augroup JAVA
+    au filetype java nnoremap gt :JavaJUnitJump<CR>
+    " map the commenter:
+    au filetype java nnoremap \d :call JCommentWriter()<CR>
+    " map searching for invalid comments. meta-n for next invalid comment, meta-p
+    " for previous. "Invalid" in this case means that the "main" comments are missing
+    " or the tag description is missing. Handy when searching for missing comments
+    " or when jumping to next tag (no need to use cursor keys (yuck!) or quit insert
+    " mode).
+    au filetype java map <M-n> :call SearchInvalidComment(0)<cr>
+    au filetype java imap <M-n> <esc>:call SearchInvalidComment(0)<cr>a
+    au filetype java map <M-p> :call SearchInvalidComment(1)<cr>
+    au filetype java imap <M-p> <esc>:call SearchInvalidComment(1)<cr>a
+augroup end
 
 hi link javaIdentifier NONE
 "
@@ -28,18 +41,7 @@ hi link javaIdentifier NONE
 " The initial settings correspond with Sun's coding conventions.
 
 
-" map the commenter:
-map \jd :call JCommentWriter()<CR>
 
-" map searching for invalid comments. meta-n for next invalid comment, meta-p
-" for previous. "Invalid" in this case means that the "main" comments are missing
-" or the tag description is missing. Handy when searching for missing comments
-" or when jumping to next tag (no need to use cursor keys (yuck!) or quit insert
-" mode).
-map <M-n> :call SearchInvalidComment(0)<cr>
-imap <M-n> <esc>:call SearchInvalidComment(0)<cr>a
-map <M-p> :call SearchInvalidComment(1)<cr>
-imap <M-p> <esc>:call SearchInvalidComment(1)<cr>a
 
 " modeline:
 let b:jcommenter_modeline = "/* vim: set " . (&et ? "et" : "noet") . " sw=" . &sw . " ts=" . &ts . ": */"
