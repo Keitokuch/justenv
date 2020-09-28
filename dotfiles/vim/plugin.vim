@@ -25,7 +25,8 @@ let g:plugins = [
             \ 'vterm',
             \ 'leaderf',
             \ 'go',
-            \ 'pairs'
+            \ 'pairs',
+            \ 'end_of_plugins'
             \]
 
 let g:nvim_plugins = [
