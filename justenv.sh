@@ -1,4 +1,4 @@
-#! /usr/bin/env bash 
+#! /usr/bin/env zsh 
 
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 MODULE=$ENV/modules

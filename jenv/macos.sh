@@ -28,7 +28,7 @@ _get_nvim() {
     cd $BUILD
     wget https://github.com/neovim/neovim/releases/download/$version/nvim-macos.tar.gz || return 1
     tar xzvf nvim-macos.tar.gz
-    mv $BIN/nvim-osx64 $BUILD/nvim-bak
+    mv $BIN/nvim-osx64 $BUILD/nvim-bak 2>/dev/null
     mv nvim-osx64 $BIN/
     JENV_PATH+=("$BIN/nvim-osx64/bin")
     rm nvim-macos.tar.gz
