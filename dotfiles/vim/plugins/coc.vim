@@ -45,7 +45,7 @@ let g:coc_snippet_prev = '<S-Tab>'
 
 "" ------------------------------------ coc.nvim -------------------------------------------
 " coc-pairs, coc-snippets
-" coc-python, coc-json, coc-vimtex, coc-html, coc-java
+" coc-python, coc-json, coc-vimtex, coc-html, coc-java, coc-go
 
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
