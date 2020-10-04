@@ -6,6 +6,7 @@ declare -ga JENV_PATH=()
 JENV=$HOME/jenv
 BIN=$JENV/bin
 LIB=$JENV/lib
+MAN=$JENV/share/man
 mkdir -p $JENV
 mkdir -p $BIN
 mkdir -p $LIB
@@ -37,6 +38,7 @@ jenv_init() {
     touch $JENV_PROFILE
     for profile in "${SYS_RC[@]}"; do 
         check_append "source "$JENV_RC"" $profile
+        check_append "export MANPATH=$MAN:\$MANPATH" $profile
     done
 }
 

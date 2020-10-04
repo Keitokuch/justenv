@@ -1,6 +1,6 @@
 Plug 'Xuyuanp/scrollbar.nvim'
 
-let g:scrollbar_max_size = 10
+let g:scrollbar_max_size = 15
 let g:scrollbar_highlight = {
       \ 'head': 'Comment',
       \ 'body': 'Comment',
