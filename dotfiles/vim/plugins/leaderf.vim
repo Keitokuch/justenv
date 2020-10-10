@@ -16,6 +16,7 @@ let g:Lf_ShortCutB = '<C-B>'
 let g:Lf_ShortCutF = '<C-B>'
 
 " ---------------------------------------- Leaderf ---------------------------------------------
+let g:Lf_JumpToExistingWindow = 0
 let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_PythonVersion = 3
