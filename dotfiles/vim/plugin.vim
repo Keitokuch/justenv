@@ -34,6 +34,7 @@ let g:nvim_plugins = [
 
 """""" Unloaded Plugins 
             \ 'minimap',
+            \ 'scroll',
             \ 'buffet',
             \ 'snazzy',
 
