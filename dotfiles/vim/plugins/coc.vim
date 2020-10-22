@@ -32,15 +32,21 @@ inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>":
             \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
             \ "\<TAB>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-k>"
 
-" make <cr> select the first completion item and confirm the completion when no item has been selected
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" When not in snippet, Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter
+inoremap <silent><expr> <CR> coc#jumpable() ? pumvisible() ? "\<C-y>" : "\<CR>" :
+            \ pumvisible() ? coc#_select_confirm() :
+            \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+let g:coc_snippet_prev = '<C-k>'
 
 
 "" ------------------------------------ coc.nvim -------------------------------------------

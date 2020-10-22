@@ -6,5 +6,6 @@
     "snippets.priority": 96,
     "python.disableInstallationCheck": true,
     "python.jediEnabled": false,
-    "python.pythonPath": "python3"
+    "python.pythonPath": "python3",
+    "java.sources.organizeImports.starThreshold": 8
 }
