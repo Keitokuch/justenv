@@ -1,4 +1,4 @@
-Plug 'uiiaoo/java-syntax.vim', { 'for' : 'java' }
+Plug 'uiiaoo/java-syntax.vim'
 Plug 'keitokuch/vim-junit-jump', { 'for' : 'java' }
 Plug 'keitokuch/jcommenter.vim', { 'for' : 'java' }
 
