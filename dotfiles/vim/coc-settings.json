@@ -9,5 +9,6 @@
     "python.disableInstallationCheck": true,
     "python.jediEnabled": false,
     "python.pythonPath": "python3",
-    "java.codeGeneration.generateComments": true
+    "java.codeGeneration.generateComments": true,
+    "java.completion.overwrite": false
 }
