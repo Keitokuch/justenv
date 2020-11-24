@@ -1,1 +1,0 @@
-Plug 'wfxr/minimap.vim'

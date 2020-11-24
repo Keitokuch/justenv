@@ -1,1 +1,0 @@
-Plug 'connorholyday/vim-snazzy'
