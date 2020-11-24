@@ -3,10 +3,11 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " ------------------- Mappings -----------------
 map <leader>r :LeaderfFunction<cr>
 map <leader>R :LeaderfFunctionAll<cr>
-map <leader>t :LeaderfBufTagAll<cr>
-map <leader>T :LeaderfTag<cr>
-map <leader>o :LeaderfBuffer<cr>
-map <leader>O :LeaderfFile<cr>
+" map <leader>t :LeaderfBufTagAll<cr>
+" map <leader>T :LeaderfTag<cr>
+map <leader>t :LeaderfBuffer<cr>
+map <leader>o :LeaderfFile<cr>
+" map <leader>o :LeaderfMruCwd<cr>
 nmap  /       :LeaderfLine<cr>
 
 command Color       LeaderfColorscheme

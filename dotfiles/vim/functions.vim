@@ -69,8 +69,8 @@ fu! LeaveSetup()
 endfu
 
 function! MyTabline()
-    " let tabline=buffet#render()
-    let tabline=airline#extensions#tabline#get()
+    let tabline=buffet#render()
+    " let tabline=airline#extensions#tabline#get()
     if g:NERDTree.IsOpen()
         let width = winwidth(g:NERDTree.GetWinNum())
         let tabline = '%#Normal#' . repeat(' ', width) . '%#VertSplit# ' . tabline

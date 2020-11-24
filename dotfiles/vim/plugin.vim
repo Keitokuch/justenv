@@ -20,11 +20,11 @@ let g:plugins = [
             \ 'syntastic',
             \ 'java',
             \ 'indent',
-            \ 'scroll',
             \ 'scrollbar',
             \ 'vimtex',
             \ 'vterm',
             \ 'leaderf',
+            \ 'buffet',
             \ 'go',
             \ 'pairs',
             \ 'end_of_plugins'
@@ -33,9 +33,9 @@ let g:plugins = [
 let g:nvim_plugins = [
             \]
 
-"""""" Unloaded Plugins 
+"""""" Unloaded Plugins
+            \ 'scroll',
             \ 'minimap',
-            \ 'buffet',
             \ 'snazzy',
 
 

@@ -45,8 +45,6 @@ map <leader><Left> :vertical resize-5<CR>
 map <leader><Right> :vertical resize+5<CR>
 
 "" Tab
-nmap <leader>l <Plug>AirlineSelectPrevTab
-nmap <leader>; <Plug>AirlineSelectNextTab
 " map <leader>t :tabe<CR>
 " map <leader>] :+tabnext<CR>
 " map <leader>[ :-tabnext<CR>

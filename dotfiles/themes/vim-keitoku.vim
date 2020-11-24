@@ -8,17 +8,18 @@ set background=dark
 highlight clear
 
 if exists("syntax_on")
-    syntax reset 
-endif 
+    syntax reset
+endif
 
 let g:colors_name="vim-keitoku"
-let colors_name="vim-keitoku" 
+let colors_name="vim-keitoku"
 " let s:black       = { "gui": "#1c2833", "cterm": "234" } "opaque
 " let s:black       = { "gui": "#162025", "cterm": "234" } "green
 let s:black       = { "gui": "#141e26", "cterm": "234" } "blue
 let s:red         = { "gui": "#e06c75", "cterm": "168" }
 let s:macro       = { "gui": "#ffa091", "cterm": "168" }
 let s:green       = { "gui": "#bae67e", "cterm": "149" }
+let s:darkgreen       = { "gui": "#98c379", "cterm": "114" }
 let s:skyblue    = { "gui": "#80d4ff", "cterm": "12" }
 let s:yellow      = { "gui": "#ffd073", "cterm": "215" }
 let s:blue        = { "gui": "#5ea6ed", "cterm": "75"  }
@@ -26,11 +27,11 @@ let s:purple      = { "gui": "#d787d7", "cterm": "176" }
 let s:cyan        = { "gui": "#5ccfe6", "cterm": "81"  }
 let s:white       = { "gui": "#e0e3e3", "cterm": "188" }
 let s:orange      = { "gui": "#f99157", "cterm": "208" }
-let s:opt         = { "gui": "#5fb3b3", "cterm": "74"  } 
+let s:opt         = { "gui": "#5fb3b3", "cterm": "74"  }
 let s:greyblue    = { "gui": "#6699cc", "cterm": "39"  }
 let s:darkblue    = { "gui": "#1d87b8", "cterm": "39"  }
 let s:lightblue   = { "gui": "#4faadd", "cterm": "12"  }
-let s:purplepink  = { "gui": "#c594c5", "cterm": "168" } 
+let s:purplepink  = { "gui": "#c594c5", "cterm": "168" }
 let s:grey        = { "gui": "#5c6370", "cterm": "241" }
 let s:rose        = { "gui": "#F48FA8", "cterm": "168" }
 let s:cool        = { "gui": "#556Aff", "cterm": "000" }
@@ -56,22 +57,22 @@ let s:vertsplit   = { "gui": "#313640", "cterm": "237" }
 function! s:hi(group, fg, bg, attr)
     let hi_str = "hi " . a:group
     if !empty(a:fg)
-        let hi_str .= " guifg=" . a:fg.gui . " ctermfg=" . a:fg.cterm 
+        let hi_str .= " guifg=" . a:fg.gui . " ctermfg=" . a:fg.cterm
     else
         let hi_str .= " guifg=NONE cterm=NONE"
-    endif 
+    endif
     if !empty(a:bg)
-        let hi_str .= " guibg=" . a:bg.gui . " ctermbg=" .a:bg.cterm 
-    else 
+        let hi_str .= " guibg=" . a:bg.gui . " ctermbg=" .a:bg.cterm
+    else
         let hi_str .= " guibg=NONE ctermbg=NONE"
-    endif 
+    endif
     if a:attr != ""
         let hi_str .= " gui=" . a:attr . " cterm=" . a:attr
-    else 
+    else
         let hi_str .= " gui=NONE cterm=NONE"
-    endif 
-    exec hi_str 
-endfunction  
+    endif
+    exec hi_str
+endfunction
 
 
 " User interface colors
@@ -111,10 +112,10 @@ call s:hi("SpellRare", s:yellow, {}, "")
 
 call s:hi("StatusLine", s:blue, s:cursor_line, "")
 call s:hi("StatusLineNC", s:comment_fg, s:cursor_line, "")
-call s:hi("TabLine", s:fg, s:cursor_line, "")
+call s:hi("TabLine", s:fg, s:grey_bg, "")
 call s:hi("TabLineFill", s:fg, s:cursor_line, "")
-call s:hi("TabLineSel", s:fg, s:darkblue, "")
-call s:hi("TabAlt", s:cyan, s:cursor_line, "")
+call s:hi("TabLineSel", s:grey_bg, s:darkgreen, "")
+call s:hi("TabAlt", s:darkgreen, s:grey_bg, "")
 call s:hi("Block", s:bg, s:green, "")
 
 
@@ -165,10 +166,10 @@ call s:hi("StorageClass", s:purplepink, {}, "")
 call s:hi("Structure", s:purple, {}, "")
 call s:hi("Typedef", s:yellow, {}, "")
 
-call s:hi("Conventional", s:opt, {}, "italic") 
+call s:hi("Conventional", s:opt, {}, "italic")
 call s:hi("FunctionCall", s:lightblue, {}, "")
-call s:hi("FunctionDeclaration", s:cyan, {}, "") 
-call s:hi("BuiltinFunc", s:cyan, {}, "") 
+call s:hi("FunctionDeclaration", s:cyan, {}, "")
+call s:hi("BuiltinFunc", s:cyan, {}, "")
 
 call s:hi("Special", s:red, {}, "")
 call s:hi("SpecialChar", s:opt, {}, "")

@@ -3,7 +3,6 @@
 [alias]
     au = add -u
 	st = status
-	stt = status
     cmm = commit -m
     rb = rebase -i @{u}
     pl = pull

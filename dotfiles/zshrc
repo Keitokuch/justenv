@@ -16,6 +16,8 @@ else
     export EDITOR='vim'
 fi
 
+export TERM=xterm-256color
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -53,8 +55,6 @@ function spectrum_ls() {
 precmd() {
 	if [ -n "$TMUX" ]; then
     	tmux refresh-client -S
-        # continuum_save=~/.tmux/plugins/tmux-continuum/scripts/continuum_save.sh
-        # [[ -x $continuum_save ]] && $continuum_save
 	fi
 }
 
@@ -78,7 +78,7 @@ ZSH_THEME="keitoku"
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 #vi-mode 
-plugins=( git osx pip sudo mosh autojump gradle-completion)
+plugins=( git osx pip sudo mosh autojump )
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.

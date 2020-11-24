@@ -34,6 +34,7 @@ inoremap <silent><expr> <TAB>
             \ "\<TAB>"
 " inoremap <silent><expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 map <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-k>"
+xmap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-k>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 " When not in snippet, Make <CR> auto-select the first completion item and notify coc.nvim to
