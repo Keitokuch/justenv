@@ -118,8 +118,8 @@ main() {
     # check_jenv   || jenv_init
     jenv_init
     jenv_before
-    parse_ostype || { jenv_after; exit 1; }
-    load_source  || { jenv_after; exit 1; }
+    parse_ostype
+    load_source 
 }
 
 main

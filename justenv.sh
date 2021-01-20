@@ -51,6 +51,7 @@ put_msg() {
 }
 
 clean_up() {
+	echo cleanup
     for tsk in "${CLEANUP[@]}"; do
         $tsk
     done

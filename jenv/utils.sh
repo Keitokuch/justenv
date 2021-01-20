@@ -47,6 +47,7 @@ parse_ostype() {
             . /etc/os-release
             OS=$ID
             OSVER=$VERSION_ID
+	    echo $OS
         else
             MSG+=("Failed: linux distro not recognized.")
             return 1
