@@ -23,7 +23,7 @@ OMZ=$HOME/.oh-my-zsh
 TMP=$HOME/.tmux/plugins
 
 usage() {
-    echo "Usage: $0 install | deploy [config_item] | uninstall"
+    echo "Usage: $0 install | deploy [config_item] | remove"
 }
 
 pull_configs() {
@@ -153,7 +153,7 @@ main() {
         deploy)
             do_deploy $@
             ;;
-        uninstall)
+        remove)
             echo "Not implemented"
             ;;
         test)

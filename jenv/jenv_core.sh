@@ -62,6 +62,7 @@ jenv_get() {
     local func=_get_$app
     has_func $func || { func=get_$app ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $OS") ; return 1 ;}
     if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
+        cd $BUILD
         if $func ; then
             [[ $silent ]] || MSG+=(">>> installed $app <<<")
         else
@@ -72,6 +73,7 @@ jenv_get() {
     fi
     # global variable position can be changed by nested calls
     OPTIND=optind
+    cd $ENV
 }
 
 load_source() {
