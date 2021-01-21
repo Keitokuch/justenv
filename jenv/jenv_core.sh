@@ -85,6 +85,9 @@ load_source() {
             ubuntu)
                 . $JGET/ubuntu.sh
                 ;;
+            debian)
+                . $JGET/debian.sh
+                ;;
             *)
                 MSG+=("Failed: linux distro $OS not supported.")
                 return 1
