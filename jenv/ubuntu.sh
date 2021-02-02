@@ -60,8 +60,8 @@ _get_nvim() {
     chmod +x nvim.appimage
     sudo ln -f nvim.appimage $BIN/nvim
     cd $ENV
-    sudo apt install -y python-neovim
-    sudo apt install -y python3-neovim
+    pip install neovim
+    pip3 install neovim
 }
 
 # _get_node() {
