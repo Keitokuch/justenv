@@ -58,7 +58,7 @@ _get_nvim() {
     cd $BIN
     wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage
     chmod +x nvim.appimage
-    sudo ln -f nvim.appimage $BIN/nvim
+    ln -f nvim.appimage $BIN/nvim
     cd $ENV
     pip install neovim
     pip3 install neovim
