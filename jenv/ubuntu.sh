@@ -43,7 +43,7 @@ get_tmux() {
     fi
 }
 
-_get_zsh() {
+get_zsh() {
     sudo apt install -y zsh
     if [[ -x "/bin/zsh" ]]; then
         chsh -s "/bin/zsh"
