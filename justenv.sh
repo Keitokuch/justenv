@@ -1,9 +1,6 @@
 #! /usr/bin/env bash
 
 ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-MODULE=$ENV/modules
-UTILS=$ENV/utils
-SCRIPT=$ENV/scripts
 declare -ga MSG=()
 declare -ga CLEANUP=("put_msg")
 
@@ -16,18 +13,10 @@ mkdir -p $JUSTENV
 mkdir -p $CONFIG_PATH
 mkdir -p $OLD
 
-THEME=$CONFIG_PATH/themes
 DOTFILE=$CONFIG_PATH
-
-OMZ=$HOME/.oh-my-zsh
-TMP=$HOME/.tmux/plugins
 
 usage() {
     echo "Usage: $0 install | deploy [config_item] | remove"
-}
-
-pull_configs() {
-    cp -rf $SRC/* $CONFIG
 }
 
 has_func() {
