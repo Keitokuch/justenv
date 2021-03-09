@@ -1,4 +1,6 @@
 # macos
+# $ostype is set to  "darwin"
+# $OS is set to "macos"
 
 get_update() {
     brew update
@@ -30,7 +32,7 @@ _get_nvim() {
     tar xzvf nvim-macos.tar.gz
     mv $BIN/nvim-osx64 $BUILD/nvim-bak 2>/dev/null
     mv nvim-osx64 $BIN/
-    JENV_PATH+=("$BIN/nvim-osx64/bin")
+    JGET_PATH+=("$BIN/nvim-osx64/bin")
     rm nvim-macos.tar.gz
     cd $ENV
 }

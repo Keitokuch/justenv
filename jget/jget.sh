@@ -1,59 +1,70 @@
+#! /usr/bin/env bash
 # jenv-get Core
 # To be sourced from context where JGET is set
 
-declare -ga JENV_PATH=()
+JGET="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-JENV=$HOME/jenv
-BIN=$JENV/bin
-LIB=$JENV/lib
-MAN=$JENV/share/man
-mkdir -p $JENV
+jget=$HOME/.jget
+BIN=$jget/bin
+LIB=$jget/lib
+MAN=$jget/share/man
+mkdir -p $jget
 mkdir -p $BIN
 mkdir -p $LIB
 
-BUILD=$JENV/build
+declare -ga JGET_PATH=()
+JGET_PATH+=("$BIN")
+
+BUILD=$jget/build
 mkdir -p $BUILD
 
-JENV_PROFILE=~/.jenv_profile
-JENV_RC="~/.jenv_profile"
-SYS_RC=($HOME/.bash_profile $HOME/.zprofile $HOME/.zshenv)
+JGET_PROFILE=~/.jget_profile
+SYS_RC=($HOME/.bash_profile $HOME/.zshenv)
+
+jget_path=$jget/.paths
+jget_libpath=$jget/.libpaths
 
 . $JGET/utils.sh
 . $JGET/config
 
-check_jenv() {
-    [[ -f $JENV_PROFILE ]] && return 0
+check_jget() {
+    [[ -f $JGET_PROFILE ]] && return 0
     return 1
 }
 
-jenv_setup() {
-    for path in "${JENV_PATH[@]}"; do 
-        check_append "export PATH=$path:\$PATH" $JENV_PROFILE
+jget_setup() {
+    for path in "${JGET_PATH[@]}"; do 
+        check_append $path $jget_path
     done
-    check_append "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$LIB" $JENV_PROFILE
+
+    while read path
+    do
+        check_append "export PATH=$path:\$PATH" $JGET_PROFILE
+    done <"$jget_path"
+
+    check_append "export LD_LIBRARY_PATH=$LIB:\$LD_LIBRARY_PATH" $JGET_PROFILE
+    check_append "export MANPATH=$MAN:\$MANPATH" $JGET_PROFILE
 }
 
-jenv_init() {
-    JENV_PATH+=("$BIN")
-    touch $JENV_PROFILE
+jget_init() {
+    touch "$JGET_PROFILE"
     for profile in "${SYS_RC[@]}"; do 
-        check_append "source "$JENV_RC"" $profile
-        check_append "export MANPATH=$MAN:\$MANPATH" $profile
+        check_append "source "$JGET_PROFILE"" $profile
     done
 }
 
-jenv_install() {
+jget_install() {
     global_options $@
     shift "$(( OPTIND - 1 ))"
 
     while (( ${#@} > 0 ))
     do
-        jenv_get $@
+        jget_one $@
         shift "$OPTIND"
     done
 }
 
-jenv_get() {
+jget_one() {
     local app=$1 && shift
     parse_options $@ 
     local forced=$_forced
@@ -80,6 +91,7 @@ load_source() {
     . $JGET/generic.sh
     if [[ $ostype == "linux" ]]; then 
         nr_worker=$(nproc)
+        . $JGET/linux.sh
         case $OS in
             centos|rhel)
                 . $JGET/centos.sh
@@ -107,22 +119,22 @@ terminate() {
     exit 1
 }
 
-jenv_before() {
+jget_before() {
     rm -rf $BUILD/*
     trap terminate SIGINT
     trap terminate SIGTSTP
-    CLEANUP=("jenv_after" "${CLEANUP[@]}")
+    CLEANUP=("jget_after" "${CLEANUP[@]}")
 }
 
-jenv_after() {
-    jenv_setup
+jget_after() {
+    jget_setup
     rm -rf $BUILD
 }
 
 main() {
-    # check_jenv   || jenv_init
-    jenv_init
-    jenv_before
+    # check_jget   || jget_init
+    jget_init
+    jget_before
     parse_ostype
     load_source 
 }

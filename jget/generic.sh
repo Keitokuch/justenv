@@ -1,17 +1,16 @@
-OMZ=$HOME/.oh-my-zsh
-TMP=$HOME/.tmux/plugins
+# Generic for linux and macos
 
 _get_node() {
     local version=${VERSION:-$NODEJS_VERSION}
     local distro=$ostype-x64
-    lib_nodejs=$JENV/lib/nodejs
+    lib_nodejs=$JGET/lib/nodejs
     nodejs=node-$version-$distro
     mkdir -p $lib_nodejs
     cd $BUILD
     wget https://nodejs.org/dist/$version/$nodejs.tar.xz    || return 1
     tar -xJvf $nodejs.tar.xz -C $lib_nodejs                 || return 1 
     rm $nodejs.tar.xz
-    JENV_PATH+=("$lib_nodejs/$nodejs/bin")
+    JGET_PATH+=("$lib_nodejs/$nodejs/bin")
     cd $ENV
 }
 
@@ -24,8 +23,8 @@ _get_cmake() {
     cd $BUILD
     wget https://github.com/Kitware/CMake/releases/download/v$version/$tarball
     tar xvf $tarball
-    mv $dir $JENV
-    JENV_PATH+=("$JENV/$dir/bin")
+    mv $dir $JGET
+    JGET_PATH+=("$JGET/$dir/bin")
     cd $ENV
 }
 
@@ -48,7 +47,7 @@ _get_ctags() {
     git clone https://github.com/universal-ctags/ctags.git $build   || return 1
     cd $build
     ./autogen.sh                        || return 1
-    ./configure --prefix=$JENV          || return 1
+    ./configure --prefix=$JGET          || return 1
     make                                || return 1
     make install                        || return 1
     cd $ENV
@@ -61,7 +60,7 @@ _get_zsh() {
     cd zsh
     autoheader
     autoconf
-    CPPFLAGS="-I$JENV/include -I$JENV/include/ncurses" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV --with-tcsetpgrp --without-shared
+    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET --with-tcsetpgrp --without-shared
     make -j $nr_worker
     make install
     cd $ENV
@@ -87,7 +86,7 @@ _get_vim() {
     wget https://github.com/vim/vim/archive/v$version.tar.gz -O vim-$version.tar.gz
     tar xzf vim-$version.tar.gz
     cd vim-$version
-    ./configure --prefix=$JENV
+    ./configure --prefix=$JGET
     make -j $nr_worker
     make install
     cd $ENV
@@ -102,7 +101,7 @@ _get_ag() {
     tar -xvf $ag.tar.gz
     rm $ag.tar.gz
     cd $ag
-    ./configure --prefix=$JENV  || return 1
+    ./configure --prefix=$JGET  || return 1
     make -j $nr_worker           || return 1
     make install        || return 1
     cd $ENV
@@ -121,7 +120,7 @@ _get_tmux() {
     wget https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz || return 1
     tar -xzf tmux-$version.tar.gz
     cd tmux-$version
-    CPPFLAGS="-I$JENV/include -I$JENV/include/ncurses" LDFLAGS="-L$JENV/lib" ./configure --prefix=$JENV
+    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
     make -j $nr_worker
     make install
     cd $ENV
@@ -161,7 +160,7 @@ _get_gradle() {
     [[ -d $target_dir ]] && mv $target_dir $BUILD/gradle-bak
     mkdir -p $BIN/gradle
     mv $unzipped $target
-    JENV_PATH+=("$target/bin")
+    JGET_PATH+=("$target/bin")
     cd $ENV
 }
 _rm_gradle() {
@@ -179,7 +178,7 @@ _get_v2ray() {
     wget https://install.direct/go.sh   || return 1
     bash ./go.sh $version_cmd $forced_cmd
     ln -sf /usr/bin/v2ray $BIN/
-    JENV_PATH+=("$BIN/v2ray")
+    JGET_PATH+=("$BIN/v2ray")
     cd $ENV
 }
 
@@ -190,7 +189,7 @@ _get_gdb() {
     tar xvf gdb-$version.tar.xz
     cd gdb-$version
     mkdir build && cd build
-    ../configure --prefix=$JENV  || return 1
+    ../configure --prefix=$JGET  || return 1
     make -j $nr_worker          || return 1
     make install                || return 1
     cd $ENV
@@ -200,8 +199,8 @@ _get_go() {
     local version=${VERSION:-$GO_VERSION}
     cd $BUILD
     wget https://dl.google.com/go/go$version.$ostype-amd64.tar.gz
-    tar -C $JENV -xzf go$version.$ostype-amd64.tar.gz
-    JENV_PATH+=("$JENV/go/bin")
+    tar -C $JGET -xzf go$version.$ostype-amd64.tar.gz
+    JGET_PATH+=("$JGET/go/bin")
     cd $ENV
 }
 
@@ -220,7 +219,7 @@ get_libevent() {
     wget https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz
     tar -xzf libevent-$LIBEVENT_VERSION.tar.gz
     cd libevent-$LIBEVENT_VERSION
-    CPPFLAGS="-fPIC" ./configure --prefix=$JENV
+    CPPFLAGS="-fPIC" ./configure --prefix=$JGET
     make -j$nr_worker
     make install
     cd $ENV
@@ -235,7 +234,7 @@ get_ncurses() {
     wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$NCURSES_VERSION.tar.gz
     tar -xzf ncurses-$NCURSES_VERSION.tar.gz
     cd ncurses-$NCURSES_VERSION
-    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-fPIC" ./configure  --prefix=$JENV --with-shared
+    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-fPIC" ./configure  --prefix=$JGET --with-shared
     make -j $nr_worker
     make install
     cd $ENV
@@ -245,6 +244,7 @@ get_ncurses() {
 # get oh-my-zsh
 get_OMZ() {
     parse_options $@
+    OMZ=$HOME/.oh-my-zsh
     if [[ $forced ]] || [[ ! -d $OMZ ]]; then
         sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -) --unattended" 
        [[ $silent ]] ||  MSG+=(">>> installed oh-my-zsh <<<")
@@ -273,6 +273,7 @@ get_vim-plug() {
 }
 
 get_tpm() {
+    TMP=$HOME/.tmux/plugins
     if [[ ! -d "$TMP/tpm" ]]; then
         git clone https://github.com/tmux-plugins/tpm.git $TMP/tpm
     fi

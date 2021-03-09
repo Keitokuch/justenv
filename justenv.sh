@@ -15,6 +15,8 @@ mkdir -p $OLD
 
 DOTFILE=$CONFIG_PATH
 
+JGET=$ENV/jget
+
 usage() {
     echo "Usage: $0 install | deploy [config_item] | remove"
 }
@@ -95,13 +97,12 @@ deploy_configs() {
 }
 
 do_install() {
-    JGET=$ENV/jenv
-    . $JGET/jenv_core.sh
+    . $JGET/jget.sh
 
     if [[ "$1" =~ ^(all|All|-A)$ ]]; then
         modules_install
     else
-        jenv_install $@
+        jget_install $@
     fi
 }
 

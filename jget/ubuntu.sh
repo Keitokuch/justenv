@@ -74,7 +74,7 @@ _get_mosh() {
     git clone https://github.com/keithw/mosh.git
     cd mosh
     ./autogen.sh                    || return 1
-    ./configure --prefix=$JENV      || return 1
+    ./configure --prefix=$JGET      || return 1
     make && make install            || return 1
     cd $ENV
 }
