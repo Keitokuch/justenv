@@ -2,30 +2,30 @@
 # jenv-get Core
 # To be sourced from context where JGET is set
 
-JGET="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-jget=$HOME/.jget
-BIN=$jget/bin
-LIB=$jget/lib
-MAN=$jget/share/man
-mkdir -p $jget
+JGET=$HOME/.jget
+BIN=$JGET/bin
+LIB=$JGET/lib
+MAN=$JGET/share/man
+mkdir -p $JGET
 mkdir -p $BIN
 mkdir -p $LIB
 
 declare -ga JGET_PATH=()
 JGET_PATH+=("$BIN")
 
-BUILD=$jget/build
+BUILD=$JGET/build
 mkdir -p $BUILD
 
 JGET_PROFILE=~/.jget_profile
 SYS_RC=($HOME/.bash_profile $HOME/.zshenv)
 
-jget_path=$jget/.paths
-jget_libpath=$jget/.libpaths
+jget_path=$JGET/.paths
+jget_libpath=$JGET/.libpaths
 
-. $JGET/utils.sh
-. $JGET/config
+. $SRC/utils.sh
+. $SRC/config
 
 check_jget() {
     [[ -f $JGET_PROFILE ]] && return 0
@@ -84,23 +84,23 @@ jget_one() {
     fi
     # global variable position can be changed by nested calls
     OPTIND=optind
-    cd $ENV
+    cd $SRC
 }
 
 load_source() {
-    . $JGET/generic.sh
+    . $SRC/generic.sh
     if [[ $ostype == "linux" ]]; then 
         nr_worker=$(nproc)
-        . $JGET/linux.sh
+        . $SRC/linux.sh
         case $OS in
             centos|rhel)
-                . $JGET/centos.sh
+                . $SRC/centos.sh
                 ;;
             ubuntu)
-                . $JGET/ubuntu.sh
+                . $SRC/ubuntu.sh
                 ;;
             debian)
-                . $JGET/debian.sh
+                . $SRC/debian.sh
                 ;;
             *)
                 MSG+=("Failed: linux distro $OS not supported.")
@@ -109,7 +109,7 @@ load_source() {
         esac
     elif [[ $ostype == "darwin" ]]; then
         nr_worker=$(sysctl -n hw.ncpu)
-        . $JGET/macos.sh        
+        . $SRC/macos.sh        
     fi
 }
 

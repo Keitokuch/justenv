@@ -4,16 +4,14 @@ ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 declare -ga MSG=()
 declare -ga CLEANUP=("put_msg")
 
-. $ENV/justenv.config
+CONFIG=~/.config/justenv
+mkdir -p $CONFIG
+[[ -f $CONFIG/config ]] && . $CONFIG/config
 
-JUSTENV=$HOME/.justenv
 CONFIG_PATH=${CONFIG_PATH:-"$ENV/configs"}
-OLD=$JUSTENV/oldconfigs
-mkdir -p $JUSTENV
+OLD=$CONFIG/oldconfigs
 mkdir -p $CONFIG_PATH
 mkdir -p $OLD
-
-DOTFILE=$CONFIG_PATH
 
 JGET=$ENV/jget
 
@@ -151,6 +149,9 @@ main() {
             ;;
         func)
             $@
+            ;;
+        install_justenv)
+            do_install justenv
             ;;
         *)
             usage

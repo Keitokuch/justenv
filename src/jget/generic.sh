@@ -11,7 +11,7 @@ _get_node() {
     tar -xJvf $nodejs.tar.xz -C $lib_nodejs                 || return 1 
     rm $nodejs.tar.xz
     JGET_PATH+=("$lib_nodejs/$nodejs/bin")
-    cd $ENV
+    cd $JGET
 }
 
 _get_cmake() {
@@ -25,7 +25,7 @@ _get_cmake() {
     tar xvf $tarball
     mv $dir $JGET
     JGET_PATH+=("$JGET/$dir/bin")
-    cd $ENV
+    cd $JGET
 }
 
 _get_BaiduPCS-Go() {
@@ -38,7 +38,7 @@ _get_BaiduPCS-Go() {
     wget https://github.com/felixonmars/BaiduPCS-Go/releases/download/v$version/$zipfile    || return 1
     unzip $zipfile      || return 1
     mv $dir/BaiduPCS-Go $BIN
-    cd $ENV
+    cd $JGET
 }
 
 _get_ctags() {
@@ -50,7 +50,7 @@ _get_ctags() {
     ./configure --prefix=$JGET          || return 1
     make                                || return 1
     make install                        || return 1
-    cd $ENV
+    cd $JGET
 }
 
 _get_zsh() {
@@ -63,7 +63,7 @@ _get_zsh() {
     CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET --with-tcsetpgrp --without-shared
     make -j $nr_worker
     make install
-    cd $ENV
+    cd $JGET
     chsh -s $(chsh -l | grep zsh) $USER 
 }
 
@@ -74,7 +74,7 @@ _get_nvim() {
     wget -O nvim.appimage https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
     chmod +x nvim.appimage
     ln -sf nvim.appimage $BIN/nvim
-    cd $ENV
+    cd $JGET
     python -m pip install neovim --user
     python3 -m pip install neovim --user
 }
@@ -89,7 +89,7 @@ _get_vim() {
     ./configure --prefix=$JGET
     make -j $nr_worker
     make install
-    cd $ENV
+    cd $JGET
 }
 
 
@@ -104,11 +104,11 @@ _get_ag() {
     ./configure --prefix=$JGET  || return 1
     make -j $nr_worker           || return 1
     make install        || return 1
-    cd $ENV
+    cd $JGET
 }
 _rm_ag() {
     cd $BIN && rm -f ag
-    cd $ENV
+    cd $JGET
 }
 
 
@@ -123,11 +123,11 @@ _get_tmux() {
     CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
     make -j $nr_worker
     make install
-    cd $ENV
+    cd $JGET
 }
 _rm_tmux() {
     cd $BIN && rm -f tmux
-    cd $ENV
+    cd $JGET
 }
 
 
@@ -137,14 +137,14 @@ _get_autojump() {
     git clone git://github.com/wting/autojump.git
     cd autojump
     ./install.py
-    cd $ENV
+    cd $JGET
 }
 _rm_autojump() {
     cd $BUILD
     git clone git://github.com/wting/autojump.git
     cd autojump
     ./uninstall.py      || return 1
-    cd $ENV
+    cd $JGET
 }
 
 
@@ -161,11 +161,11 @@ _get_gradle() {
     mkdir -p $BIN/gradle
     mv $unzipped $target
     JGET_PATH+=("$target/bin")
-    cd $ENV
+    cd $JGET
 }
 _rm_gradle() {
     cd $BIN && rm -rf gradle
-    cd $ENV
+    cd $JGET
 }
 
 _get_v2ray() {
@@ -179,7 +179,7 @@ _get_v2ray() {
     bash ./go.sh $version_cmd $forced_cmd
     ln -sf /usr/bin/v2ray $BIN/
     JGET_PATH+=("$BIN/v2ray")
-    cd $ENV
+    cd $JGET
 }
 
 _get_gdb() {
@@ -192,7 +192,7 @@ _get_gdb() {
     ../configure --prefix=$JGET  || return 1
     make -j $nr_worker          || return 1
     make install                || return 1
-    cd $ENV
+    cd $JGET
 }
 
 _get_go() {
@@ -201,7 +201,7 @@ _get_go() {
     wget https://dl.google.com/go/go$version.$ostype-amd64.tar.gz
     tar -C $JGET -xzf go$version.$ostype-amd64.tar.gz
     JGET_PATH+=("$JGET/go/bin")
-    cd $ENV
+    cd $JGET
 }
 
 get_gef() {
@@ -222,7 +222,7 @@ get_libevent() {
     CPPFLAGS="-fPIC" ./configure --prefix=$JGET
     make -j$nr_worker
     make install
-    cd $ENV
+    cd $JGET
 }
 
 get_ncurses() {
@@ -237,7 +237,7 @@ get_ncurses() {
     CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-fPIC" ./configure  --prefix=$JGET --with-shared
     make -j $nr_worker
     make install
-    cd $ENV
+    cd $JGET
 }
 
 
@@ -277,4 +277,9 @@ get_tpm() {
     if [[ ! -d "$TMP/tpm" ]]; then
         git clone https://github.com/tmux-plugins/tpm.git $TMP/tpm
     fi
+}
+
+_get_justenv() {
+    cp $ENV/justenv $BIN
+    cp -rf $ENV/jget $BIN
 }
