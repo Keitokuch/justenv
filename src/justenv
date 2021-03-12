@@ -97,11 +97,7 @@ deploy_configs() {
 do_install() {
     . $JGET/jget.sh
 
-    if [[ "$1" =~ ^(all|All|-A)$ ]]; then
-        modules_install
-    else
-        jget_install $@
-    fi
+    jget_install $@
 }
 
 do_deploy() {
@@ -125,6 +121,19 @@ do_deploy() {
 do_test() {
     deploy_other
 }
+
+_get_justenv() {
+    cp $JUSTENV_SRC/justenv $BIN
+    cp -rf $JUSTENV_SRC/jget $BIN
+}
+
+_get_update() {
+    cd $BUILD
+    git clone git@github.com:Keitokuch/justenv.git
+    JUSTENV_SRC=justenv/src
+    _get_justenv
+}
+
 
 main() {
     opt=$1
@@ -151,8 +160,12 @@ main() {
             $@
             ;;
         install_justenv)
+            JUSTENV_SRC=$ENV
             do_install justenv
             ;;
+        update)
+            do_install update
+        ;;
         *)
             usage
             exit 0

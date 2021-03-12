@@ -279,7 +279,3 @@ get_tpm() {
     fi
 }
 
-_get_justenv() {
-    cp $ENV/justenv $BIN
-    cp -rf $ENV/jget $BIN
-}
