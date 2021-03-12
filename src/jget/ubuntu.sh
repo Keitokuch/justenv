@@ -131,22 +131,22 @@ get_ctags() {
             gcc make pkg-config autoconf automake \
             python3-docutils libseccomp-dev libjansson-dev \
             libyaml-dev libxml2-dev
-                    git clone https://github.com/universal-ctags/ctags.git $build
-                    cd $build
-                    ./autogen.sh
-                    ./configure && make
-                    sudo make install
-                    cd $ENV
-                    [[ $silent ]] || MSG+=(">>> installed ctags <<<")
-                else
-                    [[ $silent ]] || MSG+=('=== ctags already installed ===')
-                fi
-            }
+        git clone https://github.com/universal-ctags/ctags.git $build
+        cd $build
+        ./autogen.sh
+        ./configure && make
+        sudo make install
+        cd $ENV
+        [[ $silent ]] || MSG+=(">>> installed ctags <<<")
+    else
+        [[ $silent ]] || MSG+=('=== ctags already installed ===')
+    fi
+}
 
-        get_ncurses() {
-            apt install -y libncurses5-dev 
-        }
+# get_ncurses() {
+#     apt install -y libncurses5-dev 
+# }
 
-    _get_ag() {
-        sudo apt-get install -y silversearcher-ag
-    }
+_get_ag() {
+    sudo apt-get install -y silversearcher-ag
+}
