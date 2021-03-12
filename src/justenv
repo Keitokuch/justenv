@@ -167,7 +167,7 @@ main() {
             ;;
         update)
             do_install -f update
-        ;;
+            ;;
         *)
             usage
             exit 0
