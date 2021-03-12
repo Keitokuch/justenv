@@ -157,7 +157,9 @@ main() {
             do_test $@
             ;;
         func)
+            . $JGET/jget.sh
             $@
+            echo $?
             ;;
         install_justenv)
             JUSTENV_SRC=$ENV
