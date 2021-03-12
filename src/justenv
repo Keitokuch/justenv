@@ -161,10 +161,10 @@ main() {
             ;;
         install_justenv)
             JUSTENV_SRC=$ENV
-            do_install justenv
+            do_install -f justenv
             ;;
         update)
-            do_install update
+            do_install -f update
         ;;
         *)
             usage
