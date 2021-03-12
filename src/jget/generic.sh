@@ -226,7 +226,7 @@ get_libevent() {
 }
 
 get_ncurses() {
-    NCURSES_VERSION=6.0
+    NCURSES_VERSION=6.2
     if has_lib libncurses ; then
         return 0
     fi
