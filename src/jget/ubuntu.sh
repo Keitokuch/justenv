@@ -20,6 +20,10 @@ get_build() {
     sudo apt install -y libncurses5-dev
 }
 
+_get_sys_prereq() {
+
+}
+
 get_tmux() {
     VERSION=$TMUX_VERSION
     parse_options $@

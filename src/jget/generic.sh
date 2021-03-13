@@ -1,5 +1,9 @@
 # Generic for linux and macos
 
+_get_prereq() {
+    jget_install -s autoconf automake
+}
+
 _get_autoconf() {
     local version=${VERSION:-$AUTOCONF_VERSION}
     wget http://ftp.gnu.org/gnu/autoconf/autoconf-$version.tar.gz
@@ -33,7 +37,6 @@ _rm_automake() {
     cd automake-$version
     ./configure --prefix=$JGET
     make uninstall
-}
 
 _get_zsh() {
     local version=${VERSION:-$ZSH_VERSION}

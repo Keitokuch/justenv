@@ -6,10 +6,8 @@ get_update() {
     brew update
 }
 
-get_prereq() {
-    jenv_get brew -s
-    jenv_get curl -s
-    jenv_get wget -s
+_get_sys_prereq() {
+    jget_install -s brew
 }
 
 get_build() {

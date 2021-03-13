@@ -51,6 +51,7 @@ jget_init() {
     for profile in "${SYS_RC[@]}"; do 
         check_append "source "$JGET_PROFILE"" $profile
     done
+    jget_install -s sys_prereq prereq
 }
 
 jget_install() {
@@ -133,10 +134,10 @@ jget_after() {
 
 main() {
     # check_jget   || jget_init
-    jget_init
-    jget_before
     parse_ostype
     load_source 
+    jget_init
+    jget_before
 }
 
 main
