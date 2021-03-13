@@ -211,7 +211,7 @@ get_gef() {
 }
 
 get_libevent() {
-    LIBEVENT_VERSION=2.0.22-stable
+    LIBEVENT_VERSION=2.1.12-stable
     if has_lib libevent ; then
         return 0
     fi
@@ -219,7 +219,7 @@ get_libevent() {
     wget https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz
     tar -xzf libevent-$LIBEVENT_VERSION.tar.gz
     cd libevent-$LIBEVENT_VERSION
-    CPPFLAGS="-fPIC" ./configure --prefix=$JGET
+    CPPFLAGS='-fPIC' ./configure --prefix=$JGET
     make -j$nr_worker
     make install
     cd $JGET
