@@ -1,17 +1,49 @@
 # Generic for linux and macos
 
+_get_autoconf() {
+    local version=${VERSION:-$AUTOCONF_VERSION}
+    wget http://ftp.gnu.org/gnu/autoconf/autoconf-$version.tar.gz
+    tar -xzf autoconf-$version.tar.gz
+    cd autoconf-$version
+    ./configure --prefix=$JGET
+    make
+    make install
+}
+_rm_autoconf() {
+    local version=${VERSION:-$AUTOCONF_VERSION}
+    wget http://ftp.gnu.org/gnu/autoconf/autoconf-$version.tar.gz
+    tar -xzf autoconf-$version.tar.gz
+    cd autoconf-$version
+    ./configure --prefix=$JGET
+    make uninstall
+}
+
+_get_automake() {
+    local version=${VERSION:-$AUTOMAKE_VERSION}
+    wget https://ftp.gnu.org/gnu/automake/automake-$version.tar.gz
+    tar -xzf automake-$version.tar.gz
+    cd automake-$version
+    ./configure --prefix=$JGET
+    make && make install
+}
+_rm_automake() {
+    local version=${VERSION:-$AUTOMAKE_VERSION}
+    wget https://ftp.gnu.org/gnu/automake/automake-$version.tar.gz
+    tar -xzf automake-$version.tar.gz
+    cd automake-$version
+    ./configure --prefix=$JGET
+    make uninstall
+}
+
 _get_node() {
     local version=${VERSION:-$NODEJS_VERSION}
     local distro=$ostype-x64
     lib_nodejs=$JGET/lib/nodejs
     nodejs=node-$version-$distro
     mkdir -p $lib_nodejs
-    cd $BUILD
     wget https://nodejs.org/dist/$version/$nodejs.tar.xz    || return 1
     tar -xJvf $nodejs.tar.xz -C $lib_nodejs                 || return 1 
-    rm $nodejs.tar.xz
     JGET_PATH+=("$lib_nodejs/$nodejs/bin")
-    cd $JGET
 }
 
 _get_cmake() {
