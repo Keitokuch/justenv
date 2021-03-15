@@ -35,6 +35,20 @@ _rm_automake() {
     make uninstall
 }
 
+_get_zsh() {
+    local version=${VERSION:-$ZSH_VERSION}
+    get_ncurses
+    wget https://github.com/zsh-users/zsh/archive/zsh-$version.tar.gz
+    tar -xzf zsh-$version.tar.gz
+    rm zsh-$version.tar.gz
+    cd zsh-*
+    ./Util/preconfig
+    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
+    make -j $nr_worker
+    make install.bin
+}
+
+
 _get_node() {
     local version=${VERSION:-$NODEJS_VERSION}
     local distro=$ostype-x64
@@ -83,20 +97,6 @@ _get_ctags() {
     make                                || return 1
     make install                        || return 1
     cd $JGET
-}
-
-_get_zsh() {
-    get_ncurses
-    cd $BUILD
-    git clone git://github.com/zsh-users/zsh.git
-    cd zsh
-    autoheader
-    autoconf
-    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET --with-tcsetpgrp --without-shared
-    make -j $nr_worker
-    make install
-    cd $JGET
-    chsh -s $(chsh -l | grep zsh) $USER 
 }
 
 
