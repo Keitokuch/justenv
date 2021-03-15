@@ -47,6 +47,7 @@ _get_zsh() {
     make -j $nr_worker
     make install.bin
     make install.modules
+    make install.fns
 }
 
 
