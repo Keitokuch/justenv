@@ -46,6 +46,7 @@ _get_zsh() {
     CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
     make -j $nr_worker
     make install.bin
+    make install.modules
 }
 
 
