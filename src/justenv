@@ -129,7 +129,7 @@ _get_justenv() {
 
 _get_update() {
     cd $BUILD
-    git clone git@github.com:Keitokuch/justenv.git
+    git clone https://github.com/Keitokuch/justenv.git
     JUSTENV_SRC=justenv/src
     _get_justenv
 }
