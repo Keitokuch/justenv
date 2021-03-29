@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 declare -ga MSG=()
 declare -ga CLEANUP=("put_msg")
 
@@ -8,12 +8,12 @@ CONFIG=~/.config/justenv
 mkdir -p $CONFIG
 [[ -f $CONFIG/config ]] && . $CONFIG/config
 
-CONFIG_PATH=${CONFIG_PATH:-"$ENV/configs"}
+CONFIG_PATH=${CONFIG_PATH:-"$HOME/configs"}
 OLD=$CONFIG/oldconfigs
 mkdir -p $CONFIG_PATH
 mkdir -p $OLD
 
-JGET=$ENV/jget
+JGET=$SRC/jget
 
 usage() {
     echo "Usage: $0 install | deploy [config_item] | remove"
