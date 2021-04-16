@@ -196,7 +196,7 @@ _rm_gradle() {
 }
 
 _get_v2ray() {
-    local version=${VERSION}
+    local version=${VERSION} # TODO: v2ray version
     local version_cmd
     local forced_cmd
     [[ $version ]] && version_cmd="--version v${version}"
@@ -306,3 +306,10 @@ get_tpm() {
     fi
 }
 
+_get_ant() {
+    local version=${VERSION:-$ANT_VERSION}
+    wget https://downloads.apache.org//ant/binaries/apache-ant-$version-bin.tar.gz
+    tar -xzf apache-ant-*
+    mv apache-ant-$version $BIN/
+    JGET_PATH+=("$BIN/apache-ant-$version/bin")
+}

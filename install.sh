@@ -16,4 +16,5 @@ check_append() {
     grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
 }
 
+$JUSTENV_SRC=$SRC
 $SRC/justenv install_justenv
