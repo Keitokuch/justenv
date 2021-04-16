@@ -36,7 +36,6 @@ get_tmux() {
         ./configure && make
         sudo make install
         cd $BUILD && rm tmux-${VERSION}.tar.gz
-        cd $ENV 
         [[ $silent ]] || MSG+=(">>> installed tmux <<<")
     else
         [[ $silent ]] || MSG+=("=== tmux already installed ===")
@@ -63,7 +62,6 @@ _get_nvim() {
     wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage
     chmod +x nvim.appimage
     ln -f nvim.appimage $BIN/nvim
-    cd $ENV
     pip install neovim
     pip3 install neovim
 }
@@ -80,12 +78,10 @@ _get_mosh() {
     ./autogen.sh                    || return 1
     ./configure --prefix=$JGET      || return 1
     make && make install            || return 1
-    cd $ENV
 }
 
 _get_python() {
     sudo apt-get install -y python
-    cd $ENV
 }
 
 get_nodejs() {
@@ -140,7 +136,6 @@ get_ctags() {
         ./autogen.sh
         ./configure && make
         sudo make install
-        cd $ENV
         [[ $silent ]] || MSG+=(">>> installed ctags <<<")
     else
         [[ $silent ]] || MSG+=('=== ctags already installed ===')

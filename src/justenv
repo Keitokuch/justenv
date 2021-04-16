@@ -114,7 +114,6 @@ do_deploy() {
         cd $CONFIG_PATH
         deploy_configs
         [[ -f $CONFIG_PATH/after_deploy.sh ]] && . $CONFIG_PATH/after_deploy.sh && MSG+=(">>> exec after_deploy")
-        cd $ENV
     fi
 }
 
@@ -162,7 +161,6 @@ main() {
             echo $?
             ;;
         install_justenv)
-            JUSTENV_SRC=$ENV
             do_install -f justenv
             ;;
         update)

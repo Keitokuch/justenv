@@ -25,7 +25,6 @@ get_python3() {
         cd Python-${VERSION}
         ./configure && make
         sudo make install
-        cd $ENV
         sudo rm -rf Python-${VERSION}
         rm Python-${VERSION}.tar.xz
         [[ $silent ]] || MSG+=(">>> installed python3 <<<")
@@ -46,7 +45,6 @@ get_tmux() {
         cd tmux-${VERSION}
         ./configure && make
         sudo make install
-        cd $ENV && rm -rf tmux-${VERSION}
         rm tmux-${VERSION}.tar.gz
         [[ $silent ]] || MSG+=(">>> installed tmux <<<")
     else

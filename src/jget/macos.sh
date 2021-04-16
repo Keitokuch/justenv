@@ -32,7 +32,6 @@ _get_nvim() {
     mv nvim-osx64 $BIN/
     JGET_PATH+=("$BIN/nvim-osx64/bin")
     rm nvim-macos.tar.gz
-    cd $ENV
 }
 
 _get_vim() {
