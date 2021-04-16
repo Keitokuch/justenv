@@ -308,8 +308,14 @@ get_tpm() {
 
 _get_ant() {
     local version=${VERSION:-$ANT_VERSION}
-    wget https://downloads.apache.org//ant/binaries/apache-ant-$version-bin.tar.gz
+    # wget https://downloads.apache.org//ant/binaries/apache-ant-$version-bin.tar.gz
+    wget https://archive.apache.org/dist/ant/binaries/apache-ant-$version-bin.tar.gz
     tar -xzf apache-ant-*
     mv apache-ant-$version $BIN/
-    JGET_PATH+=("$BIN/apache-ant-$version/bin")
+    add_path "$BIN/apache-ant-$version/bin"
+}
+_rm_ant() {
+    cd $BIN
+    rm -rf apache-ant-*
+    remove_path "$BIN/apache-ant-*"
 }

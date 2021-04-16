@@ -47,7 +47,6 @@ parse_ostype() {
             . /etc/os-release
             OS=$ID
             OSVER=$VERSION_ID
-	    echo $OS
         else
             MSG+=("Failed: linux distro not recognized.")
             return 1
@@ -70,6 +69,10 @@ put_msg() {
 
 check_append() {
     grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
+}
+
+remove_line() {
+    grep -v "$1" "$2" > temp && mv temp "$2"
 }
 
 has_lib() {

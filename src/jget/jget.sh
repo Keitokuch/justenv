@@ -13,6 +13,7 @@ mkdir -p $BIN
 mkdir -p $LIB
 
 declare -ga JGET_PATH=()
+declare -ga JGET_RM_PATH=()
 JGET_PATH+=("$BIN")
 
 BUILD=$JGET/build
@@ -34,9 +35,22 @@ check_jget() {
     return 1
 }
 
+add_path() {
+    JGET_PATH+=($1)
+}
+
+remove_path() {
+    JGET_RM_PATH+=($1)
+}
+
 jget_setup() {
     for path in "${JGET_PATH[@]}"; do 
         check_append $path $jget_path
+    done
+
+    for path in "${JGET_RM_PATH[@]}"; do
+        remove_line $path $jget_path
+        remove_line $path $JGET_PROFILE
     done
 
     while read path
@@ -67,7 +81,19 @@ jget_install() {
     done
 }
 
+jget_remove() {
+    global_options $@
+    shift "$(( OPTIND - 1 ))"
+
+    while (( ${#@} > 0 ))
+    do
+        jget_rm_one $@
+        shift "$OPTIND"
+    done
+}
+
 jget_one() {
+    local dir=$(pwd)
     local app=$1 && shift
     parse_options $@ 
     local forced=$_forced
@@ -87,7 +113,30 @@ jget_one() {
     fi
     # global variable position can be changed by nested calls
     OPTIND=optind
-    cd $SRC
+    cd $dir
+}
+
+jget_rm_one() {
+    local dir=$(pwd)
+    local app=$1 && shift
+    parse_options $@ 
+    local silent=$_silent
+    local optind=$OPTIND
+    local func=_rm_$app
+    has_func $func || { func=rm_$app ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $OS") ; return 1 ;}
+    if [[ -x $(command -v $app) ]]; then
+        cd $BUILD
+        if $func ; then
+            [[ $silent ]] || MSG+=(">>> removed $app <<<")
+        else
+            MSG+=("[ ERROR ] Failed to uninstall $app")
+        fi
+    else
+       [[ $silent ]] || MSG+=("=== $app not installed ===")
+    fi
+    # global variable position can be changed by nested calls
+    OPTIND=optind
+    cd $dir
 }
 
 load_source() {

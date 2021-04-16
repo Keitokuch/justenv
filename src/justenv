@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 declare -ga MSG=()
 declare -ga CLEANUP=("put_msg")
 
@@ -30,6 +31,10 @@ put_file() {
 
 check_append() {
     grep -qxsF -- "$1" "$2" || echo "$1" >> "$2"
+}
+
+remove_line() {
+    grep -v "$1" "$2" > temp && mv temp "$2"
 }
 
 # display messages
@@ -100,6 +105,11 @@ do_install() {
     jget_install $@
 }
 
+do_uninstall() {
+    . $JGET/jget.sh
+    jget_remove $@
+}
+
 do_deploy() {
     parse_ostype
     if [[ $# -gt 0 ]]; then
@@ -150,7 +160,7 @@ main() {
             do_deploy $@
             ;;
         remove)
-            echo "Not implemented"
+            do_uninstall $@
             ;;
         test)
             do_test $@
