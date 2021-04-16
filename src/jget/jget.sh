@@ -19,7 +19,7 @@ BUILD=$JGET/build
 mkdir -p $BUILD
 
 JGET_PROFILE=~/.jget_profile
-BASH_PROFILE=$([[ -f ~/.profile ]] && echo "~/.profile" || echo "~/.bash_profile")
+BASH_PROFILE=$([[ -f ~/.profile ]] && echo "$HOME/.profile" || echo "$HOME/.bash_profile")
 ZSH_PROFILE=~/.zshenv
 SYS_RC=($BASH_PROFILE $ZSH_PROFILE)
 

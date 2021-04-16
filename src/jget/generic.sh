@@ -37,6 +37,7 @@ _rm_automake() {
     cd automake-$version
     ./configure --prefix=$JGET
     make uninstall
+} 
 
 _get_zsh() {
     local version=${VERSION:-$ZSH_VERSION}
@@ -76,7 +77,6 @@ _get_cmake() {
     tar xvf $tarball
     mv $dir $JGET
     JGET_PATH+=("$JGET/$dir/bin")
-    cd $JGET
 }
 
 _get_BaiduPCS-Go() {
@@ -89,7 +89,6 @@ _get_BaiduPCS-Go() {
     wget https://github.com/felixonmars/BaiduPCS-Go/releases/download/v$version/$zipfile    || return 1
     unzip $zipfile      || return 1
     mv $dir/BaiduPCS-Go $BIN
-    cd $JGET
 }
 
 _get_ctags() {
@@ -101,7 +100,6 @@ _get_ctags() {
     ./configure --prefix=$JGET          || return 1
     make                                || return 1
     make install                        || return 1
-    cd $JGET
 }
 
 
@@ -111,7 +109,6 @@ _get_nvim() {
     wget -O nvim.appimage https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return 1
     chmod +x nvim.appimage
     ln -sf nvim.appimage $BIN/nvim
-    cd $JGET
     python -m pip install neovim --user
     python3 -m pip install neovim --user
 }
@@ -126,7 +123,6 @@ _get_vim() {
     ./configure --prefix=$JGET
     make -j $nr_worker
     make install
-    cd $JGET
 }
 
 
@@ -141,11 +137,9 @@ _get_ag() {
     ./configure --prefix=$JGET  || return 1
     make -j $nr_worker           || return 1
     make install        || return 1
-    cd $JGET
 }
 _rm_ag() {
     cd $BIN && rm -f ag
-    cd $JGET
 }
 
 
@@ -160,11 +154,9 @@ _get_tmux() {
     CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
     make -j $nr_worker
     make install
-    cd $JGET
 }
 _rm_tmux() {
     cd $BIN && rm -f tmux
-    cd $JGET
 }
 
 
@@ -174,14 +166,12 @@ _get_autojump() {
     git clone git://github.com/wting/autojump.git
     cd autojump
     ./install.py
-    cd $JGET
 }
 _rm_autojump() {
     cd $BUILD
     git clone git://github.com/wting/autojump.git
     cd autojump
     ./uninstall.py      || return 1
-    cd $JGET
 }
 
 
