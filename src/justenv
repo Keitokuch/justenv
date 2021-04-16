@@ -161,6 +161,7 @@ main() {
             echo $?
             ;;
         install_justenv)
+            JUSTENV_SRC=$SRC
             do_install -f justenv
             ;;
         update)
