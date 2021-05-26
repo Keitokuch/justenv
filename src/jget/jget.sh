@@ -29,6 +29,7 @@ jget_libpath=$JGET/.libpaths
 
 . $SRC/utils.sh
 . $SRC/config
+FORMULA=$SRC/formula
 
 check_jget() {
     [[ -f $JGET_PROFILE ]] && return 0
@@ -67,7 +68,6 @@ jget_init() {
     for profile in "${SYS_RC[@]}"; do 
         check_append "source "$JGET_PROFILE"" $profile
     done
-    jget_install -s sys_prereq prereq
 }
 
 jget_install() {
@@ -94,45 +94,47 @@ jget_remove() {
 
 jget_one() {
     local dir=$(pwd)
-    local app=$1 && shift
+    local target=$1 && shift
     parse_options $@ 
     local forced=$_forced
     local silent=$_silent
     local optind=$OPTIND
-    local func=_get_$app
-    has_func $func || { func=get_$app ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $OS") ; return 1 ;}
-    if [[ $forced ]] || [[ ! -x $(command -v $app) ]]; then
+    local formula="$FORMULA/$target.sh"
+    source $formula 2>/dev/null || { MSG+=("[ ERROR ] Formula for $target doesn't exist"); return 1; }
+    [[ -n $(command -v get) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not provided"); return 1; }
+    [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not provided"); return 1; }
+    if ! exists || [[ $forced ]] ; then
         cd $BUILD
-        if $func ; then
-            [[ $silent ]] || MSG+=(">>> installed $app <<<")
+        if get; then
+            [[ $silent ]] || MSG+=(">>> installed $target <<<")
         else
-            MSG+=("[ ERROR ] Failed to install $app")
+            MSG+=("[ ERROR ] Failed to install $target")
         fi
+        cd $dir
     else
-       [[ $silent ]] || MSG+=("=== $app already installed ===")
+       [[ $silent ]] || MSG+=("=== $target already installed ===")
     fi
     # global variable position can be changed by nested calls
     OPTIND=optind
-    cd $dir
 }
 
 jget_rm_one() {
     local dir=$(pwd)
-    local app=$1 && shift
+    local target=$1 && shift
     parse_options $@ 
     local silent=$_silent
     local optind=$OPTIND
-    local func=_rm_$app
-    has_func $func || { func=rm_$app ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $OS") ; return 1 ;}
-    if [[ -x $(command -v $app) ]]; then
+    local func=_rm_$target
+    has_func $func || { func=rm_$target ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $os") ; return 1 ;}
+    if [[ -x $(command -v $target) ]]; then
         cd $BUILD
         if $func ; then
-            [[ $silent ]] || MSG+=(">>> removed $app <<<")
+            [[ $silent ]] || MSG+=(">>> removed $target <<<")
         else
-            MSG+=("[ ERROR ] Failed to uninstall $app")
+            MSG+=("[ ERROR ] Failed to uninstall $target")
         fi
     else
-       [[ $silent ]] || MSG+=("=== $app not installed ===")
+       [[ $silent ]] || MSG+=("=== $target not installed ===")
     fi
     # global variable position can be changed by nested calls
     OPTIND=optind
@@ -144,7 +146,7 @@ load_source() {
     if [[ $ostype == "linux" ]]; then 
         nr_worker=$(nproc)
         . $SRC/linux.sh
-        case $OS in
+        case $os in
             centos|rhel)
                 . $SRC/centos.sh
                 ;;
@@ -155,7 +157,7 @@ load_source() {
                 . $SRC/debian.sh
                 ;;
             *)
-                MSG+=("Failed: linux distro $OS not supported.")
+                MSG+=("Failed: linux distro $os not supported.")
                 return 1
                 ;;
         esac

@@ -6,7 +6,7 @@ parse_options() {
     #    [[ $var == v ]] && ver=1
     #    [[ $ver ]] && VERSION=$var
     #done
-    unset _forced _silent VERSION
+    unset _forced _silent version
     OPTIND=1
     while getopts ":fsv:" opt ; do
         case $opt in
@@ -17,7 +17,7 @@ parse_options() {
                 _silent=1
                 ;;
             v)
-                VERSION=$OPTARG
+                version=$OPTARG
                 ;; 
         esac 
     done
@@ -45,14 +45,14 @@ parse_ostype() {
         ostype=linux
         if [ -f /etc/os-release ]; then
             . /etc/os-release
-            OS=$ID
-            OSVER=$VERSION_ID
+            os=$ID
+            osversion=$VERSION_ID
         else
             MSG+=("Failed: linux distro not recognized.")
             return 1
         fi
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        OS=macos
+        os=macos
         ostype=darwin
     else
         MSG+=("Failed: OS type $OSTYPE not supported.")
