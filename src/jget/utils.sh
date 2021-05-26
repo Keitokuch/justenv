@@ -41,7 +41,7 @@ global_options() {
 }
 
 parse_ostype() {
-    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    if [[ $(uname) == "Linux" ]]; then
         ostype=linux
         if [ -f /etc/os-release ]; then
             . /etc/os-release
@@ -51,7 +51,7 @@ parse_ostype() {
             MSG+=("Failed: linux distro not recognized.")
             return 1
         fi
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
+    elif [[ $(uname) == "Darwin" ]]; then
         os=macos
         ostype=darwin
     else
