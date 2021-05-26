@@ -21,7 +21,7 @@ get_build() {
 }
 
 _get_sys_prereq() {
-
+    true
 }
 
 get_tmux() {
