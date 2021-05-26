@@ -99,10 +99,12 @@ jget_one() {
     local forced=$_forced
     local silent=$_silent
     local optind=$OPTIND
+    unset -f get exists
     local formula="$FORMULA/$target.sh"
     source $formula 2>/dev/null || { MSG+=("[ ERROR ] Formula for $target not found"); return; }
     [[ -n $(command -v get) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not provided"); return; }
     [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not provided"); return; }
+
     if ! exists || [[ $forced ]] || [[ $version ]] ; then
         cd $BUILD
         if get; then

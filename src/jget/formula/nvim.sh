@@ -1,6 +1,5 @@
 NVIM_VERSION=nightly
 
-
 get() {
     version=${version:-$NVIM_VERSION}
     case $ostype in
