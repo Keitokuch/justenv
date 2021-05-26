@@ -55,17 +55,6 @@ get_zsh() {
     fi
 }
 
-_get_nvim() {
-    VERSION=$NVIM_VERSION
-    local version=${VERSION:-$NVIM_VERSION}
-    cd $BIN
-    wget https://github.com/neovim/neovim/releases/download/$version/nvim.appimage
-    chmod +x nvim.appimage
-    ln -f nvim.appimage $BIN/nvim
-    pip install neovim
-    pip3 install neovim
-}
-
 # _get_node() {
 #     curl -sL install-node.now.sh/lts | sudo bash
 # }

@@ -100,10 +100,10 @@ jget_one() {
     local silent=$_silent
     local optind=$OPTIND
     local formula="$FORMULA/$target.sh"
-    source $formula 2>/dev/null || { MSG+=("[ ERROR ] Formula for $target doesn't exist"); return 1; }
-    [[ -n $(command -v get) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not provided"); return 1; }
-    [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not provided"); return 1; }
-    if ! exists || [[ $forced ]] ; then
+    source $formula 2>/dev/null || { MSG+=("[ ERROR ] Formula for $target not found"); return; }
+    [[ -n $(command -v get) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not provided"); return; }
+    [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not provided"); return; }
+    if ! exists || [[ $forced ]] || [[ $version ]] ; then
         cd $BUILD
         if get; then
             [[ $silent ]] || MSG+=(">>> installed $target <<<")
