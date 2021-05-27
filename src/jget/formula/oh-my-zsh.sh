@@ -2,7 +2,7 @@
 OMZ=$HOME/.oh-my-zsh
 
 exists() {
-    [[ -d $OMZ ]]
+    [[ -f "$OMZ/oh-my-zsh.sh" ]]
 }
 
 get() {

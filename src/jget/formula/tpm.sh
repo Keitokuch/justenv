@@ -1,9 +1,9 @@
-TMP=$HOME/.tmux/plugins
+TPM=$HOME/.tmux/plugins/tpm
 
 exists() {
-    [[ -d "$TMP/tmp" ]]
+    [[ -d $TPM ]]
 }
 
 get() {
-    git clone https://github.com/tmux-plugins/tpm.git $TMP/tpm
+    git clone https://github.com/tmux-plugins/tpm.git $TPM
 }
