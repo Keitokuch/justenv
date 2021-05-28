@@ -14,5 +14,5 @@ get() {
 
 
 exists() {
-    [[ -x $(command -v node) ]] && return 0 || return 1
+    [[ -x $(command -v node) ]]
 }

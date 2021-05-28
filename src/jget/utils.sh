@@ -75,6 +75,10 @@ remove_line() {
     grep -v "$1" "$2" > temp && mv temp "$2"
 }
 
+has_executable() {
+    [[ -x $(command -v $1) ]]
+}
+
 has_lib() {
     haslib=$(whereis "$1" | wc -w)
     if [[ $haslib -gt 1 ]]; then 
