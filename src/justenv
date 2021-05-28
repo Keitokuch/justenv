@@ -130,19 +130,6 @@ do_test() {
     deploy_other
 }
 
-_get_justenv() {
-    cp $JUSTENV_SRC/justenv $BIN
-    cp -rf $JUSTENV_SRC/jget $BIN
-}
-
-_get_update() {
-    cd $BUILD
-    git clone https://github.com/Keitokuch/justenv.git
-    JUSTENV_SRC=justenv/src
-    _get_justenv
-}
-
-
 main() {
     opt=$1
     shift
@@ -174,11 +161,10 @@ main() {
             do_install -f justenv
             ;;
         update)
-            do_install -f update
+            do_install -f justenv
             ;;
         *)
             usage
-            exit 0
             ;;
     esac
     clean_up
