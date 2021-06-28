@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
 # jenv-get Core
-# To be sourced from context where JGET is set
 
 SRC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -30,11 +29,6 @@ jget_libpath=$JGET/.libpaths
 . $SRC/utils.sh
 . $SRC/config
 FORMULA=$SRC/formula
-
-check_jget() {
-    [[ -f $JGET_PROFILE ]] && return 0
-    return 1
-}
 
 add_path() {
     JGET_PATH+=($1)
@@ -188,7 +182,6 @@ jget_after() {
 }
 
 main() {
-    # check_jget   || jget_init
     parse_ostype
     load_source 
     jget_init
