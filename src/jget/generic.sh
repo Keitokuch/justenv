@@ -9,7 +9,7 @@ _get_autoconf() {
     wget http://ftp.gnu.org/gnu/autoconf/autoconf-$version.tar.gz
     tar -xzf autoconf-$version.tar.gz
     cd autoconf-$version
-    ./configure --prefix=$JGET
+    ./configure --prefix=$prefix
     make
     make install
 }
@@ -18,7 +18,7 @@ _rm_autoconf() {
     wget http://ftp.gnu.org/gnu/autoconf/autoconf-$version.tar.gz
     tar -xzf autoconf-$version.tar.gz
     cd autoconf-$version
-    ./configure --prefix=$JGET
+    ./configure --prefix=$prefix
     make uninstall
 }
 
@@ -27,7 +27,7 @@ _get_automake() {
     wget https://ftp.gnu.org/gnu/automake/automake-$version.tar.gz
     tar -xzf automake-$version.tar.gz
     cd automake-$version
-    ./configure --prefix=$JGET
+    ./configure --prefix=$prefix
     make && make install
 }
 _rm_automake() {
@@ -35,7 +35,7 @@ _rm_automake() {
     wget https://ftp.gnu.org/gnu/automake/automake-$version.tar.gz
     tar -xzf automake-$version.tar.gz
     cd automake-$version
-    ./configure --prefix=$JGET
+    ./configure --prefix=$prefix
     make uninstall
 } 
 
@@ -47,7 +47,7 @@ _get_zsh() {
     rm zsh-$version.tar.gz
     cd zsh-*
     ./Util/preconfig
-    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
+    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$prefix
     make -j $nr_worker
     make install.bin
     make install.modules
@@ -97,7 +97,7 @@ _get_ctags() {
     git clone https://github.com/universal-ctags/ctags.git $build   || return 1
     cd $build
     ./autogen.sh                        || return 1
-    ./configure --prefix=$JGET          || return 1
+    ./configure --prefix=$prefix          || return 1
     make                                || return 1
     make install                        || return 1
 }
@@ -120,7 +120,7 @@ _get_vim() {
     wget https://github.com/vim/vim/archive/v$version.tar.gz -O vim-$version.tar.gz
     tar xzf vim-$version.tar.gz
     cd vim-$version
-    ./configure --prefix=$JGET
+    ./configure --prefix=$prefix
     make -j $nr_worker
     make install
 }
@@ -134,7 +134,7 @@ _get_ag() {
     tar -xvf $ag.tar.gz
     rm $ag.tar.gz
     cd $ag
-    ./configure --prefix=$JGET  || return 1
+    ./configure --prefix=$prefix  || return 1
     make -j $nr_worker           || return 1
     make install        || return 1
 }
@@ -151,7 +151,7 @@ _get_tmux() {
     wget https://github.com/tmux/tmux/releases/download/$version/tmux-$version.tar.gz || return 1
     tar -xzf tmux-$version.tar.gz
     cd tmux-$version
-    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$JGET
+    CPPFLAGS="-I$JGET/include -I$JGET/include/ncurses" LDFLAGS="-L$JGET/lib" ./configure --prefix=$prefix
     make -j $nr_worker
     make install
 }
@@ -216,7 +216,7 @@ _get_gdb() {
     tar xvf gdb-$version.tar.xz
     cd gdb-$version
     mkdir build && cd build
-    ../configure --prefix=$JGET  || return 1
+    ../configure --prefix=$prefix  || return 1
     make -j $nr_worker          || return 1
     make install                || return 1
     cd $JGET
@@ -246,7 +246,7 @@ get_libevent() {
     wget https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz
     tar -xzf libevent-$LIBEVENT_VERSION.tar.gz
     cd libevent-$LIBEVENT_VERSION
-    CPPFLAGS='-fPIC' ./configure --prefix=$JGET
+    CPPFLAGS='-fPIC' ./configure --prefix=$prefix
     make -j$nr_worker
     make install
     cd $JGET
@@ -261,7 +261,7 @@ get_ncurses() {
     wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$NCURSES_VERSION.tar.gz
     tar -xzf ncurses-$NCURSES_VERSION.tar.gz
     cd ncurses-$NCURSES_VERSION
-    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-fPIC" ./configure  --prefix=$JGET --with-shared
+    CXXFLAGS='-fPIC' CFLAGS='-fPIC' CPPFLAGS="-fPIC" ./configure  --prefix=$prefix --with-shared
     make -j $nr_worker
     make install
     cd $JGET

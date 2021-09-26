@@ -9,6 +9,7 @@ get() {
     wget https://ftp.gnu.org/gnu/automake/automake-$version.tar.gz
     tar -xzf automake-$version.tar.gz
     cd automake-$version
-    ./configure --prefix=$JGET
+    ./configure --prefix=$prefix
     make -j$nr_worker && make install
 }
+

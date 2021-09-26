@@ -6,7 +6,7 @@ get() {
     wget https://geoff.greer.fm/ag/releases/$ag.tar.gz || return
     tar -xf $ag.tar.gz
     cd $ag
-    ./configure --prefix=$JGET  || return
+    ./configure --prefix=$prefix  || return
     make -j $nr_worker          || return
     make install                || return
 }

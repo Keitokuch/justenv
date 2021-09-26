@@ -6,9 +6,9 @@ parse_options() {
     #    [[ $var == v ]] && ver=1
     #    [[ $ver ]] && VERSION=$var
     #done
-    unset _forced _silent version
+    unset _forced _silent version prefix
     OPTIND=1
-    while getopts ":fsv:" opt ; do
+    while getopts ":fsv:p:" opt ; do
         case $opt in
             f)
                 _forced=1
@@ -19,16 +19,19 @@ parse_options() {
             v)
                 version=$OPTARG
                 ;; 
+            p)
+                prefix=$OPTARG
         esac 
     done
     _forced=${_forced:-$FORCED}
     _silent=${_silent:-$SILENT}
+    prefix=${prefix:-$PREFIX}
 }
 
 global_options() {
-    unset FORCED SILENT
+    unset FORCED SILENT PREFIX
     OPTIND=1
-    while getopts ":fs" opt ; do
+    while getopts ":fsp:" opt ; do
         case $opt in 
             f)
                 FORCED=1
@@ -36,8 +39,12 @@ global_options() {
             s)
                 SILENT=1
                 ;;
+            p)
+                PREFIX=$OPTARG
+                ;;
         esac
     done
+    PREFIX=${PREFIX:-$JGET}
 }
 
 parse_ostype() {

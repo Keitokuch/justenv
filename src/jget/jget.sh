@@ -62,6 +62,9 @@ jget_init() {
     for profile in "${SYS_RC[@]}"; do 
         check_append "source "$JGET_PROFILE"" $profile
     done
+    parse_ostype
+    load_source 
+    # TODO: jget config file
 }
 
 jget_install() {
@@ -182,8 +185,6 @@ jget_after() {
 }
 
 main() {
-    parse_ostype
-    load_source 
     jget_init
     jget_before
 }

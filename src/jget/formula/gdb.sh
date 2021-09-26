@@ -6,7 +6,7 @@ get() {
     tar xvf gdb-$version.tar.xz
     cd gdb-$version
     mkdir gdbbuild && cd gdbbuild
-    ../configure --prefix=$JGET  || return
+    ../configure --prefix=$prefix  || return
     make -j $nr_worker          || return
     make install                || return
 }
