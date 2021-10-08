@@ -67,6 +67,16 @@ parse_ostype() {
     fi
 }
 
+
+profile_add() {
+    check_append "$1" $JGET_PROFILE
+}
+
+profile_remove() {
+    remove_line "$1" $JGET_PROFILE
+}
+
+
 # display messages
 put_msg() {
     for msg in "${MSG[@]}"; do
