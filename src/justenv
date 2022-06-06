@@ -145,7 +145,7 @@ main() {
         deploy)
             do_deploy $@
             ;;
-        remove)
+        uninstall)
             do_uninstall $@
             ;;
         test)

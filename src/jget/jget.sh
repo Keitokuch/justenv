@@ -99,8 +99,8 @@ jget_one() {
     unset -f get exists
     local formula="$FORMULA/$target.sh"
     source $formula 2>/tmp/jerr || { MSG+=("Error in loading formula for $target: $(cat /tmp/jerr)"); return 1; }
-    [[ -n $(command -v get) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not provided"); return 1; }
-    [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not provided"); return 1; }
+    [[ -n $(command -v get) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not found"); return 1; }
+    [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not found"); return 1; }
 
     if ! exists || [[ $forced ]] || [[ $version ]] ; then
         cd $BUILD
@@ -124,16 +124,21 @@ jget_rm_one() {
     local silent=$_silent
     local optind=$OPTIND
     local func=_rm_$target
-    has_func $func || { func=rm_$target ; forced=1 ; has_func $func ; } || { MSG+=("$func not implemented for $os") ; return 1 ;}
-    if [[ -x $(command -v $target) ]]; then
+    unset -f remove exists
+    local formula="$FORMULA/$target.sh"
+    source $formula 2>/tmp/jerr || { MSG+=("Error in loading formula for $target: $(cat /tmp/jerr)"); return 1; }
+    [[ -n $(command -v remove) ]] || { MSG+=("[ ERROR ] Formula for $target is broken: get() not found"); return 1; }
+    [[ -n $(command -v exists) ]] || { MSG+=("[ERROR ] Formula for $target is broken: exists() not found"); return 1; }
+    if exists; then
         cd $BUILD
-        if $func ; then
-            [[ $silent ]] || MSG+=(">>> removed $target <<<")
+        if remove; then
+            [[ $silent ]] || MSG+=(">>> uninstalled $target <<<")
         else
             MSG+=("[ ERROR ] Failed to uninstall $target")
         fi
+        cd $dir
     else
-       [[ $silent ]] || MSG+=("=== $target not installed ===")
+       [[ $silent ]] || MSG+=("=== $target not found ===")
     fi
     # global variable position can be changed by nested calls
     OPTIND=optind
