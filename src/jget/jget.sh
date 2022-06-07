@@ -20,7 +20,7 @@ mkdir -p $BUILD
 
 JGET_PROFILE=~/.jget_profile
 BASH_PROFILE=$([[ -f ~/.profile ]] && echo "$HOME/.profile" || echo "$HOME/.bash_profile")
-ZSH_PROFILE=~/.zshenv
+ZSH_PROFILE=$HOME/.zprofile
 SYS_RC=($BASH_PROFILE $ZSH_PROFILE)
 
 jget_path=$JGET/.paths
@@ -52,7 +52,7 @@ jget_setup() {
 jget_init() {
     touch "$JGET_PROFILE"
     for profile in "${SYS_RC[@]}"; do 
-        check_append "source "$JGET_PROFILE"" $profile
+        check_append "source '$JGET_PROFILE'" $profile
     done
     parse_ostype
     load_source 
