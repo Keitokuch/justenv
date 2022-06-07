@@ -30,14 +30,6 @@ jget_libpath=$JGET/.libpaths
 . $SRC/config
 FORMULA=$SRC/formula
 
-add_path() {
-    JGET_PATH+=($1)
-}
-
-remove_path() {
-    JGET_RM_PATH+=($1)
-}
-
 jget_setup() {
     for path in "${JGET_PATH[@]}"; do 
         check_append $path $jget_path
@@ -45,16 +37,16 @@ jget_setup() {
 
     for path in "${JGET_RM_PATH[@]}"; do
         remove_line $path $jget_path
-        remove_line $path $JGET_PROFILE
+        profile_remove "export PATH=$path:\$PATH" 
     done
 
     while read path
     do
-        check_append "export PATH=$path:\$PATH" $JGET_PROFILE
+        profile_add "export PATH=$path:\$PATH" 
     done <"$jget_path"
 
-    check_append "export LD_LIBRARY_PATH=$LIB:\$LD_LIBRARY_PATH" $JGET_PROFILE
-    check_append "export MANPATH=$MAN:\$MANPATH" $JGET_PROFILE
+    profile_add "export LD_LIBRARY_PATH=$LIB:\$LD_LIBRARY_PATH" 
+    profile_add "export MANPATH=$MAN:\$MANPATH" 
 }
 
 jget_init() {
@@ -73,7 +65,7 @@ jget_install() {
 
     while (( ${#@} > 0 ))
     do
-        jget_one $@
+        jget_install_one $@
         shift "$OPTIND"
     done
 }
@@ -84,12 +76,12 @@ jget_remove() {
 
     while (( ${#@} > 0 ))
     do
-        jget_rm_one $@
+        jget_remove_one $@
         shift "$OPTIND"
     done
 }
 
-jget_one() {
+jget_install_one() {
     local dir=$(pwd)
     local target=$1 && shift
     parse_options $@ 
@@ -117,7 +109,7 @@ jget_one() {
     OPTIND=optind
 }
 
-jget_rm_one() {
+jget_remove_one() {
     local dir=$(pwd)
     local target=$1 && shift
     parse_options $@ 

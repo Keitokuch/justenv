@@ -1,11 +1,4 @@
 parse_options() {
-    #for var in "$@"
-    #do
-    #    [[ $var == f ]] && forced=1
-    #    [[ $var == s ]] && silent=1
-    #    [[ $var == v ]] && ver=1
-    #    [[ $ver ]] && VERSION=$var
-    #done
     unset _forced _silent version prefix
     OPTIND=1
     while getopts ":fsv:p:" opt ; do
@@ -76,8 +69,16 @@ profile_remove() {
     remove_line "$1" $JGET_PROFILE
 }
 
+add_path() {
+    JGET_PATH+=($1)
+}
 
-# display messages
+remove_path() {
+    JGET_RM_PATH+=($1)
+}
+
+
+# display queued messages
 put_msg() {
     for msg in "${MSG[@]}"; do
         echo $msg
@@ -93,6 +94,10 @@ remove_line() {
 }
 
 has_executable() {
+    [[ -x $(command -v $1) ]]
+}
+
+has_command() {
     [[ -x $(command -v $1) ]]
 }
 

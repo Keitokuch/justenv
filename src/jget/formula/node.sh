@@ -1,4 +1,4 @@
-VERSION=v12.16.3
+VERSION=v18.0.0
 
 
 get() {
@@ -14,5 +14,5 @@ get() {
 
 
 exists() {
-    [[ -x $(command -v node) ]]
+    has_command node
 }

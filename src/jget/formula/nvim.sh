@@ -14,27 +14,29 @@ get() {
         *)
             ;;
     esac
-}
-
-exists() {
-    [[ -x $(command -v nvim) ]]
-}
-
-get_linux() {
-    cd $BIN
-    wget -O nvim.appimage https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return
-    chmod +x nvim.appimage
-    ln -sf nvim.appimage $BIN/nvim
-    python -m pip install neovim --user
     python3 -m pip install neovim --user
 }
 
+remove() {
+    cd $BIN
+    rm -r nvim*
+}
+
+exists() {
+    has_command nvim
+}
+
+get_linux() {
+    wget -O nvim.appimage https://github.com/neovim/neovim/releases/download/$version/nvim.appimage || return
+    chmod +x nvim.appimage
+    mv nvim.appimage $BIN/nvim.appimage
+    ln -sf $BIN/nvim.appimage $BIN/nvim
+}
+
 get_macos() {
-    cd $BUILD
     wget https://github.com/neovim/neovim/releases/download/$version/nvim-macos.tar.gz || return
     tar xzf nvim-macos.tar.gz
     mv $BIN/nvim-osx64 $BUILD/nvim-bak 2>/dev/null
     mv nvim-osx64 $BIN/
-    JGET_PATH+=("$BIN/nvim-osx64/bin")
-    rm nvim-macos.tar.gz
+    add_path "$BIN/nvim-osx64/bin"
 }
